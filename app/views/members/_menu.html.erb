@@ -1,0 +1,9 @@
+                
+<aside class="menu">
+    <ul class="menu-list">
+        <% nav_links selected_class:'is-active', url_segment: 2 do |nav| %>
+            <li><%= nav.link_to 'Current Loans', members_path %></li>
+            <li><%= nav.link_to 'Loan History', groups_path %></li>
+        <% end %>
+    </ul>
+</aside>

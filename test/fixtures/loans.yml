@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  member_id: 1
+  item_id: 1
+  returned_at: 2018-02-22 22:17:19
+
+two:
+  member_id: 1
+  item_id: 1
+  returned_at: 2018-02-22 22:17:19

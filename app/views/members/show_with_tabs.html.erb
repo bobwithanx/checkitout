@@ -1,0 +1,37 @@
+<section class="section">
+  <%= render 'header' %>
+  <div class="container">
+    <div class="columns">
+      <div class="column is-one-quarter">
+        <nav class="panel">
+          <p class="panel-heading">
+            loans
+          </p>
+          <% nav_links selected_class:'is-active',  url_segment: 2 do |nav| %>
+            <%= nav.link_to 'Current Loans', members_path, class: 'panel-block', :data => {:tab =>'current-loans'} %>
+            <%= nav.link_to 'Loan History', groups_path, class: 'panel-block', :data => {:tab =>'loan-history'} %>
+          <% end %>
+        </nav>
+      </div>
+      <div class="column">
+        <% if @member.loans.blank? %>
+          <div class="hero is-medium is-light has-text-centered">
+            <div class="hero-body">
+              <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
+                No items have been borrowed.
+              </p>
+            </div>
+          </div>
+        <% else %>
+          <div class="columns is-multiline">
+            <% @loans.each do |loan| %>
+              <div class="column">
+                <%= render 'loan-card', :collection => loan %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

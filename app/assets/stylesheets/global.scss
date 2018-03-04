@@ -1,0 +1,46 @@
+// Place all the styles related to the Members controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bulma/initial-variables.sass";
+@import "bulma/functions";
+$table-background-color: unset;
+
+.quick-link {
+  color: grey;
+}
+
+.quick-link:hover {
+  color: #58C1A7;
+  font-weight: bold;
+}
+
+.date-column {
+  // width: 25%;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.box-outline-primary {
+  border: 1px solid #3273dc;
+  box-shadow: unset !important;
+  // box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+
+table {
+  // border: solid thin $grey-lighter;
+}
+
+.user-page {
+  background: whitesmoke;
+}
+
+.table.grouped-table tbody td,
+.table.grouped-table tbody th {
+  border: unset !important;
+}
+
+.table.grouped-table tr.with-divider {
+  border-top: 1px #ccc solid !important;
+}
+@import "bulma";
+@import "bulma/bulma-iconpicker.min.css";

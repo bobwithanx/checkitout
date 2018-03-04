@@ -1,0 +1,44 @@
+<div class="container">
+
+  <%= form_with(model: category, local: true) do |form| %>
+  <% if category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(category.errors.count, "error") %>
+        prohibited this category from being saved:</h2>
+
+      <ul>
+        <% category.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, class: "label" %>
+    <div class="control">
+      <%= form.text_field :name, class: "input", value: "Camera" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :icon, class: "label" %>
+    <div class="control">
+      <p class="help">Click to select:</p>
+      <%= form.text_field :icon, data: {action: "iconPicker" } %>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <%= form.submit class: 'button is-primary' %>
+    </div>
+    <div class="control">
+      <%= link_to 'Cancel', categories_path, class: "button is-light" %>
+    </div>
+  </div>
+
+  <%= javascript_include_tag 'bulma-iconpicker.js', media: 'all', 'bulma-iconpicker.js': 'reload' %>
+
+<% end %>
+</div>

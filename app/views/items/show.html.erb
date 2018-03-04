@@ -1,0 +1,105 @@
+<section class="section">
+    <div class="container is-fluid">
+        <nav class="">
+            <%= link_to '← Items', items_path, class: "" %>
+        </nav>
+        <br>
+        <div class="columns">
+            <div class="column is-one-third">
+                <div class="field is-grouped is-grouped-multiline">
+                    <div class="control">
+                        <div class="subtitle is-size-3">
+                            <%= @item.full_name %>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-grouped is-grouped-multiline">
+                    <div class="control">
+                        <span class="tags has-addons">
+                            <span class="tag is-light">
+                                tag #
+                            </span>
+                            <span class="tag is-link">
+                                <%= @item.inventory_tag %>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-light">
+                                sn
+                            </span>
+                            <span class="tag is-success">
+                                <%= @item.serial_number %>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-light">
+                                category
+                            </span>
+                            <% if @item.category.blank? %>
+                                <span class="tag is-danger">
+                                    n/a
+                                </span>
+                            <% else %>
+                                <span class="tag is-success">
+                                    <%= @item.category.name %>
+                                </span>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="is-divider-vertical is-hidden-mobile"></div>
+            <div class="column">
+                <div class="subtitle">
+                    <span class="control">
+                        Transaction History
+                    </span>
+                    <span class="control">
+                        <% if @loans.active.blank? %>
+                            <span class="tag is-success">
+                                Available
+                            </span>
+                        <% else %>
+                            <%= link_to member_path(@loans.active.first.member) do %>
+                            <span class="tag is-warning">
+                                <%= @loans.active.first.member.full_name %>
+                            </span>
+                        <% end %>
+                    <% end %>
+                </span>
+            </div>
+            <table style="background-color: unset" class="table is-fullwidth">
+                <thead>
+                    <th>
+                        Person
+                    </th>
+                    <th>
+                        Borrowed
+                    </th>
+                    <th>
+                        Returned
+                    </th>
+                </thead>
+                <tbody>
+                    <% @loans.each do |loan| %>
+                        <tr>
+                            <td><%= loan.member.full_name %></td>
+                            <td><%= loan.created_at.strftime("%b %e, %l:%M %p") %></td>
+                            <td>
+                                <% if loan.returned_at.blank? %>
+                                    <%= link_to 'Check In', loan_complete_path(loan.id), method: :post %>
+                                <% else %>
+                                    <%= loan.returned_at.strftime("%b %e, %l:%M %p") %>
+                                <% end %>
+                            </td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

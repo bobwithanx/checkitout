@@ -1,0 +1,124 @@
+<section class="section">
+  <div class="container is-fluid">
+    <nav class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <div class="title ">
+            <%= @member.full_name %>
+          </div>
+        </div>
+        <div class="level-item">
+
+          <span class="tags has-addons pull-right">
+            <span class="tag is-light ">
+              id #
+            </span>
+            <span class="tag is-primary ">
+              <%= @member.id_number %>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="level-right">
+          <%= form_tag(members_borrow_path, id: "borrow-form" ) do %>
+          <div class="field has-addons">
+            <input type="hidden" name="member_id" value="<%= @member.id %>">
+            <div class="control is-expanded">
+              <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", class: "input", autofocus: true %>
+            </div>
+            <div class="control">
+              <%= submit_tag "Borrow", :name => nil, class: "button is-primary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+</div>
+</section>
+<section class="section">
+<div class="container is-fluid">
+  <% if @member.loans.blank? %>
+    <div class="box hero has-text-centered">
+      <div class="hero-body">
+        <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
+          No items have been borrowed.
+        </p>
+      </div>
+    </div>
+  <% else %>
+    <table class="table is-outlined is-hoverable is-fullwidth">
+      <thead>
+        <th class="has-text-grey-dark has-text-weight-semibold">Item</th>
+        <th class="has-text-grey-dark has-text-weight-semibold">Inventory #</th>
+        <th class="has-text-grey-dark has-text-weight-semibold">Serial #</th>
+        <th class="has-text-grey-dark has-text-weight-semibold">Category</th>
+        <th class="has-text-grey-dark has-text-weight-semibold date-column has-text-right">Borrowed</th>
+        <th class="has-text-grey-dark has-text-weight-semibold date-column has-text-right">Returned</th>
+      </thead>
+
+      <tbody>
+        <% @member.loans.active.each_with_index do |x, index| %>
+          <tr>
+            <td>
+              <%= " #{x.item.full_name}" %>
+            </td>
+            <td>
+              <%= " #{x.item.inventory_tag}" %>&nbsp;
+              <%= link_to item_path(x.item) do %>
+              <i class="icon-arrow-right-circle small-icons quick-link"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= " #{x.item.serial_number}" %>
+          </td>
+
+          <td>
+            <i class="<%= " #{x.item.category.icon}" %>"></i>
+            <%= " #{x.item.category.name}" %>
+          </td>
+          <td class="date-column has-text-right">
+            <%= l(" #{x.created_at}".to_datetime, format: :table) %>
+          </td>
+          <td class="date-column has-text-right">
+            <%= link_to 'Return', loan_complete_path(" #{x.id}"), method: :post, class: "button is-outlined is-info is-small" %>
+          </td>
+        </tr>
+      <% end %>
+      <% @member.loans.returned.each do |x| %>
+        <tr class="has-text-grey has-text-weight-light">
+          <td>
+            <%= " #{x.item.full_name}" %>
+          </td>
+          <td>
+            <%= " #{x.item.inventory_tag}" %>&nbsp;
+            <%= link_to item_path(x.item) do %>
+            <i class="icon-arrow-right-circle small-icons quick-link"></i>
+          <% end %>
+
+        </td>
+        <td>
+          <%= " #{x.item.serial_number}" %>
+        </td>
+        <td>
+          <i class="<%= " #{x.item.category.icon}" %>"></i>
+          <%= " #{x.item.category.name}" %>
+        </td>
+
+        <td class="date-column has-text-right">
+          <%= l(" #{x.created_at}".to_datetime, format: :table) %>
+        </td>
+        <td class="date-column has-text-right">
+          <%= l(" #{x.returned_at}".to_datetime, format: :table) %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
