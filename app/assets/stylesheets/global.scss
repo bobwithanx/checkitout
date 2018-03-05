@@ -4,20 +4,64 @@
 @import "bulma/initial-variables.sass";
 @import "bulma/functions";
 $table-background-color: unset;
+$table-cell-border: 1px solid #e6e6e6;
+$table-cell-padding: 0.25rem;
+$section-padding: 0;
 
-.quick-link {
-  color: grey;
+.button.is-xsmall {
+  height: 2em !important;
+  font-size: 0.75rem !important;
 }
 
-.quick-link:hover {
-  color: #58C1A7;
-  font-weight: bold;
+.section {
+  margin-bottom: 0.5rem;
+}
+
+.summary {
+  margin: 0.75rem 1.5rem;
+}
+
+.container {
+  max-width: 100%;
+}
+
+.main {
+  padding: 3rem;
+}
+
+.heading {
+  margin-bottom: 2rem;
+}
+
+.stacked-block {
+  display: block !important;
+}
+
+.section strong {
+  color: #222 !important;
+}
+
+.section a:hover,
+.section strong:hover {
+  color: #3273DC !important;
+  text-decoration: underline;
+}
+
+.hidden-link {
+  color: inherit;
+  // color: grey;
+}
+
+.hidden-link:hover {
+  color: #3273dc;
+  text-decoration: underline;
+  // font-weight: bold;
 }
 
 .date-column {
   // width: 25%;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: 15px !important;
+  padding-left: 15px !important;
 }
 
 .box-outline-primary {
@@ -27,7 +71,37 @@ $table-background-color: unset;
 }
 
 table {
-  // border: solid thin $grey-lighter;
+  font-size: 0.875rem;
+  border-width: 1px 0;
+}
+
+table tr.is-active {
+  background-color: #eee !important;
+}
+
+td,
+th {
+  border-bottom: 1px solid #eee !important;
+}
+
+td.border-right,
+th.border-right {
+  border-right: 1px solid #eee !important;
+}
+
+td.border-left,
+th.border-left {
+  border-left: 1px solid #eee !important;
+}
+
+td.extra-padding,
+th.extra-padding {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
+
+tr td:first {
+  padding-left: 0.25rem;
 }
 
 .user-page {

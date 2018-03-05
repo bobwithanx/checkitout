@@ -1,22 +1,11 @@
-<section class="section">
-  <div class="container is-fluid">
+<main class="main">
+  <div class="container ">
     <nav class="level">
       <div class="level-left">
         <div class="level-item">
-          <div class="title ">
+          <div class="title">
             <%= @member.full_name %>
           </div>
-        </div>
-        <div class="level-item">
-
-          <span class="tags has-addons pull-right">
-            <span class="tag is-light ">
-              id #
-            </span>
-            <span class="tag is-primary ">
-              <%= @member.id_number %>
-            </span>
-          </span>
         </div>
       </div>
       <div class="level-right">
@@ -35,10 +24,52 @@
       </div>
     </div>
   </nav>
-</div>
-</section>
-<section class="section">
-<div class="container is-fluid">
+  <h3 id="summary" class="section">
+    <a href="#summary">
+      <span>#</span>
+      <strong>Summary</strong>
+    </a>
+  </h3>
+  <div class="summary level">
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">ID #</p>
+        <p class="title is-size-4">
+          <%= @member.id_number %>
+        </p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Group</p>
+        <p class="title is-size-4">
+          <%= @member.group.name %>
+        </p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Current Loans</p>
+        <p class="title is-size-4">
+          <%= @member.loans.active.size %>
+        </p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Total Loans</p>
+        <p class="title is-size-4">
+          <%= @member.loans.returned.size %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <h3 id="history" class="section">
+    <a href="#history">
+      <span>#</span>
+      <strong>History</strong>
+    </a>
+  </h3>
   <% if @member.loans.blank? %>
     <div class="box hero has-text-centered">
       <div class="hero-body">
@@ -48,77 +79,31 @@
       </div>
     </div>
   <% else %>
-    <table class="table is-outlined is-hoverable is-fullwidth">
+    <table class="large-element table is-outlined is-hoverable is-fullwidth">
       <thead>
+        <th class="has-text-grey-dark has-text-weight-semibold">Brand</th>
         <th class="has-text-grey-dark has-text-weight-semibold">Item</th>
         <th class="has-text-grey-dark has-text-weight-semibold">Inventory #</th>
         <th class="has-text-grey-dark has-text-weight-semibold">Serial #</th>
-        <th class="has-text-grey-dark has-text-weight-semibold">Category</th>
-        <th class="has-text-grey-dark has-text-weight-semibold date-column has-text-right">Borrowed</th>
-        <th class="has-text-grey-dark has-text-weight-semibold date-column has-text-right">Returned</th>
+        <th class="has-text-grey-dark has-text-weight-semibold extra-padding">Category</th>
+        <th class="has-text-grey-dark has-text-weight-semibold date-column">Borrowed</th>
+        <th class="has-text-grey-dark has-text-weight-semibold date-column">Returned</th>
       </thead>
 
       <tbody>
-        <% @member.loans.active.each_with_index do |x, index| %>
-          <tr>
-            <td>
-              <%= " #{x.item.full_name}" %>
-            </td>
-            <td>
-              <%= " #{x.item.inventory_tag}" %>&nbsp;
-              <%= link_to item_path(x.item) do %>
-              <i class="icon-arrow-right-circle small-icons quick-link"></i>
-            <% end %>
-          </td>
-          <td>
-            <%= " #{x.item.serial_number}" %>
-          </td>
-
-          <td>
-            <i class="<%= " #{x.item.category.icon}" %>"></i>
-            <%= " #{x.item.category.name}" %>
-          </td>
-          <td class="date-column has-text-right">
-            <%= l(" #{x.created_at}".to_datetime, format: :table) %>
-          </td>
-          <td class="date-column has-text-right">
-            <%= link_to 'Return', loan_complete_path(" #{x.id}"), method: :post, class: "button is-outlined is-info is-small" %>
-          </td>
-        </tr>
-      <% end %>
-      <% @member.loans.returned.each do |x| %>
-        <tr class="has-text-grey has-text-weight-light">
-          <td>
-            <%= " #{x.item.full_name}" %>
-          </td>
-          <td>
-            <%= " #{x.item.inventory_tag}" %>&nbsp;
-            <%= link_to item_path(x.item) do %>
-            <i class="icon-arrow-right-circle small-icons quick-link"></i>
-          <% end %>
-
-        </td>
-        <td>
-          <%= " #{x.item.serial_number}" %>
-        </td>
-        <td>
-          <i class="<%= " #{x.item.category.icon}" %>"></i>
-          <%= " #{x.item.category.name}" %>
-        </td>
-
-        <td class="date-column has-text-right">
-          <%= l(" #{x.created_at}".to_datetime, format: :table) %>
-        </td>
-        <td class="date-column has-text-right">
-          <%= l(" #{x.returned_at}".to_datetime, format: :table) %>
-        </td>
-      </tr>
-    <% end %>
+        <% @member.loans.active.each do |loan| -%>
+          <tr class="is-active">
+            <%= render partial: "loan", locals: { loan: loan } %>
+          </tr>
+        <% end -%>
+        <% @member.loans.returned.each do |loan| -%>
+          <tr class="is-returned">
+            <%= render partial: "loan", locals: { loan: loan } %>
+          </tr>
+        <% end -%>
+      </tbody>
+    </table>
   <% end %>
 
-</tbody>
-</table>
 </div>
-</div>
-</div>
-</section>
+</main>
