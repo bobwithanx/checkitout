@@ -20,8 +20,9 @@ class MembersController < ApplicationController
     @member = if params[:search]
                 Member.find_by_id_number(params[:search])
               else
-                Member.find(params[:id])
+                Member.find_by_id params[:id]
               end
+    return unless @member.present?
     @loans = @member.loans.order('returned_at, created_at DESC').all
     @loan_dates = @loans.group_by(&:short_date)
   end
@@ -55,7 +56,7 @@ class MembersController < ApplicationController
   end
 
   def edit
-    @member = Member.find(params[:id])
+    @member = Member.find_by_id params[:id]
   end
 
   def create
@@ -69,7 +70,7 @@ class MembersController < ApplicationController
   end
 
   def update
-    @member = Member.find(params[:id])
+    @member = Member.find_by_id params[:id]
 
     if @member.update(member_params)
       redirect_to members_path
@@ -79,7 +80,7 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    @member = Member.find(params[:id])
+    @member = Member.find_by_id params[:id]
     @member.destroy
 
     redirect_to members_path

@@ -8,7 +8,7 @@ class Loan < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
 
-  # named_scope :recent, order: ['created_at DESC'], limit: 5
+  validates_uniqueness_of :item, conditions: -> { where(status: 'active') }
 
   def short_date
     if returned_at.nil?
@@ -16,6 +16,10 @@ class Loan < ApplicationRecord
     else
       returned_at.strftime('%F')
     end
+  end
+
+  def today?
+    created_at.to_date == Time.zone.now.beginning_of_day.to_date
   end
 
   def days_borrowed

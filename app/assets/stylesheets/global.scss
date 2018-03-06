@@ -3,18 +3,22 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bulma/initial-variables.sass";
 @import "bulma/functions";
+$tag-background-color: #ddd;
 $table-background-color: unset;
 $table-cell-border: 1px solid #e6e6e6;
-$table-cell-padding: 0.25rem;
-$section-padding: 0;
+$table-cell-padding: 0.25rem; // $section-padding: 0;
 
 .button.is-xsmall {
   height: 2em !important;
   font-size: 0.75rem !important;
 }
+// .section {
+//   margin-bottom: 0.5rem;
+// }
 
-.section {
-  margin-bottom: 0.5rem;
+table.dataTable tbody td,
+table.dataTable tbody th {
+  // padding: 0.25rem !important;
 }
 
 .summary {
@@ -31,6 +35,25 @@ $section-padding: 0;
 
 .heading {
   margin-bottom: 2rem;
+  font-size: 0.8em !important;
+  letter-spacing: unset !important;
+}
+
+.tag.is-primary-outline {
+  background-color: #f1f8ff !important;
+  border: 1px solid #c8e1ff !important;
+}
+
+.tag.is-default-outline {
+  background-color: #fff !important;
+  border: 1px solid #e6e6e6 !important;
+}
+
+.tag .heading {
+  font-size: 1em !important;
+  margin-left: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .stacked-block {
@@ -71,27 +94,23 @@ $section-padding: 0;
 }
 
 table {
-  font-size: 0.875rem;
-  border-width: 1px 0;
-}
-
-table tr.is-active {
-  background-color: #eee !important;
+  // font-size: 0.875rem;
+  // border-width: 1px 0;
 }
 
 td,
 th {
-  border-bottom: 1px solid #eee !important;
+  // border-bottom: 1px solid #eee !important;
 }
 
 td.border-right,
 th.border-right {
-  border-right: 1px solid #eee !important;
+  // border-right: 1px solid #eee !important;
 }
 
 td.border-left,
 th.border-left {
-  border-left: 1px solid #eee !important;
+  // border-left: 1px solid #eee !important;
 }
 
 td.extra-padding,
@@ -101,7 +120,33 @@ th.extra-padding {
 }
 
 tr td:first {
-  padding-left: 0.25rem;
+  // padding-left: 0.25rem;
+}
+
+table tr.is-active {
+  // background-color: rgba(101, 210, 119, 0.2) !important;
+  // border-bottom: 1px solid #3273dc !important;
+}
+
+tr.is-active {
+  background-color: #f1f8ff !important;
+  border-color: #c8e1ff !important;
+}
+
+tr.is-active:hover {
+  background-color: #e0edfb !important;
+}
+
+.tag .is-outlined-link {
+  border-color: #3273dc;
+}
+
+.tag .is-highlighted {
+  background-color: rgba(255, 227, 15, 0.3) !important;
+}
+
+.is-light-green {
+  background-color: rgba(101, 210, 119, 0.2) !important;
 }
 
 .user-page {
@@ -115,6 +160,10 @@ tr td:first {
 
 .table.grouped-table tr.with-divider {
   border-top: 1px #ccc solid !important;
+}
+
+table.dataTable thead th {
+  padding-left: 8px !important;
 }
 @import "bulma";
 @import "bulma/bulma-iconpicker.min.css";

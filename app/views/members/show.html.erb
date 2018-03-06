@@ -1,109 +1,103 @@
 <main class="main">
   <div class="container ">
-    <nav class="level">
-      <div class="level-left">
-        <div class="level-item">
-          <div class="title">
-            <%= @member.full_name %>
+    <% flash.each_with_index do |(key, message), index| %>
+      <div class="notification <%= key %>" id="<%= key %>-<%= index %>">
+        <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
+        <%= message %>
+      </div>
+    <% end %>
+
+    <div class="columns">
+      <div class="column is-4">
+        <div class="title">
+          <%= @member.full_name %>
+        </div>
+        <div class="subtitle">
+          <p class="heading">
+            <%= @member.id_number %>
+            &bull;
+            <%= @member.group.name %>
+          </p>
+        </div>
+
+        <div class="field is-grouped is-grouped-multiline">
+          <div class="control">
+            <span class="tags has-addons">
+              <span class="tag is-primary-outline is-medium">
+                <%= @member.loans.active.size %>
+                <p class="heading">Current</p>
+              </span>
+              <span class="tag is-default-outline is-medium">
+                <%= @member.loans.size %>
+                <p class="heading">Total</p>
+              </span>
+            </span>
           </div>
         </div>
-      </div>
-      <div class="level-right">
-        <div class="level-right">
+        <br/>
+        <div>
           <%= form_tag(members_borrow_path, id: "borrow-form" ) do %>
           <div class="field has-addons">
             <input type="hidden" name="member_id" value="<%= @member.id %>">
-            <div class="control is-expanded">
-              <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", class: "input", autofocus: true %>
+            <div class="control ">
+              <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", class: "input", autofocus: true, autocomplete: "off" %>
             </div>
             <div class="control">
-              <%= submit_tag "Borrow", :name => nil, class: "button is-primary" %>
+              <%= submit_tag "Borrow", :name => nil, class: "button is-link" %>
             </div>
           </div>
         <% end %>
       </div>
     </div>
-  </nav>
-  <h3 id="summary" class="section">
-    <a href="#summary">
-      <span>#</span>
-      <strong>Summary</strong>
-    </a>
-  </h3>
-  <div class="summary level">
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">ID #</p>
-        <p class="title is-size-4">
-          <%= @member.id_number %>
-        </p>
-      </div>
-    </div>
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">Group</p>
-        <p class="title is-size-4">
-          <%= @member.group.name %>
-        </p>
-      </div>
-    </div>
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">Current Loans</p>
-        <p class="title is-size-4">
-          <%= @member.loans.active.size %>
-        </p>
-      </div>
-    </div>
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">Total Loans</p>
-        <p class="title is-size-4">
-          <%= @member.loans.returned.size %>
-        </p>
-      </div>
+    <div class="column">
+      <% if @member.loans.blank? %>
+        <div class="box hero has-text-centered">
+          <div class="hero-body">
+            <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
+              No items have been borrowed.
+            </p>
+          </div>
+        </div>
+      <% else %>
+        <table id="member_loans" class="large-element table is-outlined is-hoverable is-fullwidth ">
+          <thead>
+            <th class="has-text-grey-dark has-text-weight-semibold "></th>
+            <th class="has-text-grey-dark has-text-weight-semibold ">
+              Item
+            </th>
+            <th class="has-text-grey-dark has-text-weight-semibold ">
+              Inventory Tag
+            </th>
+            <th class="has-text-grey-dark has-text-weight-semibold is-hidden-mobile">
+              Date
+            </th>
+            <th class="has-text-grey-dark has-text-weight-semibold ">
+              Status
+            </th>
+          </thead>
+          <tbody>
+            <% @member.loans.active.each do |loan| -%>
+              <tr class="is-active">
+                <%= render partial: "loan", locals: { loan: loan } %>
+              </tr>
+            <% end -%>
+            <% @member.loans.returned.each do |loan| -%>
+              <tr class="is-returned">
+                <%= render partial: "loan", locals: { loan: loan } %>
+              </tr>
+            <% end -%>
+          </tbody>
+        </table>
+      <% end %>
     </div>
   </div>
-  <h3 id="history" class="section">
-    <a href="#history">
-      <span>#</span>
-      <strong>History</strong>
-    </a>
-  </h3>
-  <% if @member.loans.blank? %>
-    <div class="box hero has-text-centered">
-      <div class="hero-body">
-        <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
-          No items have been borrowed.
-        </p>
-      </div>
-    </div>
-  <% else %>
-    <table class="large-element table is-outlined is-hoverable is-fullwidth">
-      <thead>
-        <th class="has-text-grey-dark has-text-weight-semibold">Brand</th>
-        <th class="has-text-grey-dark has-text-weight-semibold">Item</th>
-        <th class="has-text-grey-dark has-text-weight-semibold">Inventory #</th>
-        <th class="has-text-grey-dark has-text-weight-semibold">Serial #</th>
-        <th class="has-text-grey-dark has-text-weight-semibold extra-padding">Category</th>
-        <th class="has-text-grey-dark has-text-weight-semibold date-column">Borrowed</th>
-        <th class="has-text-grey-dark has-text-weight-semibold date-column">Returned</th>
-      </thead>
-
-      <tbody>
-        <% @member.loans.active.each do |loan| -%>
-          <tr class="is-active">
-            <%= render partial: "loan", locals: { loan: loan } %>
-          </tr>
-        <% end -%>
-        <% @member.loans.returned.each do |loan| -%>
-          <tr class="is-returned">
-            <%= render partial: "loan", locals: { loan: loan } %>
-          </tr>
-        <% end -%>
-      </tbody>
-    </table>
-  <% end %>
-
-</div>
 </main>
+
+<script>
+  $('#member_loans').DataTable({
+    scrollY: '50vh', scrollCollapse: true, paging: false, ordering: false, searching: false
+
+    // ajax: ..., autoWidth: false, pagingType: 'full_numbers', processing: true, serverSide: true, Optional, if you want full pagination controls. Check dataTables documentation to learn more about available options.
+    // http://datatables.net/reference/option/pagingType
+  });
+</script>

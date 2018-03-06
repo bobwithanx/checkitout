@@ -1,22 +1,26 @@
-<td>
-  <%= " #{loan.item.brand}" %>
+<td class="">
+  <i class="<%= " #{loan.item.category.icon}" %>"></i>
 </td>
 <td>
   <%= " #{loan.item.name}" %>
 </td>
 <td class="">
-  <%= link_to loan.item.inventory_tag, item_path(loan.item), class: "hidden-link" %>
+  <%= " #{loan.item.inventory_tag}" %>
+</td>
+<td class="date-column is-hidden-mobile">
+  <%= l(" #{loan.updated_at}".to_datetime, format: :m_d) %>
 </td>
 <td>
-  <%= " #{loan.item.serial_number}" %>
-</td>
-<td class="extra-padding">
-  <i class="<%= " #{loan.item.category.icon}" %>"></i>
-  <%= " #{loan.item.category.name}" %>
-</td>
-<td class=" date-column ">
-  <%= l(" #{loan.created_at}".to_datetime, format: :table) %>
-</td>
-<td class="date-column ">
-  <%= link_to 'Return', loan_complete_path(" #{loan.id}"), method: :post, class: "button is-outlined is-info is-xsmall has-text-centered" %>
-</td>
+  <% if loan.active? %>
+    <!-- <%= link_to 'Check In', loan_complete_path(" #{loan.id}"), method: :post, class: "", data: { confirm: "Confirm returning: #{loan.item.name} (#{loan.item.inventory_tag})?" } %> -->
+    <%= link_to 'Check In', loan_complete_path(" #{loan.id}"), method: :post %>
+  <% else %>
+    <% if loan.today? %>
+      <span class="tag is-light-green">
+      <% else %>
+        <span class="tag is-light">
+        <% end %>
+        RETURNED
+      </span>
+    <% end %>
+  </td>

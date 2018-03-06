@@ -5,10 +5,12 @@ git_source(:github) do |repo_name|
    "https://github.com/#{repo_name}.git"
 end
 
-gem 'bulma-rails', '~> 0.6.2'
-gem 'nav_links'
 gem 'active_link_to'
-gem "tabs_on_rails"
+gem 'bulma-rails', '~> 0.6.2'
+gem 'jquery-datatables-rails'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'nav_links'
+gem 'tabs_on_rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'

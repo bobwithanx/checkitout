@@ -2,68 +2,21 @@
 
 <section class="section">
   <div class="container is-fluid">
-    <div class="columns is-variable is-8">
-      <div class="column is-centered">
-        <div class="hero is-success">
-          <div class="hero-body">
-            <div class="level">
-              <div class="level-left">
-                <div>
-                  <h1 class="title">
-                    Borrow Items
-                  </h1>
-                  <h2 class="subtitle">
-                    Check out
-                  </h2>
-                </div>
-              </div>
-              <div class="level-right">
-                <div class="is-size-1">
-                  <i class="icon ion-android-arrow-dropright"></i>
-                </div>
-              </div>
-            </div>
+    <div class="hero is-medium is-light-green">
+      <div class="hero-body has-text-centered">
+        <h1 class="title">
+          Scan Student ID
+        </h1>
+        <%= form_tag(members_search_path, :method => "get", id: "search-form" ) do %>
+        <div class="field has-addons has-addons-centered">
+          <div class="control">
+            <%= text_field_tag :search, params[:search], placeholder: "Search Members", class: "input", autofocus: true, autocomplete: "off" %>
+          </div>
+          <div class="control">
+            <%= submit_tag "Search", :name => nil, class: "button is-primary" %>
           </div>
         </div>
-      </div>
-      <div class="is-divider-vertical" data-content="OR"></div>
-      <div class="column is-centered">
-        <div class="hero is-danger">
-          <div class="hero-body">
-            <div class="level">
-              <div class="level-left">
-                <div>
-                  <h1 class="title">
-                    Return Items
-                  </h1>
-                  <h2 class="subtitle">
-                    Check in
-                  </h2>
-                </div>
-              </div>
-              <div class="level-right">
-                <div class="is-size-1">
-                  <i class="icon ion-android-arrow-dropright"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
-</section>
-<section class="section">
-  <div class="container is-fluid">
-    <%= form_tag(members_search_path, :method => "get", id: "search-form" ) do %>
-    <div class="field has-addons">
-      <div class="control">
-        <%= text_field_tag :search, params[:search], placeholder: "Search Members", class: "input" %>
-      </div>
-      <div class="control">
-        <%= submit_tag "Search", :name => nil, class: "button is-primary" %>
-      </div>
-    </div>
-  <% end %>
-</div>
 </section>

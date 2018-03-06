@@ -1,5 +1,14 @@
 class LoansController < ApplicationController
-  def index; end
+  def index
+    @loans = Loan.all
+  end
+
+  def destroy
+    @loan = Loan.find(params[:id])
+    @loan.destroy
+
+    redirect_to loans_path
+  end
 
   def complete
     @loan = Loan.find(params[:loan_id])
