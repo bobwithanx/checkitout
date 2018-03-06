@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20180223051719) do
   create_table "items", force: :cascade do |t|
     t.string "brand"
     t.string "name"
+    t.string "description"
     t.string "serial_number"
     t.string "inventory_tag"
     t.integer "category_id"
