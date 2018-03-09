@@ -24,3 +24,5 @@
 
 .DS_Store
 .rubocup.yml
+
+/db/seeds.rb

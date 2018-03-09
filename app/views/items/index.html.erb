@@ -1,63 +1,88 @@
 <%= render 'admin/menu' %>
 <section class="section">
-    <div class="container is-fluid">
-        <% flash.each_with_index do |(key, message), index| %>
-            <div class="notification <%= key %>" id="<%= key %>-<%= index %>">
-                <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
-                <%= message %>
-            </div>
+  <div class="container is-fluid">
+    <% flash.each_with_index do |(key, message), index| %>
+      <div class="notification <%= key %>" id="<%= key %>-<%= index %>">
+        <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
+        <%= message %>
+      </div>
+    <% end %>
+    <div class="columns">
+      <div class="column is-2">
+        <h1 class="title ">
+          Items
+        </h1>
+        <p class="">
+          <%= link_to new_item_path, class: "button " do %>
+          <i class="fa fa-plus-circle"></i>&nbsp; New
         <% end %>
-        <h1 class="title">Items</h1>
-        <nav class="level">
-            <div class="level-left"></div>
-            <div class="level-right">
-                <p class="level-item"><%= link_to 'New Category', new_category_path, class: "button is-outlined" %></p>
-                <p class="level-item"><%= link_to 'New Item', new_item_path, class: "button is-link is-outlined" %></p>
-            </div>
-        </nav>
-        <% if @items.blank? %>
-            <section class="hero is-medium is-light has-text-centered">
-                <div class="hero-body">
-                    <div class="container">
-                        <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
-                            Add a New Item
-                        </p>
-                    </div>
-                </div>
-            </section>
-        <% else %>
-            <table class="table order-table is-hoverable is-fullwidth">
-                <thead>
-                    <th>Brand</th>
-                    <th>Name</th>
-                    <th>Serial Number</th>
-                    <th>Inventory Tag</th>
-                    <th>Category</th>
-                    <th colspan="3">Actions</th>
-                </thead>
-                <tbody>
-                    <% @items.each do |item| %>
-                        <tr>
-                            <td><%= item.brand %></td>
-                            <td><%= item.name %></td>
-                            <td><%= item.serial_number %></td>
-                            <td><%= item.inventory_tag %></td>
-                            <td>
-                                <% if item.category %>
-                                    <%= item.category.name %>
-                                <% end %>
-                            </td>
-                            <td>
-                                <%= link_to 'Show', item_path(item) %>
-                            </td>
-                            <td>
-                                <%= link_to 'Edit', edit_item_path(item) %></td>
-                            <td>
-                                <%= link_to 'Delete', item_path(item), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                        </tr>
-                    <% end %>
-                </tbody>
-            </table>
-        <% end %>
+      </p>
     </div>
+    <div class="column">
+      <% if @items.blank? %>
+        <section class="hero is-medium is-light has-text-centered">
+          <div class="hero-body">
+            <div class="container">
+              <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
+                Add a New Item
+              </p>
+            </div>
+          </div>
+        </section>
+      <% else %>
+        <table id="item_list" class="table order-table is-hoverable is-fullwidth">
+          <thead>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Inventory Tag</th>
+            <th>Category</th>
+            <th class="no-sort">Actions</th>
+          </thead>
+          <tbody>
+            <% @items.each do |item| %>
+              <tr>
+                <td>
+                  <%= item.brand %>
+                  <%= item.name %>
+                  <br/>
+                </td>
+                <td><%= item.description %></td>
+                <td><%= item.inventory_tag %></td>
+                <td>
+                  <% if item.category %>
+                    <%= item.category.name %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to 'Show', item_path(item) %>
+                  |
+                  <%= link_to 'Edit', edit_item_path(item) %>
+                  |
+                  <%= link_to 'Delete', item_path(item), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
 </section>
+
+<script>
+  $('#item_list').DataTable({
+    paging: true,
+    order: [
+      [0, "asc"]
+    ],
+
+    columnDefs: [
+      {
+        targets: 'no-sort',
+        responsive: true,
+        orderable: false
+      }
+    ]
+  });
+
+  $('div.dataTables_filter input', $('#item_list').DataTable().table().container()).focus();
+</script>

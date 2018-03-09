@@ -8,47 +8,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css', 'https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css',
-    'https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css' %>
+    <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css', 'https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css', 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css',
+    'https://cdn.datatables.net/1.10.16/css/dataTables.jqueryui.min.css' %>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js" %>
+
   </head>
 
   <body>
 
-    <section class="hero is-black hero-background">
+    <section id="hero-home" class="hero is-black hero-background">
       <div class="hero-body ">
         <div class="container is-fluid">
-          <div class="columns is-vcentered">
-            <div class="column">
-              <p>
-                <%= link_to 'CheckItOut', welcome_index_path, class: "title" %>
-              </p>
-              <p class="subtitle">
-                Inventory tracking system.
-              </p>
-            </div>
-          </div>
+          <p>
+            <%= link_to 'CheckItOut', welcome_index_path, class: "title" %>
+          </p>
+          <p class="subtitle">
+            Inventory tracking system.
+          </p>
         </div>
       </div>
       <div class="hero-foot">
         <div class="container is-fluid">
-          <div class="level">
-            <div class="level-left"></div>
-            <div class="level-right">
-              <nav class="tabs is-boxed pull-right">
-                <% nav_links selected_class:'is-active', url_segment: 1, wrapper: 'li' do |nav| %>
-                  <%= nav.link_to 'Admin', admin_index_path, class: " is-tab" %>
-                <% end %>
-            </ul>
+          <nav class="tabs is-boxed pull-right">
+            <% nav_links selected_class:'is-active', url_segment: 1, wrapper: 'li' do |nav| %>
+              <%= nav.link_to 'Admin', admin_index_path, class: " is-tab" %>
+            <% end %>
           </nav>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

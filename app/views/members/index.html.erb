@@ -9,54 +9,86 @@
         <%= message %>
       </div>
     <% end %>
-    <h1 class="title">Members</h1>
-
-    <nav class="level">
-      <div class="level-left"></div>
-      <div class="level-right">
-        <p class="level-item"><%= link_to 'New Group', new_group_path, class: "button is-outlined" %></p>
-        <p class="level-item"><%= link_to 'New Member', new_member_path, class: "button is-link is-outlined" %></p>
-      </div>
-    </nav>
-
-    <% if @members.blank? %>
-      <section class="hero is-medium is-light has-text-centered">
-        <div class="hero-body">
-          <div class="container">
-            <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
-              Add a New Member
-            </p>
+    <div class="columns">
+      <div class="column is-2">
+        <h1 class="title ">
+          Members
+        </h1>
+        <p class="">
+          <%= link_to new_member_path, class: "button " do %>
+          <i class="fa fa-plus-circle"></i>&nbsp; New
+        <% end %>
+      </p>
+    </div>
+    <div class="column">
+      <% if @members.blank? %>
+        <section class="hero is-medium is-light has-text-centered">
+          <div class="hero-body">
+            <div class="container">
+              <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
+                Add a New Member
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
-    <% else %>
-      <table class="table order-table is-hoverable is-fullwidth">
-        <thead>
-          <th>Last Name</th>
-          <th>First Name</th>
-          <th>ID Number</th>
-          <th>Group</th>
-          <th colspan="3">Actions</th>
-        </thead>
+        </section>
+      <% else %>
+        <table id="member_list" class="table order-table is-hoverable is-fullwidth">
+          <thead>
+            <th class="no-sort"> <i class="fa fa-tag"></i> </th>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>ID Number</th>
+            <th>Group</th>
+            <th class="no-sort">Actions</th>
+          </thead>
 
-        <tbody>
-          <% @members.each do |member| %>
-            <tr>
-              <td><%= member.last_name %></td>
-              <td><%= member.first_name %></td>
-              <td><%= member.id_number %></td>
-              <td>
-                <% if member.group %>
-                  <%= member.group.name %>
-                <% end %>
-              </td>
-              <td><%= link_to 'Show', member_path(member) %></td>
-              <td><%= link_to 'Edit', edit_member_path(member) %></td>
-              <td><%= link_to 'Destroy', member_path(member), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% end %>
-  </div>
-</section>
+          <tbody>
+            <% @members.each do |member| %>
+              <tr>
+                <td>
+                  <% if !member.loans.active.size.zero? %>
+                    <div class="tag is-warning"> <%= member.loans.active.size %> </div>
+                  <% end %>
+                </td>
+                <td><%= member.last_name %></td>
+                <td><%= member.first_name %></td>
+                <td><%= member.id_number %></td>
+                <td>
+                  <% if member.group %>
+                    <%= member.group.name %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to 'Show', member_path(member) %>
+                  |
+                  <%= link_to 'Edit', edit_member_path(member) %>
+                  |
+                  <%= link_to 'Destroy', member_path(member), method: :delete, data: { confirm: 'Are you sure?' } %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </section>
+
+  <script>
+    $('#member_list').DataTable({
+      paging: true,
+      order: [
+     [0, "desc"], [1, "asc"]
+      ],
+          orderFixed: [ 0, 'desc' ],
+
+      columnDefs: [
+        {
+          targets: 'no-sort',
+          responsive: true,
+          orderable: false
+        }
+      ]
+    });
+
+    $('div.dataTables_filter input', $('#member_list').DataTable().table().container()).focus();
+  </script>
