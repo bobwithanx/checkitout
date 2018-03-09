@@ -17,14 +17,14 @@
 <div class="field">
   <%= form.label :brand, class: "label" %>
   <div class="control">
-    <%= form.text_field :brand, class: "input", value: "Apple" %>
+    <%= form.text_field :brand, class: "input" %>
   </div>
 </div>
 
 <div class="field">
   <%= form.label :name, class: "label" %>
   <div class="control">
-    <%= form.text_field :name, class: "input", value: "MacBook Pro" %>
+    <%= form.text_field :name, class: "input" %>
   </div>
 </div>
 
@@ -37,7 +37,7 @@
       </a>
     </p>
     <div class="control">
-      <%= form.text_field :serial_number, class: "input", value: "SN1234" %>
+      <%= form.text_field :serial_number, class: "input" %>
     </div>
   </div>
 </div>
@@ -51,8 +51,15 @@
       </a>
     </p>
     <div class="control">
-      <%= form.text_field :inventory_tag, class: "input", value: "MBP-10" %>
+      <%= form.text_field :inventory_tag, class: "input" %>
     </div>
+  </div>
+</div>
+
+<div class="field">
+  <%= form.label :description, class: "label" %>
+  <div class="control">
+    <%= form.text_field :description, class: "input" %>
   </div>
 </div>
 
