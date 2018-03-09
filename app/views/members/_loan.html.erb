@@ -2,10 +2,13 @@
   <i class="<%= " #{loan.item.category.icon}" %>"></i>
 </td>
 <td>
-  <%= " #{loan.item.name}" %>
+  <%= " #{loan.item.full_name}" %>
 </td>
 <td class="">
   <%= " #{loan.item.inventory_tag}" %>
+</td>
+<td class="">
+  <%= " #{loan.item.description}" %>
 </td>
 <td class="date-column is-hidden-mobile">
   <%= l(" #{loan.updated_at}".to_datetime, format: :m_d) %>
