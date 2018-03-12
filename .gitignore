@@ -26,3 +26,8 @@
 .rubocup.yml
 
 db/seeds.rb
+/public/packs
+/public/packs-test
+/vendor
+yarn-debug.log*
+.yarn-integrity

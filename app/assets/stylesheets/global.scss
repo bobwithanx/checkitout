@@ -9,8 +9,9 @@ $table-cell-border: 1px solid #e6e6e6;
 $table-cell-padding: 0.25rem; // $section-padding: 0;
 
 .no-sort .DataTables_sort_icon {
-display: none;
+  display: none;
 }
+
 #hero-home .hero-body {
   padding-bottom: 0 !important;
 }
@@ -22,11 +23,10 @@ display: none;
 // .section {
 //   margin-bottom: 0.5rem;
 // }
-
-table.dataTable tbody td,
-table.dataTable tbody th {
-  // padding: 0.25rem !important;
-}
+// table.dataTable tbody td,
+// table.dataTable tbody th {
+//   // padding: 0.25rem !important;
+// }
 
 .summary {
   margin: 0.75rem 1.5rem;
@@ -99,50 +99,46 @@ table.dataTable tbody th {
   box-shadow: unset !important;
   // box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 }
-
-table {
-  // font-size: 0.875rem;
-  // border-width: 1px 0;
-}
-
-td,
-th {
-  // border-bottom: 1px solid #eee !important;
-}
-
-td.border-right,
-th.border-right {
-  // border-right: 1px solid #eee !important;
-}
-
-td.border-left,
-th.border-left {
-  // border-left: 1px solid #eee !important;
-}
+// table {
+//   // font-size: 0.875rem;
+//   // border-width: 1px 0;
+// }
+//
+// td,
+// th {
+//   // border-bottom: 1px solid #eee !important;
+// }
+// td.border-right,
+// th.border-right {
+//   // border-right: 1px solid #eee !important;
+// }
+//
+// td.border-left,
+// th.border-left {
+//   // border-left: 1px solid #eee !important;
+// }
 
 td.extra-padding,
 th.extra-padding {
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important;
 }
-
-tr td:first {
-  // padding-left: 0.25rem;
-}
-
-table tr.is-active {
-  // background-color: rgba(101, 210, 119, 0.2) !important;
-  // border-bottom: 1px solid #3273dc !important;
-}
-
-tr.is-active {
-  background-color: #f1f8ff !important;
-  border-color: #c8e1ff !important;
-}
-
-tr.is-active:hover {
-  background-color: #e0edfb !important;
-}
+// tr td:first {
+//   // padding-left: 0.25rem;
+// }
+//
+// table tr.is-active {
+//   // background-color: rgba(101, 210, 119, 0.2) !important;
+//   // border-bottom: 1px solid #3273dc !important;
+// }
+// tr.is-active {
+//   background-color: #f1f8ff !important;
+//   border-color: #c8e1ff !important;
+// }
+//
+// tr.is-active:hover {
+//   background-color: #e0edfb !important;
+// }
 
 .tag .is-outlined-link {
   border-color: #3273dc;
@@ -174,3 +170,4 @@ table.dataTable thead th {
 }
 @import "bulma";
 @import "bulma/bulma-iconpicker.min.css";
+@import "bulma/dataTables.bulma.min.css";

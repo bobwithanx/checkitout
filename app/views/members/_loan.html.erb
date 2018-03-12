@@ -16,7 +16,7 @@
 <td>
   <% if loan.active? %>
     <!-- <%= link_to 'Check In', loan_complete_path(" #{loan.id}"), method: :post, class: "", data: { confirm: "Confirm returning: #{loan.item.name} (#{loan.item.inventory_tag})?" } %> -->
-    <%= link_to 'Check In', loan_complete_path(" #{loan.id}"), method: :post %>
+    <%= link_to 'check in', loan_complete_path(" #{loan.id}"), method: :post %>
   <% else %>
     <% if loan.today? %>
       <span class="tag is-light-green">

@@ -7,6 +7,7 @@ end
 
 gem 'active_link_to'
 gem 'bulma-rails', '~> 0.6.2'
+gem 'counter_culture', '~> 1.8'
 gem 'jquery-datatables-rails'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'nav_links'

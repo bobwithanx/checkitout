@@ -14,7 +14,10 @@
 //= require turbolinks
 //= require_tree .
 
-//= require jquery
-//= require jquery_ujs
+//= require jquery-3.3.1.min.js
 
-//= require dataTables/jquery.dataTables
+//= require bulma-iconpicker.js
+//= require datatables.js
+//= require dataTables.bulma.js
+//= require fontawesome-all.js
+//= require fa-v4-shims.js

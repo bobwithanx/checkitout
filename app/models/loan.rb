@@ -1,5 +1,8 @@
 class Loan < ApplicationRecord
   belongs_to :member
+  counter_culture :member, column_name: proc { |model| model.active? ? 'active_loans_count' : nil }
+  counter_culture :member
+
   belongs_to :item
 
   enum status: %i[active returned]

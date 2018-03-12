@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="column is-4">
-      <% if @loans.size.zero? %>
+      <% if @borrowers.empty? %>
         <div class="box hero has-text-centered">
           <div class="hero-body">
             <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
@@ -36,15 +36,13 @@
           <p class="panel-heading">
             Current Loans
           </p>
-          <% @loans.each do |loan| -%>
-            <%= link_to member_path(loan.member), class: "panel-block" do %>
-            <span class="panel-icon">
-              <i class="fa fa-user"></i>
-            </span>
-            <%= " #{loan.member.full_name}" %>
+          <% @borrowers.each do |person| -%>
+            <%= link_to member_path(person), class: "panel-block" do %>
             <div class="is-pulled-right tag is-warning">
-              <%= loan.member.loans.active.size %>
+              <%= person.loans.active.size %>
             </div>
+            &nbsp;
+            <%= "#{person.full_name}" %>
           <% end %>
         <% end -%>
 
