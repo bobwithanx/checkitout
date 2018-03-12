@@ -10,7 +10,7 @@
       </div>
     <% end %>
     <div class="columns">
-      <div class="column is-2">
+      <div class="column is-narrow">
         <h1 class="title ">
           Members
         </h1>
@@ -34,7 +34,9 @@
       <% else %>
         <table id="member_list" class="table order-table is-hoverable is-fullwidth">
           <thead>
-            <th class="no-sort"> <i class="fa fa-tag"></i> </th>
+            <th class="no-sort">
+              <i class="fa fa-tag"></i>
+            </th>
             <th>Last Name</th>
             <th>First Name</th>
             <th>ID Number</th>
@@ -47,7 +49,9 @@
               <tr>
                 <td>
                   <% if !member.loans.active.size.zero? %>
-                    <div class="tag is-warning"> <%= member.loans.active.size %> </div>
+                    <div class="tag is-warning">
+                      <%= member.loans.active.size %>
+                    </div>
                   <% end %>
                 </td>
                 <td><%= member.last_name %></td>
@@ -77,9 +81,16 @@
     $('#member_list').DataTable({
       paging: true,
       order: [
-     [0, "desc"], [1, "asc"]
+        [
+          0, "desc"
+        ],
+        [
+          1, "asc"
+        ]
       ],
-          orderFixed: [ 0, 'desc' ],
+      orderFixed: [
+        0, 'desc'
+      ],
 
       columnDefs: [
         {

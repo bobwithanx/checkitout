@@ -12,12 +12,11 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
 Rails.application.config.assets.precompile += %w[bulma-iconpicker.js]
-Rails.application.config.assets.precompile += %w[dataTables.bulma.min.js]
-Rails.application.config.assets.precompile += %w[datatables.js]
-Rails.application.config.assets.precompile += %w[fa-v4-shims.js]
-Rails.application.config.assets.precompile += %w[fontawesome-all.js]
+Rails.application.config.assets.precompile += %w[dataTables.bulma.js]
+
 Rails.application.config.assets.precompile += %w[jquery-3.3.1.min.js]
+Rails.application.config.assets.precompile += %w[jquery.dataTables.js]
+
 Rails.application.config.assets.precompile += %w[bulma/bulma-divider.min.css]
 Rails.application.config.assets.precompile += %w[bulma/bulma-iconpicker.min.css]
-Rails.application.config.assets.precompile += %w[bulma/dataTables.bulma.min.css]
 Rails.application.config.assets.precompile += %w[bulma/dataTables.bulma.min.css]

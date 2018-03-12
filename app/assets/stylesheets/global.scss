@@ -20,9 +20,10 @@ $table-cell-padding: 0.25rem; // $section-padding: 0;
   height: 2em !important;
   font-size: 0.75rem !important;
 }
-// .section {
-//   margin-bottom: 0.5rem;
-// }
+
+.section {
+  margin-bottom: 0.5rem;
+}
 // table.dataTable tbody td,
 // table.dataTable tbody th {
 //   // padding: 0.25rem !important;
@@ -164,10 +165,11 @@ th.extra-padding {
 .table.grouped-table tr.with-divider {
   border-top: 1px #ccc solid !important;
 }
-
-table.dataTable thead th {
-  padding-left: 8px !important;
-}
+// table.dataTable thead th {
+//   padding-left: 8px !important;
+// }
 @import "bulma";
 @import "bulma/bulma-iconpicker.min.css";
 @import "bulma/dataTables.bulma.min.css";
+@import "font-awesome-sprockets";
+@import "font-awesome";

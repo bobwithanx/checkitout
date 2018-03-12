@@ -17,7 +17,5 @@
 //= require jquery-3.3.1.min.js
 
 //= require bulma-iconpicker.js
-//= require datatables.js
+//= require jquery.dataTables.js
 //= require dataTables.bulma.js
-//= require fontawesome-all.js
-//= require fa-v4-shims.js
