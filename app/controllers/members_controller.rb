@@ -22,7 +22,9 @@ class MembersController < ApplicationController
               else
                 Member.find_by_id params[:id]
               end
-    return unless @member.present?
+    if @member.blank?
+      return redirect_to welcome_index_path
+    end
     @loans = @member.loans.order('returned_at, created_at DESC').all
     @loan_dates = @loans.group_by(&:short_date)
   end
