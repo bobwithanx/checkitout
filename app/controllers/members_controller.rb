@@ -23,7 +23,9 @@ class MembersController < ApplicationController
                 Member.find_by_id params[:id]
               end
     if @member.blank?
-      return redirect_to welcome_index_path
+      flash[:danger] = "Member ID not found."
+      redirect_to(welcome_index_path)
+      return
     end
     @loans = @member.loans.order('returned_at, created_at DESC').all
     @loan_dates = @loans.group_by(&:short_date)
