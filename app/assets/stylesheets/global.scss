@@ -8,8 +8,13 @@ $table-background-color: unset;
 $table-cell-border: 1px solid #e6e6e6;
 $table-cell-padding: 0.25rem; // $section-padding: 0;
 
-.no-sort .DataTables_sort_icon {
-  display: none;
+.no-sort .DataTables_sort_icon,
+.no-sort.sorting_desc:after {
+  display: none !important;
+}
+
+.no-sort.sorting_desc {
+  cursor: text !important;
 }
 
 #hero-home .hero-body {
