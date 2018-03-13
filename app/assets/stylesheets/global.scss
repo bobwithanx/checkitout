@@ -21,6 +21,10 @@ $table-cell-padding: 0.25rem; // $section-padding: 0;
   padding-bottom: 0 !important;
 }
 
+.tabs.is-boxed {
+  justify-content: flex-end;
+}
+
 .button.is-xsmall {
   height: 2em !important;
   font-size: 0.75rem !important;
