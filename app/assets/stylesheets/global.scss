@@ -80,7 +80,7 @@ $table-cell-padding: 0.25rem; // $section-padding: 0;
 .section a:hover,
 .section strong:hover {
   color: #3273DC !important;
-  text-decoration: underline;
+  // text-decoration: underline;
 }
 
 .hidden-link {
@@ -93,12 +93,12 @@ $table-cell-padding: 0.25rem; // $section-padding: 0;
   text-decoration: underline;
   // font-weight: bold;
 }
-
-.date-column {
-  // width: 25%;
-  padding-right: 15px !important;
-  padding-left: 15px !important;
-}
+// .date-column {
+//   // width: 25%;
+//   padding-right: 15px !important;
+//   padding-left: 15px !important;
+// }
+//
 
 .box-outline-primary {
   border: 1px solid #3273dc;
