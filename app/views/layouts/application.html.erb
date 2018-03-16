@@ -8,8 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css' %>
-
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   </head>
@@ -29,7 +27,7 @@
       </div>
       <div class="hero-foot">
         <div class="container is-fluid">
-          <nav class="tabs is-boxed pull-right">
+          <nav id="admin" class="tabs is-boxed pull-right">
             <% nav_links selected_class:'is-active', url_segment: 1, wrapper: 'li' do |nav| %>
               <%= nav.link_to 'Admin', admin_index_path, class: "is-tab" %>
             <% end %>

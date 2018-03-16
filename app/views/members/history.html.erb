@@ -1,161 +1,118 @@
-<section class="section">
-  <div class="container is-fluid">
-    <nav class="level">
-      <div class="level-left">
-        <div class="title is-spaced">
-          <%= @member.full_name %>
-          &nbsp;&nbsp;&nbsp;
-          <span class="tags has-addons pull-right">
-            <span class="tag is-dark is-medium">
-              id #
-            </span>
-            <span class="tag is-link is-medium">
-              <%= @member.id_number %>
-            </span>
-          </span>
-        </div>
-      </div>
-      <div class="level-right">
-        <%= form_tag(members_borrow_path, id: "borrow-form" ) do %>
-        <div class="field has-addons">
-          <input type="hidden" name="member_id" value="<%= @member.id %>">
-          <div class="control is-expanded">
-            <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", class: "input", autofocus: true %>
-          </div>
-          <div class="control">
-            <%= submit_tag "Borrow", :name => nil, class: "button is-primary" %>
-          </div>
-        </div>
-      <% end %>
+<div class="container ">
+  <% flash.each_with_index do |(key, message), index| %>
+    <div class="notification <%= key %>" id="<%= key %>-<%= index %>">
+      <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
+      <%= message %>
     </div>
-  </nav>
+  <% end %>
 </div>
-</section>
-<section class="section user-page">
-<div class="container is-fluid">
-  <% if @member.loans.blank? %>
-    <div class="box hero has-text-centered">
-      <div class="hero-body">
-        <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
-          No items have been borrowed.
-        </p>
-      </div>
-    </div>
-  <% else %>
-    <div class="columns is-6 is-variable">
-      <div class="column">
-        <div class="box ">
 
-          <%= form_tag(members_borrow_path, id: "borrow-form" ) do %>
-          <div class="field has-addons">
-            <input type="hidden" name="member_id" value="<%= @member.id %>">
-            <div class="control is-expanded">
-              <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", class: "input", autofocus: true %>
-            </div>
-            <div class="control">
-              <%= submit_tag "Borrow", :name => nil, class: "button is-primary" %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="box box-outline-primary">
-        <nav class="level">
-          <div class="level-left">
-            <div class="level-item">
-              <div class="title is-5">
-                Current Loans
-              </div>
-            </div>
-            <% if @member.loans.active.present? %>
-              <div class="level-item">
-                <span class="tag is-warning is-rounded">
-                  <%= @member.loans.active.size %>
-                </span>
-              </div>
-            <% end %>
-          </div>
-        </nav>
-        <table class="table is-fullwidth">
-          <tbody>
-            <% if @member.loans.active.blank? %>
-              <div class="hero is-light has-text-centered">
-                <div class="hero-body">
-                  <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
-                    No items are currently borrowed.
-                  </p>
-                </div>
-              </div>
-            <% else %>
-              <% @member.loans.active.each_with_index do |x, index| %>
-                <tr>
-                  <td>
-                    <%= " #{x.item.name}" %>
-                  </td>
-                  <td>
-                    <%= " #{x.item.inventory_tag}" %>
-                  </td>
-                  <td>
-                    <%= l(" #{x.created_at}".to_datetime, format: :table) %>
-                  </td>
-                  <td>
-                    <%= link_to 'Return', loan_complete_path(" #{x.id}"), method: :post, class: "button is-outlined is-info is-small" %>
-                  </td>
-                </tr>
-              <% end %>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="column">
-      <div class="box">
-        <table class="table grouped-table is-scrollable">
-          <thead>
-            <th colspan="5">
-              Recent Loans
-            </th>
-          </thead>
-
-          <tbody>
-            <% @member.loans.returned.group_by(&:short_date).each do |short_date, loans| %>
-              <% loans.each_with_index do |x, index| %>
-                <% if index==0 %>
-                  <tr class="with-divider">
-                    <td>
-                      <%= short_date %>
-                    </td>
-                  <% else %>
-                    <tr>
-                      <td ></td>
-                    <% end %>
-                    <td class="pull-right">
-                      <%= "#{x.id}" %>
-                    </td>
-                    <td>
-                      <span class="has-text-grey">
-                        <%= "#{x.item.name}" %>
-                      </span>
-                    </td>
-                    <td>
-                      <span class="tag">
-                        <%= "#{x.item.inventory_tag}" %>
-                      </span>
-                    </td>
-                    <td>
-                      <span class="has-text-grey">
-                        <%= "#{x.days_borrowed}" %>
-                      </span>
-                    </td>
-                  </tr>
-                <% end %>
-              <% end %>
-            <% end %>
-
-          </tbody>
-        </table>
-      </div>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <span class="title is-4">
+        <%= @member.full_name %>
+        <span class="subtitle is-6 has-text-weight-light">
+          <span class="heading">
+            <%= @member.id_number %>
+            &bull;
+            <%= @member.group.name %>
+          </span>
+        </span>
+      </span>
     </div>
   </div>
+  <div class="hero-foot has-shadow">
+    <div class="tabs is-boxed">
+      <div class="container">
+        <ul>
+          <li class="tab">
+            <%= link_to member_path(@member) do %>
+            <span class="icon is-small">
+              <i class="fas fa-briefcase"></i>
+            </span>
+            <span>Current</span>&nbsp;&nbsp;&nbsp;
+            <span class="tag is-rounded">
+              <%= @member.loans.active.size %>
+            </span>
+          <% end %>
+        </li>
+        <li class="tab is-active">
+          <%=link_to history_member_path(@member) do %>
+          <span class="icon is-small">
+            <i class="fas fa-history"></i>
+          </span>
+          <span>Loan History</span>
+        <% end %>
+      </li>
+    </ul>
+
+  </div>
+</div>
 </div>
 </section>
+
+<main class="main">
+<div class="container">
+<% if @member.loans.blank? %>
+  <div class="box hero has-text-centered">
+    <div class="hero-body">
+      <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
+        No items have been borrowed.
+      </p>
+    </div>
+  </div>
+<% else %>
+  <table id="member_history" class=" table is-outlined is-hoverable is-fullwidth ">
+    <thead>
+      <th class="has-text-grey-dark has-text-weight-semibold "></th>
+      <th class="has-text-grey-dark has-text-weight-semibold ">
+        Item
+      </th>
+      <th class="has-text-grey-dark has-text-weight-semibold ">
+        Inventory Tag
+      </th>
+      <th class="has-text-grey-dark has-text-weight-semibold ">
+        Description
+      </th>
+      <th class="has-text-grey-dark has-text-weight-semibold">
+        Date
+      </th>
+      <th class="has-text-grey-dark has-text-weight-semibold ">
+        Status
+      </th>
+    </thead>
+    <tbody>
+      <% @member.loans.returned.each do |loan| -%>
+        <tr class="is-returned">
+          <%= render partial: "loan", locals: { loan: loan } %>
+        </tr>
+      <% end -%>
+    </tbody>
+  </table>
+<% end %>
+</div>
+</div>
+
+</main>
+
+<script>
+function openTab(evt, tabTitle) {
+var i,
+tabcontent,
+tablinks;
+tabcontent = document.getElementsByClassName("tab-content");
+// for (i = 0; i < tabcontent.length; i++) {   tabcontent[i].style.display = "none"; }
+tablinks = document.getElementsByClassName("tablinks");
+console.log(tabTitle)
+for (i = 0; i < tablinks.length; i++) {
+tablinks[i].className = tablinks[i].className.replace(" is-active", " ");
+tabcontent[i].className = tabcontent[i].className.replace(" is-active", " ");
+}
+document.getElementById(tabTitle).className += " is-active";
+evt.currentTarget.className += " is-active";
+}
+
+$('#member_loans').DataTable({scrollY: '50vh', scrollCollapse: true, paging: false, ordering: false, searching: false});
+$('#member_history').DataTable({scrollY: '50vh', scrollCollapse: true, paging: false, ordering: false, searching: false});
+</script>

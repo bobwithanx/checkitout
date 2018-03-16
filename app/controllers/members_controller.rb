@@ -15,7 +15,7 @@ class MembersController < ApplicationController
     #            end
   end
 
-  def show
+  def history
     set_tab :members
     @member = if params[:search]
                 Member.find_by_id_number(params[:search])
@@ -31,7 +31,24 @@ class MembersController < ApplicationController
     @loan_dates = @loans.group_by(&:short_date)
   end
 
+  def show
+    set_tab :members
+    @member = Member.find_by_id params[:id]
+    if @member.blank?
+      flash[:danger] = "Member ID not found."
+      redirect_to(welcome_index_path)
+      return
+    end
+  end
+
   def search
+    @member =  Member.find_by_id_number(params[:search])
+    if @member.blank?
+      flash[:danger] = "Member ID not found."
+      redirect_to(welcome_index_path)
+      return
+    end
+
     render 'show'
     # @member = Member.find_by_id_number(params[:search])
   end

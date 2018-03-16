@@ -14,7 +14,7 @@
             <h1 class="title">
               Scan Student ID
             </h1>
-            <%= form_tag(members_search_path, :method => "get", id: "search-form" ) do %>
+            <%= form_tag(search_members_path, :method => "get", id: "search-form" ) do %>
             <div class="field has-addons has-addons-centered">
               <div class="control">
                 <%= text_field_tag :search, params[:search], placeholder: "Search Members", class: "input", autofocus: true, autocomplete: "off" %>

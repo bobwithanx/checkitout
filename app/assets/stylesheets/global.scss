@@ -2,15 +2,28 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bulma/initial-variables.sass";
-@import "bulma/functions";
-$tag-background-color: #ddd;
-$table-background-color: unset;
-$table-cell-border: 1px solid #e6e6e6;
-$table-cell-padding: 0.25rem; // $section-padding: 0;
+@import "bulma/functions"; // $tag-background-color: #ddd;
+// $table-background-color: unset;
+// $table-cell-border: 1px solid #e6e6e6;
+// $table-cell-padding: 0.25rem; // $section-padding: 0;
+
+.hero-foot {
+  margin-top: -2rem;
+}
+// .tab-content:not(.is-active) {
+//   display: none !important;
+// }
+//
 
 .no-sort .DataTables_sort_icon,
 .no-sort.sorting_desc:after {
   display: none !important;
+}
+
+.tabs ul {
+  border-bottom-color: #dbdbdb !important;
+  border-bottom-style: solid !important;
+  border-bottom-width: 1px !important;
 }
 
 .no-sort.sorting_desc {
@@ -18,10 +31,10 @@ $table-cell-padding: 0.25rem; // $section-padding: 0;
 }
 
 #hero-home .hero-body {
-  padding-bottom: 0 !important;
+  // padding-bottom: 0 !important;
 }
 
-.tabs.is-boxed {
+#admin.tabs {
   justify-content: flex-end;
 }
 
@@ -41,13 +54,12 @@ $table-cell-padding: 0.25rem; // $section-padding: 0;
 .summary {
   margin: 0.75rem 1.5rem;
 }
-
-.container {
-  max-width: 100%;
-}
+// .container {
+//   max-width: 100%;
+// }
 
 .main {
-  padding: 3rem;
+  padding: 2rem;
 }
 
 .heading {
@@ -76,27 +88,25 @@ $table-cell-padding: 0.25rem; // $section-padding: 0;
 .stacked-block {
   display: block !important;
 }
-
-.section strong {
-  color: #222 !important;
-}
-
-.section a:hover,
-.section strong:hover {
-  color: #3273DC !important;
-  // text-decoration: underline;
-}
-
-.hidden-link {
-  color: inherit;
-  // color: grey;
-}
-
-.hidden-link:hover {
-  color: #3273dc;
-  text-decoration: underline;
-  // font-weight: bold;
-}
+// .section strong {
+//   color: #222 !important;
+// }
+// .section a:hover,
+// .section strong:hover {
+//   color: #3273DC !important;
+//   // text-decoration: underline;
+// }
+//
+// .hidden-link {
+//   color: inherit;
+//   // color: grey;
+// }
+//
+// .hidden-link:hover {
+//   color: #3273dc;
+//   text-decoration: underline;
+//   // font-weight: bold;
+// }
 // .date-column {
 //   // width: 25%;
 //   padding-right: 15px !important;
@@ -127,12 +137,11 @@ $table-cell-padding: 0.25rem; // $section-padding: 0;
 // th.border-left {
 //   // border-left: 1px solid #eee !important;
 // }
-
-td.extra-padding,
-th.extra-padding {
-  padding-left: 0.75rem !important;
-  padding-right: 0.75rem !important;
-}
+// td.extra-padding,
+// th.extra-padding {
+//   padding-left: 0.75rem !important;
+//   padding-right: 0.75rem !important;
+// }
 // tr td:first {
 //   // padding-left: 0.25rem;
 // }
@@ -161,22 +170,21 @@ th.extra-padding {
 .is-light-green {
   background-color: rgba(101, 210, 119, 0.2) !important;
 }
-
-.user-page {
-  background: whitesmoke;
-}
-
-.table.grouped-table tbody td,
-.table.grouped-table tbody th {
-  border: unset !important;
-}
-
-.table.grouped-table tr.with-divider {
-  border-top: 1px #ccc solid !important;
-}
-// table.dataTable thead th {
-//   padding-left: 8px !important;
+// .user-page {
+//   background: whitesmoke;
 // }
+//
+// .table.grouped-table tbody td,
+// .table.grouped-table tbody th {
+//   border: unset !important;
+// }
+//
+// .table.grouped-table tr.with-divider {
+//   border-top: 1px #ccc solid !important;
+// }
+// // table.dataTable thead th {
+// //   padding-left: 8px !important;
+// // }
 @import "bulma";
 @import "bulma/bulma-iconpicker.min.css";
 @import "bulma/dataTables.bulma.min.css";
