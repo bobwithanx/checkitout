@@ -12,6 +12,7 @@ gem 'font-awesome-sass', '~> 5.0.6'
 gem 'jquery-datatables-rails'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'nav_links'
+gem "paperclip", "~> 5.2.1"
 gem 'tabs_on_rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

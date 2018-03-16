@@ -31,3 +31,5 @@ db/seeds.rb
 /vendor
 yarn-debug.log*
 .yarn-integrity
+
+public/system
