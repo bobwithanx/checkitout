@@ -13,6 +13,8 @@ gem 'jquery-datatables-rails'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'nav_links'
 gem "paperclip", "~> 5.2.1"
+gem 'primer-rails', '~> 0.7.0'
+gem 'rails_admin', '~> 1.3'
 gem 'tabs_on_rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

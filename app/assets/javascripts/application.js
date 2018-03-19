@@ -12,10 +12,11 @@
 //
 //= require rails-ujs
 //= require turbolinks
-//= require_tree .
 
 //= require jquery-3.3.1.min.js
 
 //= require bulma-iconpicker.js
 //= require jquery.dataTables.js
 //= require dataTables.bulma.js
+
+//= require_tree .

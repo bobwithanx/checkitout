@@ -1,7 +1,7 @@
 class Member < ApplicationRecord
   belongs_to :group, optional: true
   has_many :loans
-  has_many :products, through: :loans
+  has_many :items, through: :loans
 
   def full_name
     "#{first_name} #{last_name}"

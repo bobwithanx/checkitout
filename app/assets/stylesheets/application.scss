@@ -13,4 +13,7 @@
  *= require_tree .
  *= require_self
  */
-@import "global.scss"
+/*
+ *= require primer
+ */
+@import "global.scss";
