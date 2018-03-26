@@ -1,57 +1,44 @@
-<section class="section">
-  <div class="container is-fluid">
-    <div class="columns">
-      <div class="column">
-        <% flash.each_with_index do |(key, message), index| %>
-          <div class="notification is-<%= key %>" id="<%= key %>-<%= index %>">
-            <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
-            <%= message %>
+<div class="container is-fluid">
+  <% flash.each_with_index do |(key, message), index| %>
+    <div class="notification is-<%= key %>" id="<%= key %>-<%= index %>">
+      <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
+      <%= message %>
+    </div>
+    <% end %>
+</div>
+<section class="hero">
+  <div class="hero-center">
+    <div class="hero-body">
+      <div class="container is-fluid">
+        <div class="columns is-mobile">
+          <div class="column is-half is-offset-one-quarter">
+            <% if @borrowers.empty? %>
+              <div class="box hero has-text-centered">
+                <div class="hero-body">
+                  <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
+                    No items are borrowed.
+                  </p>
+                </div>
+              </div>
+              <% else %>
+                <div class="panel">
+                  <div class="panel-heading">
+                    Current Loans
+                  </div>
+                  <% @borrowers.each do |person| -%>
+                    <%= link_to member_path(person), class: "panel-block" do %>
+                      <div class="is-pulled-right tag is-warning">
+                        <%= person.loans.active.size %>
+                      </div>
+                      &nbsp;
+                      <%= "#{person.full_name}" %>
+                        <% end %>
+                          <% end -%>
+                </div>
+                <% end %>
           </div>
-        <% end %>
 
-        <div class="hero is-medium is-light-green">
-          <div class="hero-body has-text-centered">
-            <h1 class="title">
-              Scan Student ID
-            </h1>
-            <%= form_tag(search_members_path, :method => "get", id: "search-form" ) do %>
-            <div class="field has-addons has-addons-centered">
-              <div class="control">
-                <%= text_field_tag :search, params[:search], placeholder: "Search Members", class: "input", autofocus: true, autocomplete: "off" %>
-              </div>
-              <div class="control">
-                <%= submit_tag "Search", :name => nil, class: "button is-primary" %>
-              </div>
-            </div>
-          <% end %>
         </div>
       </div>
     </div>
-    <div class="column is-4">
-      <% if @borrowers.empty? %>
-        <div class="box hero has-text-centered">
-          <div class="hero-body">
-            <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
-              No items are borrowed.
-            </p>
-          </div>
-        </div>
-      <% else %>
-        <div class="panel">
-          <p class="panel-heading">
-            Current Loans
-          </p>
-          <% @borrowers.each do |person| -%>
-            <%= link_to member_path(person), class: "panel-block" do %>
-            <div class="is-pulled-right tag is-warning">
-              <%= person.loans.active.size %>
-            </div>
-            &nbsp;
-            <%= "#{person.full_name}" %>
-          <% end %>
-        <% end -%>
-      </div>
-    <% end %>
-  </div>
-</div>
 </section>

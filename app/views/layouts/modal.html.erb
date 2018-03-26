@@ -1,0 +1,33 @@
+<!-- app/views/layouts/modal.html.erb -->
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Loan Details</p>
+      <button id="close-icon" class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <%= yield %>
+    </section>
+    <footer class="modal-card-foot">
+      <button id="close-button" class="button">Close</button>
+    </footer>
+  </div>
+</div>
+
+<script type="application/javascript">
+function toggleModalClasses(event) {
+    var modalId = event.currentTarget.dataset.modalId;
+    var modal = $(modalId);
+    modal.toggleClass('is-active');
+    $('html').toggleClass('is-clipped');
+    console.log("here");
+  $("html").removeClass("is-clipped");
+  $(".modal").removeClass("is-active");
+
+  };
+
+$('.open-modal').click(toggleModalClasses);
+
+$('#close-button').add('#close-icon').add('.modal-background').click(toggleModalClasses);
+</script>

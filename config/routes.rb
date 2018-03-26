@@ -2,21 +2,22 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'admin/index'
 
+  post 'versions/:id/revert' => 'versions#revert', :as=>'revert_version'
   # resources :groups, :categories, :items
   # get 'members/search'
   # get 'members/:id/history', to: 'members#history'
 
   # scope '/admin' do
-    resources :groups, :categories, :items
-    resources :members do
-      member { post 'borrow' }
-      member { post 'return' }
-      member { get 'history' }
-      collection { get 'search' }
-    end
-    resources 'loans' do
-      post :complete
-    end
+  resources :groups, :categories, :items, :loans
+  resources :members do
+    member { post 'borrow' }
+    member { post 'return' }
+    member { get 'history' }
+    collection { get 'search' }
+  end
+    # resources 'loans' do
+    #   post :complete
+    # end
   # end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

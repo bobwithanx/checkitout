@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <!-- <html class="has-navbar-fixed-top"> -->
 <html class="">
-  <head>
-    <title>CheckItOut</title>
-    <%= csrf_meta_tags %>
+
+<head>
+  <title>CheckItOut</title>
+  <%= csrf_meta_tags %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'https://use.fontawesome.com/releases/v5.0.8/js/all.js' %>
-  </head>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body class="">
-    <nav class="navbar has-shadow">
-      <div class="container is-fluid">
-        <div class="navbar-brand">
-          <%= link_to 'CheckItOut', welcome_index_path, class: "navbar-item is-tab" %>
-        </div>
+<body class="">
+  <nav class="navbar is-dark has-shadow">
+    <div class="container is-fluid">
+      <div class="navbar-brand">
+        <%= link_to 'CheckItOut', welcome_index_path, class: "navbar-item is-tab" %>
+      </div>
+      <div class="navbar-menu ">
         <div class="navbar-start">
+          <div class="navbar-item">
+            <%= form_tag(search_members_path, :method => "get", id: "search-form" ) do %>
+              <div class="field">
+                <div class="control">
+                  <%= text_field_tag :search, params[:search], placeholder: "Find Student", class: "input", autofocus: true, autocomplete: "off" %>
+                </div>
+              </div>
+              <% end %>
+          </div>
           <% nav_links selected_class:'is-active', url_segment: 1 do |nav| %>
             <%= nav.link_to 'Members', members_path, class: "navbar-item is-tab" %>
-            <%= nav.link_to 'Items', items_path, class: "navbar-item is-tab" %>
-          <% end %>
+              <%= nav.link_to 'Items', items_path, class: "navbar-item is-tab" %>
+                <% end %>
         </div>
         <div class="navbar-end">
           <a class="navbar-item is-tab" href="/admin">
@@ -31,9 +41,14 @@
           </a>
         </div>
       </div>
-    </nav>
 
-    <%= yield %>
+    </div>
+  </nav>
 
-  </body>
+  <%= yield %>
+
+    <div id="modal-holder"></div>
+
+</body>
+
 </html>

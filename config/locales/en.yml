@@ -34,7 +34,7 @@ en:
 
   time:
     formats:
-      day: '%F'
+      extended: '%Y-%b-%d • %l:%M %P'
       m_y: '%B %e'
       table: '%b %e, %l:%M %p'
       m_d: '%B %e'

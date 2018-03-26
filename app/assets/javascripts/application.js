@@ -18,5 +18,7 @@
 //= require bulma-iconpicker.js
 //= require jquery.dataTables.js
 //= require dataTables.bulma.js
+//= require rails-timeago
+//= require local-time
 
 //= require_tree .

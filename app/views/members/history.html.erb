@@ -1,118 +1,69 @@
-<div class="container ">
-  <% flash.each_with_index do |(key, message), index| %>
-    <div class="notification <%= key %>" id="<%= key %>-<%= index %>">
-      <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
-      <%= message %>
-    </div>
-  <% end %>
-</div>
+<%= render 'header' %>
 
-<section class="hero">
-  <div class="hero-body">
+  <div class="container">
+    <% flash.each_with_index do |(key, message), index| %>
+      <div class="notification is-<%= key %>" id="<%= key %>-<%= index %>">
+        <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
+        <%= raw(message) %>
+      </div>
+      <% end %>
+  </div>
+
+  <section class="section">
     <div class="container">
-      <span class="title is-4">
-        <%= @member.full_name %>
-        <span class="subtitle is-6 has-text-weight-light">
-          <span class="heading">
-            <%= @member.id_number %>
-            &bull;
-            <%= @member.group.name %>
-          </span>
-        </span>
-      </span>
+      <table id="member_loans" class=" table is-hoverable is-fullwidth is-responsive">
+        <thead>
+          <th class="has-text-grey-dark has-text-weight-semibold ">
+            Item
+          </th>
+          <th class="has-text-grey-dark has-text-weight-semibold ">
+            Inventory Tag
+          </th>
+          <th class="has-text-grey-dark has-text-weight-semibold ">
+            Description
+          </th>
+          <th class="has-text-grey-dark has-text-weight-semibold "> Category </th>
+          <th class="has-text-grey-dark has-text-weight-semibold">
+            Returned
+          </th>
+          <th class="has-text-grey-dark has-text-weight-semibold ">
+            Duration
+          </th>
+        </thead>
+        <tbody>
+          <% @member.loans.each do |loan| -%>
+            <tr class="<%= 'is-selected' if loan.active? %>">
+              <td>
+                <i class="<%= loan.item.category.icon %>"></i>
+                <%= loan.item.full_name %>
+              </td>
+              <td class="">
+                <%= loan.item.inventory_tag %>
+              </td>
+              <td class="">
+                <%= loan.item.description %>
+              </td>
+              <td class="">
+                <i class="<%= loan.item.category.icon %>"></i>
+                <%= loan.item.category.name %>
+              </td>
+
+              <td class="">
+                <%= local_time_ago(loan.updated_at) %>
+              </td>
+              <td class="">
+                <%= loan.days_borrowed %>
+                  <span class="is-pulled-right">
+                    <%= link_to loan_path(" #{loan.id}"), data: { behavior: 'modal' } do %>
+                      <i class="info-icon fas fa-info-circle"></i>
+                      <% end %>
+                  </span>
+              </td>
+
+            </tr>
+            <% end -%>
+        </tbody>
+      </table>
+
     </div>
-  </div>
-  <div class="hero-foot has-shadow">
-    <div class="tabs is-boxed">
-      <div class="container">
-        <ul>
-          <li class="tab">
-            <%= link_to member_path(@member) do %>
-            <span class="icon is-small">
-              <i class="fas fa-briefcase"></i>
-            </span>
-            <span>Current</span>&nbsp;&nbsp;&nbsp;
-            <span class="tag is-rounded">
-              <%= @member.loans.active.size %>
-            </span>
-          <% end %>
-        </li>
-        <li class="tab is-active">
-          <%=link_to history_member_path(@member) do %>
-          <span class="icon is-small">
-            <i class="fas fa-history"></i>
-          </span>
-          <span>Loan History</span>
-        <% end %>
-      </li>
-    </ul>
-
-  </div>
-</div>
-</div>
-</section>
-
-<main class="main">
-<div class="container">
-<% if @member.loans.blank? %>
-  <div class="box hero has-text-centered">
-    <div class="hero-body">
-      <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
-        No items have been borrowed.
-      </p>
-    </div>
-  </div>
-<% else %>
-  <table id="member_history" class=" table is-outlined is-hoverable is-fullwidth ">
-    <thead>
-      <th class="has-text-grey-dark has-text-weight-semibold "></th>
-      <th class="has-text-grey-dark has-text-weight-semibold ">
-        Item
-      </th>
-      <th class="has-text-grey-dark has-text-weight-semibold ">
-        Inventory Tag
-      </th>
-      <th class="has-text-grey-dark has-text-weight-semibold ">
-        Description
-      </th>
-      <th class="has-text-grey-dark has-text-weight-semibold">
-        Date
-      </th>
-      <th class="has-text-grey-dark has-text-weight-semibold ">
-        Status
-      </th>
-    </thead>
-    <tbody>
-      <% @member.loans.returned.each do |loan| -%>
-        <tr class="is-returned">
-          <%= render partial: "loan", locals: { loan: loan } %>
-        </tr>
-      <% end -%>
-    </tbody>
-  </table>
-<% end %>
-</div>
-</div>
-
-</main>
-
-<script>
-function openTab(evt, tabTitle) {
-var i,
-tabcontent,
-tablinks;
-tabcontent = document.getElementsByClassName("tab-content");
-// for (i = 0; i < tabcontent.length; i++) {   tabcontent[i].style.display = "none"; }
-tablinks = document.getElementsByClassName("tablinks");
-console.log(tabTitle)
-for (i = 0; i < tablinks.length; i++) {
-tablinks[i].className = tablinks[i].className.replace(" is-active", " ");
-tabcontent[i].className = tabcontent[i].className.replace(" is-active", " ");
-}
-document.getElementById(tabTitle).className += " is-active";
-evt.currentTarget.className += " is-active";
-}
-
-$('#member_loans').DataTable({scrollY: '50vh', scrollCollapse: true, paging: false, ordering: false, searching: false});
-$('#member_history').DataTable({scrollY: '50vh', scrollCollapse: true, paging: false, ordering: false, searching: false});
-</script>
+  </section>

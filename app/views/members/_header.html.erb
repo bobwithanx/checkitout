@@ -1,18 +1,42 @@
-<div class="container is-fluid">
-  <nav class="level">
-    <div class="level-left">
-      <div class="title is-spaced">
+<section class="hero pagehead">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
         <%= @member.full_name %>
-        &nbsp;&nbsp;&nbsp;
-        <span class="tags has-addons pull-right">
-          <span class="tag is-dark is-medium">
-            id #
-          </span>
-          <span class="tag is-link is-medium">
-            <%= @member.id_number %>
-          </span>
-        </span>
+      </h1>
+      <h2 class="subtitle">
+        <%= @member.id_number %>
+          &bull;
+          <%= @member.group.name %>
+      </h2>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <div class="container">
+      <div class="tabs is-boxed">
+        <ul>
+          <% nav_links selected_class:'is-active', wrapper: 'li' do |nav| %>
+            <%= nav.link_to member_path(@member), class: "tab pagetab " do %>
+              <span class="icon is-small">
+                <i class="fa fa-briefcase"></i>
+              </span>
+              <span>Current</span>&nbsp;&nbsp;&nbsp;
+              <span class="tag is-rounded">
+                <%= @member.loans.active.size %>
+              </span>
+              <% end %>
+
+                <%= nav.link_to history_member_path(@member), class: "tab pagetab" do %>
+                  <span class="icon is-small">
+                    <i class="fa fa-history"></i>
+                  </span>
+                  <span>History</span>
+                  <% end %>
+
+                    <% end %>
+
+        </ul>
       </div>
     </div>
-  </nav>
-</div>
+  </div>
+</section>

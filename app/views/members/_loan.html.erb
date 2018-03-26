@@ -15,8 +15,7 @@
 </td>
 <td>
   <% if loan.active? %>
-    <!-- <%= link_to 'Check In', loan_complete_path(" #{loan.id}"), method: :post, class: "", data: { confirm: "Confirm returning: #{loan.item.name} (#{loan.item.inventory_tag})?" } %> -->
-    <%= link_to loan_complete_path(" #{loan.id}"), method: :post do %>
+    <%= link_to return_member_path(" #{loan.id}"), method: :post do %>
     <%= icon('far', 'calendar-check') %>
     check in
   <% end %>

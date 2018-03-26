@@ -5,17 +5,21 @@ git_source(:github) do |repo_name|
    "https://github.com/#{repo_name}.git"
 end
 
+gem 'active_decorator'
 gem 'active_link_to'
 gem 'bulma-rails', '~> 0.6.2'
 gem 'counter_culture', '~> 1.8'
 gem 'font-awesome-sass', '~> 5.0.6'
 gem 'jquery-datatables-rails'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'local_time'
 gem 'nav_links'
-gem "paperclip", "~> 5.2.1"
+gem 'paper_trail'
+gem 'paperclip', '~> 5.2.1'
 gem 'primer-rails', '~> 0.7.0'
 gem 'rails_admin', '~> 1.3'
 gem 'tabs_on_rails'
+gem 'rails-timeago', '~> 2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'

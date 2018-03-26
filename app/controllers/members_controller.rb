@@ -1,38 +1,22 @@
 class MembersController < ApplicationController
   def index
     @members = Member.all
-
-    # @members = if params[:search]
-    #              Member.search(params[:search]).order('created_at DESC')
-    #              if !@members.empty? && @members.count == 1
-    #                flash.now[:alert] = 'Your book was not found'
-    #
-    #                # render 'show'
-    #                #   @member = Member.find(params[:search])
-    #                # else
-    #                #   Member.all
-    #              end
-    #            end
   end
 
   def history
     set_tab :members
-    @member = if params[:search]
-                Member.find_by_id_number(params[:search])
-              else
-                Member.find_by_id params[:id]
-              end
+    set_tab :history
+    @member = Member.find_by_id params[:id]
     if @member.blank?
       flash[:danger] = "Member ID not found."
       redirect_to(welcome_index_path)
       return
     end
-    @loans = @member.loans.order('returned_at, created_at DESC').all
-    @loan_dates = @loans.group_by(&:short_date)
   end
 
   def show
     set_tab :members
+    set_tab :current
     @member = Member.find_by_id params[:id]
     if @member.blank?
       flash[:danger] = "Member ID not found."
@@ -53,12 +37,20 @@ class MembersController < ApplicationController
     # @member = Member.find_by_id_number(params[:search])
   end
 
+  def undo_link
+    view_context.link_to('undo', revert_version_path(@loan.versions.last), :method=> :post)
+  end
+
   def borrow
     @loan = Loan.new
     @loan.member = Member.find(params[:member_id])
     @loan.item = Item.find_by_inventory_tag(params[:inventory_tag])
 
-    @loan.save
+    if @loan.save
+      flash[:success] = "Item borrowed. #{undo_link}"
+    else
+      flash[:danger] = "Did not save."
+    end
     redirect_to @loan.member
     # @member = Member.find_by_id_number(params[:search])
   end
@@ -67,8 +59,10 @@ class MembersController < ApplicationController
     @loan = Loan.find(params[:id])
     @loan.returned_at = Time.now
 
-    loan.save
-    render members_index
+    @loan.save
+    redirect_to @loan.member
+
+    # render members_index
     # @member = Member.find_by_id_number(params[:search])
   end
 
