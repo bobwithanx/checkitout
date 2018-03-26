@@ -19,7 +19,8 @@ class Loan < ApplicationRecord
   end
 
   def days_borrowed
-    days = (updated_at.to_date - created_at.to_date).to_i
+    return '-' unless returned_at
+    days = (returned_at.to_date - created_at.to_date).to_i
     if days.zero?
       'same day'
     elsif days == 1
