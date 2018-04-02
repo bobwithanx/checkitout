@@ -1,3 +1,14 @@
+GIT
+  remote: https://github.com/activerecord-hackery/ransack.git
+  revision: 4128660fd26797874511a8b0f54de8ffacfc826d
+  specs:
+    ransack (1.8.8)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      i18n
+      polyamorous (~> 1.3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -123,7 +134,7 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
     local_time (2.0.0)
-    loofah (2.2.1)
+    loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.0)
@@ -152,6 +163,8 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
+    polyamorous (1.3.3)
+      activerecord (>= 3.0)
     primer-rails (0.7.0)
     public_suffix (3.0.2)
     puma (3.11.3)
@@ -176,8 +189,10 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.0.3)
-      loofah (~> 2.0)
+    rails-html-sanitizer (1.0.4)
+      loofah (~> 2.2, >= 2.2.2)
+    rails-jquery-autocomplete (1.0.3)
+      rails (>= 3.2)
     rails-timeago (2.16.0)
       actionpack (>= 3.1)
       activesupport (>= 3.1)
@@ -209,7 +224,7 @@ GEM
       rack (>= 1.4)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
-    sass (3.5.5)
+    sass (3.5.6)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -256,6 +271,9 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    will_paginate (3.1.6)
+    will_paginate-bulma (1.0.0)
+      will_paginate (>= 3.0.3)
     xpath (3.0.0)
       nokogiri (~> 1.8)
 
@@ -282,8 +300,10 @@ DEPENDENCIES
   primer-rails (~> 0.7.0)
   puma (~> 3.7)
   rails (~> 5.1.5)
+  rails-jquery-autocomplete
   rails-timeago (~> 2.0)
   rails_admin (~> 1.3)
+  ransack!
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
@@ -294,6 +314,7 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  will_paginate-bulma
 
 BUNDLED WITH
    1.16.1

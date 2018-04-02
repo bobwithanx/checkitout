@@ -11,18 +11,21 @@
 
   <section class="section">
     <div class="container">
-      <table id="member_loans" class=" table is-hoverable is-fullwidth is-responsive">
+      <table id="loan_history" class=" table is-hoverable is-fullwidth is-responsive is-striped">
         <thead>
-          <th class="has-text-grey-dark has-text-weight-semibold ">
+          <th class="has-text-grey-dark has-text-weight-semibold item_name">
             Item
           </th>
           <th class="has-text-grey-dark has-text-weight-semibold ">
             Inventory Tag
           </th>
           <th class="has-text-grey-dark has-text-weight-semibold ">
-            Description
+            Serial Number
           </th>
-          <th class="has-text-grey-dark has-text-weight-semibold "> Category </th>
+          <th class="has-text-grey-dark has-text-weight-semibold is-hidden-tablet"> Category </th>
+          <th class="has-text-grey-dark has-text-weight-semibold">
+            Borrowed
+          </th>
           <th class="has-text-grey-dark has-text-weight-semibold">
             Returned
           </th>
@@ -35,35 +38,37 @@
             <tr class="<%= 'is-selected' if loan.active? %>">
               <td>
                 <i class="<%= loan.item.category.icon %>"></i>
-                <%= loan.item.full_name %>
+                <span class="item_name">
+                  <%= loan.item.full_name %>
+                </span>
               </td>
-              <td class="">
+              <td class="is-size-6 is-monospaced">
                 <%= loan.item.inventory_tag %>
               </td>
-              <td class="">
-                <%= loan.item.description %>
+              <td class="is-size-6 is-monospaced">
+                <%= loan.item.serial_number %>
               </td>
-              <td class="">
+              <td class="is-hidden-tablet">
                 <i class="<%= loan.item.category.icon %>"></i>
                 <%= loan.item.category.name %>
               </td>
-
               <td class="">
-                <%= local_time_ago(loan.updated_at) %>
+                <%= local_time_ago(loan.created_at) %>
+              </td>
+              <td class="">
+                <% if loan.returned_at %>
+                  <%= local_time_ago(loan.returned_at) %>
+                    <% else %>
+                      -
+                      <% end %>
               </td>
               <td class="">
                 <%= loan.days_borrowed %>
-                  <span class="is-pulled-right">
-                    <%= link_to loan_path(" #{loan.id}"), data: { behavior: 'modal' } do %>
-                      <i class="info-icon fas fa-info-circle"></i>
-                      <% end %>
-                  </span>
               </td>
 
             </tr>
             <% end -%>
         </tbody>
       </table>
-
     </div>
   </section>

@@ -3,6 +3,17 @@ class MembersController < ApplicationController
     @members = Member.all
   end
 
+  def search
+    @members = Member.ransack(name_or_id_number_cont: params[:q]).result(distinct: true)
+
+    respond_to do |format|
+      format.html {}
+      format.json {
+        @members = @members.limit(5)
+      }
+    end
+  end
+
   def history
     set_tab :members
     set_tab :history
@@ -25,17 +36,17 @@ class MembersController < ApplicationController
     end
   end
 
-  def search
-    @member =  Member.find_by_id_number(params[:search])
-    if @member.blank?
-      flash[:danger] = "Member ID not found."
-      redirect_to(welcome_index_path)
-      return
-    end
+  # def search
+  #   @member =  Member.find_by_id_number(params[:search])
+  #   if @member.blank?
+  #     flash[:danger] = "Member ID not found."
+  #     redirect_to(welcome_index_path)
+  #     return
+  #   end
 
-    render 'show'
-    # @member = Member.find_by_id_number(params[:search])
-  end
+  #   render 'show'
+  #   # @member = Member.find_by_id_number(params[:search])
+  # end
 
   def undo_link
     view_context.link_to('undo', revert_version_path(@loan.versions.last), :method=> :post)
@@ -49,7 +60,7 @@ class MembersController < ApplicationController
     if @loan.save
       flash[:success] = "Item borrowed. #{undo_link}"
     else
-      flash[:danger] = "Did not save."
+      flash[:danger] = "ERROR<p>Item was not borrowed.</p>"
     end
     redirect_to @loan.member
     # @member = Member.find_by_id_number(params[:search])
@@ -59,7 +70,11 @@ class MembersController < ApplicationController
     @loan = Loan.find(params[:id])
     @loan.returned_at = Time.now
 
-    @loan.save
+    if @loan.save
+      flash[:success] = "Item returned. #{undo_link}"
+    else
+      flash[:danger] = "ERROR<p>Item was not returned.</p>"
+    end
     redirect_to @loan.member
 
     # render members_index

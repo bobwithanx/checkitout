@@ -3,6 +3,17 @@ class ItemsController < ApplicationController
     @items = Item.all
   end
 
+  def search
+    @items = Item.ransack( name_or_inventory_tag_or_serial_number_cont: params[:q] ).result(distinct: true)
+
+    respond_to do |format|
+      format.html {}
+      format.json {
+        @items = @items.limit(10)
+      }
+    end
+  end
+
   def show
     @item = Item.find(params[:id])
     @loans = @item.loans.order('returned_at, created_at DESC').all

@@ -28,7 +28,7 @@ class LoansController < ApplicationController
     if @loan.save
       flash[:success] = "Item borrowed. #{undo_link}"
     else
-      flash[:danger] = "Did not save."
+      flash[:danger] = "Error - item was not assigned."
     end
     redirect_to @loan.member
     # @member = Member.find_by_id_number(params[:search])

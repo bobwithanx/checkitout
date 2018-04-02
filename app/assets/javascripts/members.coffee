@@ -3,6 +3,5 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 # jQuery -> $("#member_loans").dataTable()
-
-$(document).ready -> $('#member_loans').DataTable({retrieve: true, ordering: false, searching: true, lengthChange: false});
-
+# jQuery ->
+# $(document).ready -> $('#member_loans').DataTable({retrieve: true, ordering: false, searching: true, lengthChange: false});

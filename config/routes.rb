@@ -8,17 +8,18 @@ Rails.application.routes.draw do
   # get 'members/:id/history', to: 'members#history'
 
   # scope '/admin' do
-  resources :groups, :categories, :items, :loans
+  resources :groups, :categories, :loans
   resources :members do
     member { post 'borrow' }
     member { post 'return' }
     member { get 'history' }
     collection { get 'search' }
   end
-    # resources 'loans' do
-    #   post :complete
-    # end
-  # end
+
+
+  resources :items do
+    collection { get 'search' }
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # resource :members, only: [:index, :show] do
@@ -28,4 +29,5 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   root 'welcome#index'
+  # get :search, controller: :member
 end

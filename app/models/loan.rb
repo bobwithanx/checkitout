@@ -11,7 +11,6 @@ class Loan < ApplicationRecord
   after_save :update_status, if: :saved_change_to_returned_at?
 
   default_scope { order(created_at: :desc) }
-
   validates_uniqueness_of :item, conditions: -> { where(status: 'active') }
 
   def today?

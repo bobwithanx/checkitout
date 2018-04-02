@@ -19,6 +19,29 @@ $text: grey;
 @import "bulma/dataTables.bulma.min.css";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+#loan_histry {
+  font-size: .9rem;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400; // line-height: 12px;
+  font-family: "Fira Sans", sans-serif;
+}
+
+#loan_history tr,
+#loan_history tr td {
+  vertical-align: middle;
+}
+
+.is-monospaced {
+  font-family: "Inconsolata", "Roboto Mono", monospace;
+}
+
+.inventory-tag {
+  font-size: 1rem;
+}
+
 .hero.is-light .tabs.is-boxed li.is-active a {
   background: white !important;
   color: darkslategray !important;
@@ -40,12 +63,25 @@ li.is-active a.pagetab {
 }
 
 a.pagetab.is-active {
-  border-bottom: 0;
+  border-bottom: 1px solid white;
 }
 
 a.pagetab,
 a.secondary-tab {
   border-width: 3px 1px 1px !important;
+}
+
+.eac-item {
+  color: #24292e;
+}
+
+div#eac-container-item-autocomplete.easy-autocomplete-container {
+  padding-top: 2px;
+}
+
+.easy-autocomplete-container ul {
+  border-top: 1px solid #ccc !important;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 #current_loans thead {

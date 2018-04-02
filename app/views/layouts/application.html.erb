@@ -22,14 +22,15 @@
       <div class="navbar-menu ">
         <div class="navbar-start">
           <div class="navbar-item">
-            <%= form_tag(search_members_path, :method => "get", id: "search-form" ) do %>
+            <%= form_with  local: true, method: :get, html: { id: "search-form" } do |form| %>
               <div class="field">
                 <div class="control">
-                  <%= text_field_tag :search, params[:search], placeholder: "Find Student", class: "input", autofocus: true, autocomplete: "off" %>
+                  <%= form.text_field :q, placeholder: "Find Student", class: "input", autocomplete: "off", id: 'member-autocomplete', data: { behavior: 'autocomplete'} %>
                 </div>
               </div>
               <% end %>
           </div>
+
           <% nav_links selected_class:'is-active', url_segment: 1 do |nav| %>
             <%= nav.link_to 'Members', members_path, class: "navbar-item is-tab" %>
               <%= nav.link_to 'Items', items_path, class: "navbar-item is-tab" %>

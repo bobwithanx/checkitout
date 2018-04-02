@@ -8,6 +8,8 @@ class Member < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  ransack_alias :name_or_id_number, :first_name_or_last_name_or_id_number
+
   def self.search(search)
     where('id_number LIKE ? OR first_name LIKE ? OR last_name LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
   end

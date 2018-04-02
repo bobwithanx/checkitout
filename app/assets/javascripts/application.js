@@ -20,5 +20,8 @@
 //= require dataTables.bulma.js
 //= require rails-timeago
 //= require local-time
+//= require jquery_ujs
+//= require jquery.easy-autocomplete.js
+//= require typeahead.bundle.js
 
 //= require_tree .
