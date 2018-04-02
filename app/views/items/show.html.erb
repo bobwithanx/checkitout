@@ -94,7 +94,7 @@
               <td><%= loan.created_at.strftime("%b %e, %l:%M %p") %></td>
               <td>
                 <% if loan.returned_at.blank? %>
-                  <%= link_to 'Check In', loan_complete_path(loan.id), method: :post %>
+                -
                 <% else %>
                   <%= loan.returned_at.strftime("%b %e, %l:%M %p") %>
                 <% end %>
