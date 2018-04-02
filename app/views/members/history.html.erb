@@ -43,7 +43,9 @@
                 </span>
               </td>
               <td class="is-size-6 is-monospaced">
-                <%= loan.item.inventory_tag %>
+                    <%= link_to item_path(loan.item.id) do %>
+<%= loan.item.inventory_tag %>
+<% end %>
               </td>
               <td class="is-size-6 is-monospaced">
                 <%= loan.item.serial_number %>
