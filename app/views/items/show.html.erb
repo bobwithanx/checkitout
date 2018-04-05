@@ -12,7 +12,7 @@
                <div class="field is-grouped is-grouped-multiline">
           <div class="control">
             <span class="tags has-addons">
-              <span class="tag is-light">
+              <span class="tag is-light is-outlined-dark">
                 tag #
               </span>
               <span class="tag is-link">
@@ -22,7 +22,7 @@
           </div>
           <div class="control">
             <div class="tags has-addons">
-                            <span class="tag is-light">
+                            <span class="tag is-light is-outlined-dark">
                 status
               </span>
                  <% if @loans.active.blank? %>
@@ -70,7 +70,7 @@
                     Returned
                   </th>
                   <th class="has-text-grey-dark has-text-weight-semibold ">
-                    Action
+                    Duration
                   </th>
                 </thead>
                 <tbody>
@@ -86,7 +86,10 @@
                                       <% if loan.returned_at %>
                   <%= local_time_ago(loan.returned_at) %>
                     <% else %>
-                      -
+                                    <span class="tag is-danger">
+                on loan
+              </span>
+
                       <% end %>
               </td>
               <td class="">
