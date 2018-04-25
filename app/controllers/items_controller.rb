@@ -1,17 +1,18 @@
 class ItemsController < ApplicationController
+  before_action :force_json, only: :search
   def index
     @items = Item.all
   end
 
   def search
-    @items = Item.ransack( name_or_inventory_tag_or_serial_number_cont: params[:q] ).result(distinct: true)
+    @items = Item.ransack(name_cont: params[:q]).result(distinct: true)
 
-    respond_to do |format|
-      format.html {}
-      format.json {
-        @items = @items.limit(10)
-      }
-    end
+    # respond_to do |format|
+    #   format.html {}
+    #   format.json {
+    #     @items = @items.limit(10)
+    #   }
+    # end
   end
 
   def show
@@ -58,6 +59,9 @@ class ItemsController < ApplicationController
   end
 
   private
+  def force_json
+    request.format = :json
+  end
 
   def item_params
     params.require(:item).permit(:brand, :name, :serial_number, :inventory_tag, :description, :category, :category_id, :image)

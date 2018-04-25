@@ -1,9 +1,10 @@
 document.addEventListener("turbolinks:load", function () {
-  $input = $("#item-autocomplete")
+  input = $("#item-autocomplete")
   var options = {
     getValue: "inventory_tag",
     url: function (phrase) {
-      return "/items/search.json?q=" + phrase;
+      console.log("phrase = " + phrase);
+      return "/items/search?q=" + phrase;
     },
     listLocation: "items",
     list: {
@@ -25,5 +26,5 @@ document.addEventListener("turbolinks:load", function () {
     }
   }
 
-  $input.easyAutocomplete(options)
+  input.easyAutocomplete(options)
 });
