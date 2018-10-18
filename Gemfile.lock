@@ -88,7 +88,7 @@ GEM
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
       after_commit_action (~> 1.0)
-    crass (1.0.3)
+    crass (1.0.4)
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.23)
@@ -111,7 +111,7 @@ GEM
       jquery-rails
       railties (>= 3.1)
       sass-rails
-    jquery-rails (4.3.1)
+    jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
@@ -152,7 +152,7 @@ GEM
       rails (>= 3.2.13, < 6.0)
     nested_form (0.3.2)
     nio4r (2.3.0)
-    nokogiri (1.8.2)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     paper_trail (8.1.2)
       activerecord (>= 4.2, < 5.2)
@@ -168,11 +168,11 @@ GEM
     primer-rails (0.7.0)
     public_suffix (3.0.2)
     puma (3.11.3)
-    rack (2.0.4)
+    rack (2.0.5)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
-    rack-test (0.8.3)
+    rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.1.5)
       actioncable (= 5.1.5)
@@ -288,7 +288,7 @@ DEPENDENCIES
   font-awesome-sass (~> 5.0.6)
   jbuilder (~> 2.5)
   jquery-datatables-rails
-  jquery-rails (~> 4.3, >= 4.3.1)
+  jquery-rails (~> 4.3, >= 4.3.3)
   listen (>= 3.0.5, < 3.2)
   local_time
   nav_links
