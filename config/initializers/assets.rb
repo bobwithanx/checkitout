@@ -15,7 +15,7 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.precompile += %w[bulma-iconpicker.js]
 Rails.application.config.assets.precompile += %w[dataTables.bulma.js]
 
-Rails.application.config.assets.precompile += %w[jquery-3.3.1.min.js]
+# Rails.application.config.assets.precompile += %w[jquery-3.3.1.min.js]
 Rails.application.config.assets.precompile += %w[jquery.dataTables.js]
 
 Rails.application.config.assets.precompile += %w[bulma/bulma-divider.min.css]
