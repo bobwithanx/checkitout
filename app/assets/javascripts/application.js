@@ -13,14 +13,13 @@
 //= require rails-ujs
 //= require turbolinks
 
-//= require jquery-3.3.1.min.js
+//= require jquery
 
 //= require bulma-iconpicker.js
 //= require jquery.dataTables.js
 //= require dataTables.bulma.js
 //= require rails-timeago
 //= require local-time
-//= require jquery_ujs
 //= require jquery.easy-autocomplete.js
 //= require typeahead.bundle.js
 
