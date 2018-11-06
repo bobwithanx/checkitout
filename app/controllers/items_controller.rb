@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   end
 
   def search
-    @items = Item.ransack(name_cont: params[:q]).result(distinct: true)
+    @items = Item.ransack(brand_or_name_or_description_or_inventory_tag: params[:q]).result(distinct: true)
 
     # respond_to do |format|
     #   format.html {}

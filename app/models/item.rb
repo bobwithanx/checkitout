@@ -8,8 +8,13 @@ class Item < ApplicationRecord
 
   scope :available, -> { joins(:loans).merge(Loan.active)}
 
+  ransack_alias :name_or_tag, :brand_or_name_or_description_or_inventory_tag
+
   def full_name
     "#{brand} #{name}"
   end
 
+  def self.search(search)
+    where('brand LIKE ? OR name LIKE ? OR description LIKE ? OR inventory_tag LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%")
+  end
 end
