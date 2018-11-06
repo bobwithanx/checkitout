@@ -36,9 +36,11 @@
           <% @member.loans.each do |loan| -%>
             <tr class="<%= 'is-selected' if loan.active? %>">
               <td>
-                <i class="<%= loan.item.category.icon %>"></i>
+                <i class="<%= loan.item.category.icon %>"></i>&nbsp;
                 <span class="item_name">
-                  <%= loan.item.full_name %>
+                  <%= link_to item_path(loan.item.id) do %>
+                    <%= loan.item.full_name %>
+                  <% end %>
                 </span>
               </td>
               <td class="is-size-6">
@@ -46,11 +48,6 @@
               </td>
               <td class="is-size-6">
                 <%= loan.item.inventory_tag %>
-                <%= link_to item_path(loan.item.id) do %>
-                  <span class="icon is-small">
-                    <i class="fa fa-chevron-circle-right"></i>
-                  </span>
-                <% end %>
                </td>
               <td class="">
                 <%= local_time_ago(loan.created_at) %>

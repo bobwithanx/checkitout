@@ -21,20 +21,23 @@
                 <i class="fa fa-briefcase"></i>
               </span>
               <span>Current</span>&nbsp;&nbsp;&nbsp;
-              <span class="tag is-primary is-rounded">
-                <%= @member.loans.active.size %>
-              </span>
+              <% if ! @member.loans.active.blank? %>
+                <span class="tag is-primary is-rounded">
+                  <%= @member.loans.active.size %>
+                </span>
               <% end %>
+            <% end %>
 
-                <%= nav.link_to history_member_path(@member), class: "tab pagetab" do %>
-                  <span class="icon is-small">
-                    <i class="fa fa-history"></i>
-                  </span>
-                  <span>History</span>
-                  <% end %>
-
-                    <% end %>
-
+            <%= nav.link_to history_member_path(@member), class: "tab pagetab" do %>
+              <span class="icon is-small">
+                <i class="fa fa-history"></i>
+              </span>
+              <span>History</span>&nbsp;&nbsp;&nbsp;
+                <span class="tag is-rounded">
+                  <%= @member.loans.size %>
+                </span>
+            <% end %>
+          <% end %>
         </ul>
       </div>
     </div>
