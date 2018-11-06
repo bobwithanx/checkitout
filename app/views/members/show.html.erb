@@ -93,7 +93,7 @@
                         <%= local_time_ago(loan.created_at) %>
                       </td>
                       <td class="">
-                        <%= link_to return_member_path(" #{loan.id}"), class: 'is-7', method: :post, data: { confirm: 'Are you sure?' } do %>
+                        <%= link_to return_member_path(" #{loan.id}"), class: 'is-7', method: :post do %>
                           <i class="fa fa-calendar-check-o"></i> check in
                           <% end %>
                       </td>
