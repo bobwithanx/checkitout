@@ -6,6 +6,10 @@ class Loan < ApplicationRecord
 
   belongs_to :item
 
+  def title
+    self.item.name + " " + self.item.serial_number + " (" + self.created_at.strftime("%Y-%m-%d") + ")"
+  end
+
   enum status: %i[active complete]
 
   after_save :update_status, if: :saved_change_to_returned_at?

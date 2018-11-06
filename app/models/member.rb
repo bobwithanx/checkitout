@@ -8,6 +8,10 @@ class Member < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def title
+    self.full_name
+  end
+
   ransack_alias :name_or_id_number, :first_name_or_last_name_or_id_number
 
   def self.search(search)
