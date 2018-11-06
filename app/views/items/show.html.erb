@@ -2,41 +2,47 @@
   <div class="hero-body">
     <div class="container">
       <h1 class="title">
-              <%= @item.full_name %>
+        <%= @item.full_name %>
+        <% if @loans.active.blank? %>
+          <span class="tag is-success">
+            available
+          </span>
+        <% else %>
+          <span class="tag is-danger">
+            on loan
+          </span>
+        <% end %>
       </h1>
+
       <h2 class="subtitle">
-      <i class="<%= @item.category.icon %>"></i>
-        <%= @item.category.name %> &bull; <%= @item.serial_number %>
-       <h2 class="subtitle">
-               <div class="field is-grouped is-grouped-multiline">
-          <div class="control">
-            <span class="tags has-addons">
-              <span class="tag is-light is-outlined-dark">
-                tag #
+        <i class="<%= @item.category.icon %>"></i>
+        <%= @item.category.name %>
+        </h2>
+        <h2 class="subtitle">
+          <div class="field is-grouped is-grouped-multiline">
+            <div class="control">
+              <span class="tags has-addons">
+                <span class="tag is-medium is-light is-outlined-dark">
+                  tag #
+                </span>
+                <span class="tag is-medium is-info">
+                  <%= @item.inventory_tag %>
+                </span>
               </span>
-              <span class="tag is-link">
-                <%= @item.inventory_tag %>
-              </span>
-            </span>
+            </div>
+            <% if !@item.serial_number.blank? %>
+              <div class="control">
+                <div class="tags has-addons">
+                  <span class="tag is-medium is-light is-outlined-dark">
+                    serial #
+                  </span>
+                  <span class="tag is-medium is-primary">
+                    <%= @item.serial_number %>
+                  </span>
+                </div>
+              <% end %>
           </div>
-          <div class="control">
-            <div class="tags has-addons">
-                            <span class="tag is-light is-outlined-dark">
-                status
-              </span>
-                 <% if @loans.active.blank? %>
-              <span class="tag is-success">
-                available
-              </span>
-            <% else %>
-              <span class="tag is-danger">
-                on loan
-              </span>
-          <% end %>
-           </span>            </div>
-          </div>
-
-
+        </div>
       </h2>
     </div>
   </div>
