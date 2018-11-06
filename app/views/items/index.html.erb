@@ -33,17 +33,13 @@
                     <% @items.each do |item| %>
                       <tr class="<%= 'is-selected' unless item.loans.active.size.zero? %>">
                         <td>
-                          <%= item.brand %>
+                          <%= link_to item_path(item) do %>
+                            <%= item.brand %>
                             <%= item.name %>
-                              <br/>
+                          <% end %>
                         </td>
                         <td>
                           <%= item.inventory_tag %>
-                        <%= link_to item_path(item) do %>
-                          <span class="icon is-small">
-                            <i class="fa fa-arrow-circle-right" ></i>
-                          </span>
-                        <% end %>
                         </td>
                         <td>
                           <%= item.serial_number %>
