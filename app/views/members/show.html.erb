@@ -22,7 +22,7 @@
                   <div class="field is-grouped">
                     <div class="field">
                       <p class="control ">
-                        <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", class: "input is-rounded", autofocus: true, autocomplete: "off", id: 'item-autocomplete', data: { behavior: 'autocomplete'} %>
+                        <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", class: "input is-rounded", autofocus: "true", autocomplete: "off", id: 'item-autocomplete', data: { behavior: 'autocomplete'} %>
                       </p>
                     </div>
                     <% end %>
@@ -76,18 +76,15 @@
                     <tr class="loan-item">
                       <td>
                         <i class="<%= loan.item.category.icon %>"></i>
-                        <%= loan.item.full_name %>
+                        <%= link_to item_path(loan.item.id) do %>
+                          <%= loan.item.full_name %>
+                        <% end %>
                       </td>
                       <td class="">
                         <%= loan.item.serial_number %>
                       </td>
                       <td class="">
                         <%= loan.item.inventory_tag %>
-                        <%= link_to item_path(loan.item.id) do %>
-                          <span class="icon is-small">
-                            <i class="fa fa-arrow-circle-right" ></i>
-                          </span>
-                        <% end %>
                       </td>
                       <td class="">
                         <%= local_time_ago(loan.created_at) %>
