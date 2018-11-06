@@ -59,6 +59,9 @@
                     Item
                   </th>
                   <th class="has-text-grey-dark has-text-weight-semibold ">
+                    Serial Number
+                  </th>
+                  <th class="has-text-grey-dark has-text-weight-semibold ">
                     Inventory Tag
                   </th>
                   <th class="has-text-grey-dark has-text-weight-semibold">
@@ -70,24 +73,27 @@
                 </thead>
                 <tbody>
                   <% @member.loans.active.each do |loan| -%>
-                    <tr>
+                    <tr class="loan-item">
                       <td>
                         <i class="<%= loan.item.category.icon %>"></i>
                         <%= loan.item.full_name %>
                       </td>
                       <td class="">
-                      <%= loan.item.inventory_tag %>
-                    <span class="on-hover"><%= link_to item_path(loan.item.id) do %>
-    <span class="icon is-small">
-  <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
-  </span>
-<% end %> 
+                        <%= loan.item.serial_number %>
+                      </td>
+                      <td class="">
+                        <%= loan.item.inventory_tag %>
+                        <%= link_to item_path(loan.item.id) do %>
+                          <span class="icon is-small">
+                            <i class="fa fa-arrow-circle-right" ></i>
+                          </span>
+                        <% end %>
                       </td>
                       <td class="">
                         <%= local_time_ago(loan.created_at) %>
                       </td>
                       <td class="">
-                        <%= link_to return_member_path(" #{loan.id}"), class: 'is-7', method: :post do %>
+                        <%= link_to return_member_path(" #{loan.id}"), class: 'is-7', method: :post, data: { confirm: 'Are you sure?' } do %>
                           <i class="fa fa-calendar-check-o"></i> check in
                           <% end %>
                       </td>

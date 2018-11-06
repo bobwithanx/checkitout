@@ -2,12 +2,11 @@
   <div class="hero-body">
     <div class="container">
       <h1 class="title">
-              <%= @item.full_name %> 
+              <%= @item.full_name %>
       </h1>
       <h2 class="subtitle">
-               <i class="<%= @item.category.icon %>"></i>
- <%= @item.category.name %> &bull; <%= @item.serial_number %>
- </h2>
+      <i class="<%= @item.category.icon %>"></i>
+        <%= @item.category.name %> &bull; <%= @item.serial_number %>
        <h2 class="subtitle">
                <div class="field is-grouped is-grouped-multiline">
           <div class="control">
@@ -33,7 +32,7 @@
               <span class="tag is-danger">
                 on loan
               </span>
-          <% end %> 
+          <% end %>
            </span>            </div>
           </div>
 
