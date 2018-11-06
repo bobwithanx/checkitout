@@ -1,6 +1,6 @@
 <!-- <%= render 'admin/menu' %> -->
 <section class="section">
-  <div class="container is-fluid">
+  <div class="container">
     <% flash.each_with_index do |(key, message), index| %>
       <div class="notification <%= key %>" id="<%= key %>-<%= index %>">
         <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
