@@ -37,12 +37,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-
           <% if @member.loans.active.empty? %>
             <div class="box hero has-text-centered is-light">
               <div class="hero-body">
@@ -75,7 +69,7 @@
                   <% @member.loans.active.each do |loan| -%>
                     <tr class="loan-item">
                       <td>
-                        <i class="<%= loan.item.category.icon %>"></i>
+                        <i class="<%= loan.item.category.icon %>"></i>&nbsp;
                         <%= link_to item_path(loan.item.id) do %>
                           <%= loan.item.full_name %>
                         <% end %>
