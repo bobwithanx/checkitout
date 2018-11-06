@@ -1,25 +1,17 @@
 <!-- <%= render 'admin/menu' %> -->
 <section class="section">
   <div class="container is-fluid">
-
     <% flash.each_with_index do |(key, message), index| %>
       <div class="notification <%= key %>" id="<%= key %>-<%= index %>">
         <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
         <%= message %>
       </div>
     <% end %>
-    <div class="columns">
-      <div class="column is-narrow">
-        <h1 class="title ">
-          Members
-        </h1>
-        <p class="">
-          <%= link_to new_member_path, class: "button " do %>
-          <i class="fa fa-plus-circle"></i>&nbsp; New
-        <% end %>
-      </p>
-    </div>
-    <div class="column">
+
+    <h1 class="title ">
+      Members
+    </h1>
+
       <% if @members.blank? %>
         <section class="hero is-medium is-light has-text-centered">
           <div class="hero-body">
@@ -40,7 +32,6 @@
             <th>First Name</th>
             <th>ID Number</th>
             <th>Group</th>
-            <th class="no-sort">Actions</th>
           </thead>
 
           <tbody>
@@ -55,18 +46,18 @@
                 </td>
                 <td><%= member.last_name %></td>
                 <td><%= member.first_name %></td>
-                <td><%= member.id_number %></td>
+                <td>
+                  <%= member.id_number %>
+                  <%= link_to member_path(member) do %>
+                    <span class="icon is-small">
+                      <i class="fa fa-arrow-circle-right" ></i>
+                    </span>
+                  <% end %>
+                </td>
                 <td>
                   <% if member.group %>
                     <%= member.group.name %>
                   <% end %>
-                </td>
-                <td>
-                  <%= link_to 'Show', member_path(member) %>
-                  |
-                  <%= link_to 'Edit', edit_member_path(member) %>
-                  |
-                  <%= link_to 'Destroy', member_path(member), method: :delete, data: { confirm: 'Are you sure?' } %>
                 </td>
               </tr>
             <% end %>

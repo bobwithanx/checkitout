@@ -7,18 +7,9 @@
         <%= message %>
       </div>
       <% end %>
-        <div class="columns">
-          <div class="column is-narrow">
             <h1 class="title ">
               Items
             </h1>
-            <p class="">
-              <%= link_to new_item_path, class: "button " do %>
-                <i class="fa fa-plus-circle"></i>&nbsp; New
-                <% end %>
-            </p>
-          </div>
-          <div class="column">
             <% if @items.blank? %>
               <section class="hero is-medium is-light has-text-centered">
                 <div class="hero-body">
@@ -33,10 +24,10 @@
                 <table id="item_list" class="table order-table is-hoverable is-fullwidth">
                   <thead>
                     <th>Item</th>
-                    <th>Description</th>
                     <th>Inventory Tag</th>
+                    <th>Serial Number</th>
+                    <th>Description</th>
                     <th>Category</th>
-                    <th class="no-sort">Actions</th>
                   </thead>
                   <tbody>
                     <% @items.each do |item| %>
@@ -47,22 +38,23 @@
                               <br/>
                         </td>
                         <td>
-                          <%= item.description %>
+                          <%= item.inventory_tag %>
+                        <%= link_to item_path(item) do %>
+                          <span class="icon is-small">
+                            <i class="fa fa-arrow-circle-right" ></i>
+                          </span>
+                        <% end %>
                         </td>
                         <td>
-                          <%= item.inventory_tag %>
+                          <%= item.serial_number %>
+                        </td>
+                        <td>
+                          <%= item.description %>
                         </td>
                         <td>
                           <% if item.category %>
                             <%= item.category.name %>
                               <% end %>
-                        </td>
-                        <td>
-                          <%= link_to 'Show', item_path(item) %>
-                            |
-                            <%= link_to 'Edit', edit_item_path(item) %>
-                              |
-                              <%= link_to 'Delete', item_path(item), method: :delete, data: { confirm: 'Are you sure?' } %>
                         </td>
                       </tr>
                       <% end %>
