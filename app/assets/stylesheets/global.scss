@@ -116,7 +116,7 @@ div#eac-container-item-autocomplete.easy-autocomplete-container {
   opacity: 0.8;
 }
 
-.navbar-item.is-tab:hover {
+.navbar-item.is-tab:not(.is-active):hover {
   border: none;
 }
 
