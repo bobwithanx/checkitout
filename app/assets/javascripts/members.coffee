@@ -5,3 +5,13 @@
 # jQuery -> $("#member_loans").dataTable()
 # jQuery ->
 # $(document).ready -> $('#member_loans').DataTable({retrieve: true, ordering: false, searching: true, lengthChange: false});
+
+@inventoryFocus = () ->
+    $("input[name='inventory_tag']").focus();
+    # console.log("hi");
+
+jQuery ->
+  $(document).ready ->
+    # console.log("hi");
+    inventoryFocus();
+    # setTimeout(inventoryFocus, 10);
