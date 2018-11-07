@@ -16,7 +16,7 @@
       <div class="tabs is-boxed">
         <ul>
           <% nav_links selected_class:'is-active', wrapper: 'li' do |nav| %>
-            <%= nav.link_to member_path(@member), class: "tab pagetab " do %>
+            <%= nav.link_to member_path(@member), class: "tab pagetab", data: { turbolinks: false } do %>
               <span class="icon is-small">
                 <i class="fa fa-briefcase"></i>
               </span>
@@ -28,7 +28,7 @@
               <% end %>
             <% end %>
 
-            <%= nav.link_to history_member_path(@member), class: "tab pagetab" do %>
+            <%= nav.link_to history_member_path(@member), class: "tab pagetab", data: { turbolinks: false } do %>
               <span class="icon is-small">
                 <i class="fa fa-history"></i>
               </span>

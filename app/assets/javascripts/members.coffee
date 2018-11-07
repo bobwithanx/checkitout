@@ -12,6 +12,6 @@
 
 jQuery ->
   $(document).ready ->
-    # console.log("hi");
-    inventoryFocus();
-    # setTimeout(inventoryFocus, 10);
+      console.log("hi");
+      inventoryFocus();
+      setTimeout(inventoryFocus, 10);
