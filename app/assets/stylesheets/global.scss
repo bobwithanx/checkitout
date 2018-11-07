@@ -38,6 +38,14 @@ $text: grey;
   font-family: "Inconsolata", "Roboto Mono", monospace;
 }
 
+table .is-monospaced,
+.tag.is-monospaced {
+  font-size: 1.0rem !important;
+}
+
+.table.is-narrow td {
+  padding: 0.4em 0.5em;
+}
 .on-hover {
   display: none;
 }
@@ -48,6 +56,10 @@ tr:hover .on-hover {
 
 .inventory-tag {
   font-size: 1rem;
+}
+
+.hero-body {
+  padding: 2rem 1.5rem;
 }
 
 .hero.is-light .tabs.is-boxed li.is-active a {

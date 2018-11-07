@@ -21,11 +21,11 @@
                 </div>
               </section>
               <% else %>
-                <table id="item_list" class="table order-table is-hoverable is-fullwidth">
+                <table id="item_list" class="table order-table is-hoverable is-fullwidth is-narrow">
                   <thead>
                     <th>Item</th>
-                    <th>Inventory Tag</th>
                     <th>Serial Number</th>
+                    <th>Inventory Tag</th>
                     <th>Description</th>
                     <th>Category</th>
                   </thead>
@@ -40,10 +40,14 @@
                           <% end %>
                         </td>
                         <td>
-                          <%= item.inventory_tag %>
+                          <span class="is-monospaced">
+                            <%= item.serial_number %>
+                          </span>
                         </td>
                         <td>
-                          <%= item.serial_number %>
+                          <span class="is-monospaced">
+                            <%= item.inventory_tag %>
+                          </span>
                         </td>
                         <td>
                           <%= item.description %>
