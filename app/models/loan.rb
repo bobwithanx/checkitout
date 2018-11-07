@@ -7,7 +7,7 @@ class Loan < ApplicationRecord
   belongs_to :item
 
   def title
-    self.item.name + " " + self.item.serial_number + " (" + self.created_at.strftime("%Y-%m-%d") + ")"
+    self.item.name + " (" + self.created_at.strftime("%Y-%m-%d") + ")"
   end
 
   enum status: %i[active complete]
