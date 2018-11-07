@@ -11,7 +11,7 @@
 
   <section class="section">
     <div class="container">
-      <table id="loan_history" class=" table is-hoverable is-fullwidth is-responsive is-striped">
+      <table id="loan_history" class=" table is-hoverable is-fullwidth is-responsive">
         <thead>
           <th class="has-text-grey-dark has-text-weight-semibold item_name">
             Item
@@ -34,7 +34,7 @@
         </thead>
         <tbody>
           <% @member.loans.each do |loan| -%>
-            <tr class="<%= 'has-text-warning has-background-grey' if loan.active? %>">
+            <tr class="<%= 'has-background-warning-light' if loan.active? %>">
               <td>
                 <i class="<%= loan.item.category.icon %>"></i>&nbsp;
                 <span class="item_name">

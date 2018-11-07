@@ -38,6 +38,21 @@ $text: grey;
   font-family: "Inconsolata", "Roboto Mono", monospace;
 }
 
+.has-background-warning-light {
+  background-color: hsl(48, 100, 90);
+}
+
+tr.has-background-warning-light td {
+  border-color: hsl(48, 100, 67) !important;
+}
+
+.has-background-warning-light:hover {
+  background-color: hsl(48, 100, 80) !important;
+}
+
+.has-background-warning-light .item_name {
+  font-weight: 500;
+}
 table .is-monospaced,
 .tag.is-monospaced {
   font-size: 1.0rem !important;

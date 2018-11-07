@@ -22,7 +22,7 @@
               </span>
               <span>Current</span>&nbsp;&nbsp;&nbsp;
               <% if ! @member.loans.active.blank? %>
-                <span class="tag is-danger is-rounded">
+                <span class="tag is-warning is-rounded">
                   <%= @member.loans.active.size %>
                 </span>
               <% end %>
