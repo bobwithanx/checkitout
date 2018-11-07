@@ -7,7 +7,7 @@ end
 
 gem 'active_decorator'
 gem 'active_link_to'
-gem 'bulma-rails', '~> 0.6.2'
+gem 'bulma-rails', '~> 0.7.2'
 gem 'counter_culture', '~> 1.8'
 gem 'font-awesome-sass', '~> 5.0.6'
 gem 'jquery-datatables-rails'

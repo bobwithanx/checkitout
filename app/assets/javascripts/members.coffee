@@ -7,7 +7,7 @@
 # $(document).ready -> $('#member_loans').DataTable({retrieve: true, ordering: false, searching: true, lengthChange: false});
 
 @inventoryFocus = () ->
-    $("input[name='inventory_tag']").focus();
+    $("input[autofocus='autofocus']").focus();
     # console.log("hi");
 
 jQuery ->

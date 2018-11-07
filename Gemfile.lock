@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/activerecord-hackery/ransack.git
-  revision: 7145471d2083c0e258a981b682a64ad660a89fd3
+  revision: 2858ceb83b39b82443f79a612e6c6f4857ac38fb
   specs:
-    ransack (2.0.1)
+    ransack (2.1.0)
       actionpack (>= 5.0)
       activerecord (>= 5.0)
       activesupport (>= 5.0)
@@ -34,7 +34,7 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    active_decorator (1.0.0)
+    active_decorator (1.1.0)
     active_link_to (1.0.5)
       actionpack
       addressable
@@ -60,7 +60,7 @@ GEM
     arel (8.0.0)
     bindex (0.5.0)
     builder (3.2.3)
-    bulma-rails (0.6.2)
+    bulma-rails (0.7.2)
       sass (~> 3.2)
     byebug (10.0.2)
     capybara (2.18.0)
@@ -82,7 +82,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.0.5)
+    concurrent-ruby (1.1.3)
     counter_culture (1.12.0)
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -102,7 +102,7 @@ GEM
       tilt
     i18n (1.1.1)
       concurrent-ruby (~> 1.0)
-    jbuilder (2.7.0)
+    jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
     jquery-datatables-rails (3.4.0)
@@ -133,12 +133,12 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
     local_time (2.1.0)
-    loofah (2.2.2)
+    loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
-    method_source (0.9.0)
+    method_source (0.9.1)
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2018.0812)
@@ -165,7 +165,7 @@ GEM
     primer-rails (0.7.0)
     public_suffix (3.0.3)
     puma (3.12.0)
-    rack (2.0.5)
+    rack (2.0.6)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
@@ -221,7 +221,7 @@ GEM
       rack (>= 1.4)
     ruby_dep (1.5.0)
     rubyzip (1.2.2)
-    sass (3.6.0)
+    sass (3.7.1)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -235,7 +235,7 @@ GEM
     sassc (2.0.0)
       ffi (~> 1.9.6)
       rake
-    selenium-webdriver (3.14.1)
+    selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
     spring (2.0.2)
@@ -280,7 +280,7 @@ PLATFORMS
 DEPENDENCIES
   active_decorator
   active_link_to
-  bulma-rails (~> 0.6.2)
+  bulma-rails (~> 0.7.2)
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)

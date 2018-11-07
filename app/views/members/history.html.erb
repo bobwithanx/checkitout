@@ -34,7 +34,7 @@
         </thead>
         <tbody>
           <% @member.loans.each do |loan| -%>
-            <tr class="<%= 'is-selected' if loan.active? %>">
+            <tr class="<%= 'has-text-warning has-background-grey' if loan.active? %>">
               <td>
                 <i class="<%= loan.item.category.icon %>"></i>&nbsp;
                 <span class="item_name">
@@ -52,17 +52,18 @@
               <td class="">
                 <%= local_time_ago(loan.created_at) %>
               </td>
-              <td class="">
                 <% if loan.returned_at %>
-                  <%= local_time_ago(loan.returned_at) %>
-                    <% else %>
-                      -
-                      <% end %>
+              <td class="">
+                <%= local_time_ago(loan.returned_at) %>
               </td>
+                <% else %>
+              <td class="">
+                  on loan
+              </td>
+                <% end %>
               <td class="">
                 <%= loan.days_borrowed %>
               </td>
-
             </tr>
             <% end -%>
         </tbody>
