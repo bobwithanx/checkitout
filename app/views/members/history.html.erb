@@ -28,7 +28,7 @@
           <th class="has-text-grey-dark has-text-weight-semibold">
             Returned
           </th>
-          <th class="has-text-grey-dark has-text-weight-semibold ">
+          <th class="has-text-grey-dark has-text-weight-semibold is-hidden-touch">
             Duration
           </th>
         </thead>
@@ -49,19 +49,19 @@
               <td class="is-monospaced">
                 <%= loan.item.inventory_tag %>
               </td>
-              <td class="">
+              <td class="is-monospaced">
                 <%= local_time_ago(loan.created_at) %>
               </td>
                 <% if loan.returned_at %>
-              <td class="">
+              <td class="is-monospaced">
                 <%= local_time_ago(loan.returned_at) %>
               </td>
                 <% else %>
-              <td class="">
+              <td class="is-monospaced">
                   on loan
               </td>
                 <% end %>
-              <td class="">
+              <td class="is-hidden-touch is-monospaced">
                 <%= loan.days_borrowed %>
               </td>
             </tr>

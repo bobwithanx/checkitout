@@ -22,7 +22,7 @@
                   <div class="field is-grouped">
                     <div class="field">
                       <p class="control ">
-                        <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", class: "input is-rounded", autofocus: true, autocomplete: "off", id: 'item-autocomplete', data: { behavior: 'autocomplete'} %>
+                        <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", class: "input is-rounded", autofocus: true, autocomplete: "off", required: true, id: 'item-autocomplete', data: { behavior: 'autocomplete'} %>
                       </p>
                     </div>
                     <% end %>
@@ -80,7 +80,7 @@
                       <td class="is-monospaced">
                         <%= loan.item.inventory_tag %>
                       </td>
-                      <td class="">
+                      <td class="is-monospaced">
                         <%= local_time_ago(loan.created_at) %>
                       </td>
                       <td class="">
