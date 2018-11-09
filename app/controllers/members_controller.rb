@@ -55,7 +55,7 @@ class MembersController < ApplicationController
   def borrow
     @loan = Loan.new
     @loan.member = Member.find(params[:member_id])
-    @loan.item = Item.find_by_inventory_tag(params[:inventory_tag])
+    @loan.item = Item.find_by_inventory_tag(params[:inventory_tag].upcase)
 
     if @loan.save
       flash[:success] = "Item borrowed. #{undo_link}"
