@@ -1,5 +1,5 @@
 document.addEventListener("turbolinks:load", function () {
-  input = $("#item-autocomplete")
+  input = $("#item-autocomplete");
   var options = {
     getValue: "inventory_tag",
     // getValue: function (element) {

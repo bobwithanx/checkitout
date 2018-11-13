@@ -1,26 +1,44 @@
 document.addEventListener("turbolinks:load", function () {
-  $input = $("#member-autocomplete")
+  input = $("#member-autocomplete");
   var options = {
-    getValue: function (element) {
-      return element.name + " (" + element.id_number + ")";
-    },
+    getValue: "id_number",
+    // getValue: function (element) {
+    //   return element.name + " (" +
+    //          element.id_number + ")";
+    // },
     url: function (phrase) {
+      console.log("phrase = " + phrase);
       return "/members/search.json?q=" + phrase;
     },
     listLocation: "members",
     list: {
-      onChooseEvent: function () {
-        var url = $input.getSelectedItemData().url
-        $input.val("")
-        console.log("url = " + url);
 
-        Turbolinks.visit(url)
+
+
+
+
+
+      onChooseEvent: function () {
+        var url = input.getSelectedItemData().url;
+        var id_number = input.getSelectedItemData().id_number;
+
+        console.log("url = " + url);
+        input.val(id_number);
+
+        Turbolinks.visit(url);
       },
       match: {
         enabled: true
       }
+    },
+    template: {
+      type: "custom",
+      method: function (value, person) {
+        return person.name + " (" +
+              person.id_number + ")";
+      }
     }
   }
 
-  $input.easyAutocomplete(options)
+  input.easyAutocomplete(options)
 });
