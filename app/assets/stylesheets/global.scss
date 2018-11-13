@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bulma/initial-variables.sass";
 @import "bulma/functions"; // $tag-background-color: #ddd;
-@import url("https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Lato");
 // $table-background-color: unset;
 // $table-cell-border: 1px solid #e6e6e6;
 // $table-cell-padding: 0.25rem; // $section-padding: 0;
@@ -12,6 +12,9 @@ $navbar-tab-hover-border-bottom-color: #5ec4d8;
 $navbar-tab-active-color: #5ec4d8;
 $navbar-tab-active-border-bottom-color: #5ec4d8;
 $text: grey;
+
+$family-sans-serif: 'Lato','Helvetica Neue',Arial,Helvetica,sans-serif;
+
 // $link: $turquoise;
 @import "bulma";
 @import "bulma/bulma-iconpicker.min.css";
