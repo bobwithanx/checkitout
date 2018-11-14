@@ -8,6 +8,11 @@
           <%= @member.id_number %>
         &bull;
         <%= @member.group.name %>
+        <% if @member.group.is_active? %>
+        <span class="tag is-xs is-danger">
+          inactive
+        </span>
+        <% end %>
       </h2>
     </div>
   </div>
