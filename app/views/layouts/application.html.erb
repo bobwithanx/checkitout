@@ -21,7 +21,7 @@
       <div class="navbar-menu ">
         <div class="navbar-start">
           <div class="navbar-item">
-            <%= form_with  local: true, method: :get, html: { id: "search-form" } do |form| %>
+            <%= form_with url:search_members_path, local: true, method: :get, html: { id: "search-form" } do |form| %>
               <div class="field">
                 <div class="control">
                   <%= form.text_field :q, placeholder: "Find Student", class: "input", autocomplete: "off", autocorrect: "off", autocapitalize: "off", spellcheck: "false", id: 'member-autocomplete', data: { behavior: 'autocomplete'} %>

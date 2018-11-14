@@ -1,10 +1,16 @@
 class MembersController < ApplicationController
+  # before_action :force_json, only: :search
+
   def index
     @members = Member.all
   end
 
   def search
-    @members = Member.ransack(name_cont_or_id_number_cont: params[:q]).result(distinct: true)
+    @members = Member.ransack(name_or_id_number_cont: params[:q]).result(distinct: true)
+
+    if @members.length == 1
+      redirect_to @members[0]
+    end
 
     respond_to do |format|
       format.html {}
@@ -127,6 +133,9 @@ class MembersController < ApplicationController
   end
 
   private
+  def force_json
+    request.format = :json
+  end
 
   def member_params
     params.require(:member).permit(:first_name, :last_name, :id_number, :group, :group_id)

@@ -1,0 +1,96 @@
+<!-- <%= render 'admin/menu' %> -->
+<section class="section">
+  <div class="container">
+    <% flash.each_with_index do |(key, message), index| %>
+      <div class="notification <%= key %>" id="<%= key %>-<%= index %>">
+        <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
+        <%= message %>
+      </div>
+    <% end %>
+
+      <h1 class="title ">
+        Member Search Results
+      </h1>
+
+        <% if @members.blank? %>
+          <section class="hero is-medium is-light has-text-centered">
+            <div class="hero-body">
+              <div class="container">
+                <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
+                  No results
+                </p>
+              </div>
+            </div>
+          </section>
+        <% else %>
+        <table id="member_list" class="table order-table is-hoverable is-fullwidth">
+          <thead>
+            <th class="no-sort">
+              <i class="fa fa-tag"></i>
+            </th>
+            <th>Full Name</th>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>ID Number</th>
+            <th>Group</th>
+          </thead>
+
+          <tbody>
+            <% @members.each do |member| %>
+              <tr>
+                <td>
+                  <% if !member.loans.active.size.zero? %>
+                    <div class="tag is-warning">
+                      <%= member.loans.active.size %>
+                    </div>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to member_path(member) do %>
+                    <%= member.full_name %>
+                  <% end %>
+                </td>
+                <td><%= member.last_name %></td>
+                <td><%= member.first_name %></td>
+                <td>
+                  <%= member.id_number %>
+                </td>
+                <td>
+                  <% if member.group %>
+                    <%= member.group.name %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </section>
+
+  <script>
+    $('#member_list').DataTable({
+      paging: true,
+      order: [
+        [
+          0, "desc"
+        ],
+        [
+          2, "asc"
+        ]
+      ],
+      orderFixed: [
+        0, 'desc'
+      ],
+
+      columnDefs: [
+        {
+          targets: 'no-sort',
+          responsive: true,
+          orderable: false
+        }
+      ]
+    });
+
+    $('div.dataTables_filter input', $('#member_list').DataTable().table().container()).focus();
+  </script>
