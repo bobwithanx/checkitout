@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   # before_action :force_json, only: :search
 
   def index
-    @members = Member.all
+    @members = Member.joins(:group).where(groups: {is_active: true})
   end
 
   def search
