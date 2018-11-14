@@ -4,7 +4,7 @@ class MembersController < ApplicationController
   end
 
   def search
-    @members = Member.ransack(name_or_id_number_cont: params[:q]).result(distinct: true)
+    @members = Member.ransack(name_cont_or_id_number_cont: params[:q]).result(distinct: true)
 
     respond_to do |format|
       format.html {}
@@ -50,6 +50,16 @@ class MembersController < ApplicationController
 
   def undo_link
     view_context.link_to('undo', revert_version_path(@loan.versions.last), :method=> :post)
+  end
+
+  def items
+    @member = Member.find_by_id params[:id]
+    if @member.blank?
+      flash[:danger] = "Member ID not found."
+      redirect_to(welcome_index_path)
+      return
+    end
+    @items = Item.available
   end
 
   def borrow

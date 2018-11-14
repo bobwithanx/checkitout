@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     member { post 'borrow' }
     member { post 'return' }
     member { get 'history' }
+    member { get 'items' }
     collection { get 'search' }
   end
 
