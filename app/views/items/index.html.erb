@@ -31,12 +31,17 @@
                   </thead>
                   <tbody>
                     <% @items.each do |item| %>
-                      <tr class="<%= 'is-selected' unless item.loans.active.size.zero? %>">
+                      <tr class="<%= 'has-text-grey-light' unless item.loans.active.size.zero? %>">
                         <td>
                           <i class="<%= item.category.icon %>"></i>&nbsp;
                           <%= link_to item_path(item) do %>
                             <%= item.brand %>
                             <%= item.name %>
+                          <% end %>
+                          <% if !item.loans.active.size.zero? %>
+                          <span class="tag is-xs is-danger">
+                            on loan
+                          </span>
                           <% end %>
                         </td>
                         <td>

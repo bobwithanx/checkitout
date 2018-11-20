@@ -1,5 +1,5 @@
 <!-- app/views/layouts/modal.html.erb -->
-<div class="modal">
+<div class="modal ">
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
@@ -17,17 +17,16 @@
 
 <script type="application/javascript">
 function toggleModalClasses(event) {
-    var modalId = event.currentTarget.dataset.modalId;
-    var modal = $(modalId);
-    modal.toggleClass('is-active');
+    var target = event.currentTarget.dataset.target;
+    target.toggleClass('is-active');
     $('html').toggleClass('is-clipped');
-    console.log("here");
-  $("html").removeClass("is-clipped");
-  $(".modal").removeClass("is-active");
+  //   console.log("here");
+  // $("html").removeClass("is-clipped");
+  // $(".modal").removeClass("is-active");
 
   };
 
-$('.open-modal').click(toggleModalClasses);
+$('.open-modal').addEventListener('click', toggleModalClasses);
 
 $('#close-button').add('#close-icon').add('.modal-background').click(toggleModalClasses);
 </script>
