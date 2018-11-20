@@ -21,5 +21,6 @@
 //= require local-time
 //= require jquery.easy-autocomplete.js
 //= require list.js
+//= require bootstrap
 
 //= require_tree .

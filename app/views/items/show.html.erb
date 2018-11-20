@@ -6,48 +6,41 @@
         <%= @item.full_name %>
       </h1>
       <h2 class="subtitle">
-        <div class="field is-grouped is-grouped-multiline">
-          <div class="control">
-            <span class="tags has-addons">
-              <span class="tag is-medium is-light is-outlined-dark">
-                tag #
-              </span>
-              <span class="tag is-medium is-info is-monospaced">
-                <%= @item.inventory_tag %>
-              </span>
-            </span>
+      <div class="d-flex justify-content-start align-items-start mb-3">
+        <span class="d-flex justify-content-start align-items-start mr-3">
+          <div class="input-group-prepend  input-group-sm ">
+            <span class="input-group-text bg-light">tag #</span>
           </div>
-          <% if !@item.serial_number.blank? %>
-            <div class="control">
-              <span class="tags has-addons">
-                <span class="tag is-medium is-light is-outlined-dark">
-                  serial #
-                </span>
-                <span class="tag is-medium is-dark is-monospaced">
-                  <%= @item.serial_number %>
-                </span>
-              </span>
+          <div class="input-group-append">
+            <span class="input-group-text bg-primary text-white is-monospaced"><%= @item.inventory_tag %></span>
+          </div>
+        </span>
+        <% if !@item.serial_number.blank? %>
+            <span class="d-flex justify-content-start align-items-start mr-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-light">serial #</span>
             </div>
-          <% end %>
-          <div class="control">
-            <span class="tags has-addons">
-              <span class="tag is-medium is-light is-outlined-dark">
-                status
-              </span>
-              <% if @loans.active.blank? %>
-                <span class="tag is-medium is-success is-monospaced">
-                  available
-                </span>
-              <% else %>
-                <span class="tag is-medium is-danger is-monospaced">
-                  on loan
-                </span>
-              <% end %>
-              </span>
+            <div class="input-group-append">
+              <span class="input-group-text bg-dark text-white is-monospaced"><%= @item.serial_number %></span>
+            </div>
+          </span>
+        <% end %>
+          <span class="d-flex justify-content-start align-items-start mr-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-light">status</span>
           </div>
-        </div>
-
-      </div>
+          <div class="input-group-append">
+            <% if @loans.active.blank? %>
+              <span class="input-group-text bg-success text-white is-monospaced">
+                available
+              </span>
+            <% else %>
+              <span class="input-group-text bg-danger text-white is-monospaced">
+                on loan
+              </span>
+            <% end %>
+          </div>
+        </span>
       </h2>
     </div>
   </div>

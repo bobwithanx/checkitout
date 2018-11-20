@@ -14,14 +14,14 @@
 
       <section class="section">
         <div class="container">
-          <div class="input-group mb-3">
             <%= form_tag(borrow_member_path, id: "borrow-form" ) do %>
+              <div class="input-group mb-3">
               <input type="hidden" name="member_id" value="<%= @member.id %>">
-              <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", class: "input is-rounded", autofocus: true, autocomplete: "off", required: true, id: 'item-autocomplete', data: { behavior: 'autocomplete'} %>
-              <% end %>
-            <div class="input-group-append">
-              <%= link_to 'Add Item', items_member_path,  { :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'input-group-btn btn btn-outline-primary' }  %>
+              <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", type: 'text', class: "input form-control", autofocus: true, autocomplete: "off", required: true, id: 'item-autocomplete', data: { behavior: 'autocomplete'} %>
+              <div class="input-group-append">
+                <%= link_to 'Add Item', items_member_path,  { :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', type: 'button', class: 'input-group-btn btn btn-outline-primary' }  %>
               </div>
+              <% end %>
               <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="selectItemModal" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content"></div>

@@ -13,40 +13,41 @@
 </head>
 
 <body class="">
-  <nav class="navbar is-dark has-shadow">
-    <div class="container is-fluid">
-      <div class="navbar-brand">
-        <%= link_to 'CheckItOut', welcome_index_path, class: "navbar-item is-tab" %>
-      </div>
-      <div class="navbar-menu ">
-        <div class="navbar-start">
-          <div class="navbar-item">
-            <%= form_with url:search_members_path, local: true, method: :get, html: { id: "search-form" } do |form| %>
-              <div class="field">
-                <div class="control">
-                  <%= form.text_field :q, placeholder: "Find Student", class: "input", autocomplete: "off", autocorrect: "off", autocapitalize: "off", spellcheck: "false", id: 'member-autocomplete', data: { behavior: 'autocomplete'} %>
-                </div>
-              </div>
-              <% end %>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
+    <%= link_to 'CheckItOut', welcome_index_path, class: "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= form_with url:search_members_path, local: true, method: :get, html: { id: "search-form" } do |form| %>
+          <div class="field">
+            <div class="control">
+              <%= form.text_field :q, placeholder: "Find Student", class: "input", autocomplete: "off", autocorrect: "off", autocapitalize: "off", spellcheck: "false", id: 'member-autocomplete', data: { behavior: 'autocomplete'} %>
+            </div>
           </div>
-
-          <% nav_links selected_class:'is-active', url_segment: 1 do |nav| %>
-            <%= nav.link_to 'Members', members_path, class: "navbar-item is-tab" %>
-              <%= nav.link_to 'Items', items_path, class: "navbar-item is-tab" %>
-                <% end %>
-        </div>
-        <div class="navbar-end">
-          <a class="navbar-item is-tab" href="/admin">
-            Admin
-          </a>
-        </div>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Members', members_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Items', items_path, class: "nav-link" %>
+        </li>
+      </ul>
+      <div class="nav-item d-flex justify-content-end">
+        <a class="nav-link" href="/admin">
+          Admin
+        </a>
       </div>
-
     </div>
   </nav>
 
+<div class="container-fluid">
   <%= yield %>
-
+</div>
     <div id="modal-holder"></div>
 
 </body>

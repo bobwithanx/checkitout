@@ -66,6 +66,8 @@ GEM
       popper_js (>= 1.12.9, < 2)
       sass (>= 3.5.2)
     builder (3.2.3)
+    bulma-rails (0.7.2)
+      sass (~> 3.2)
     byebug (10.0.2)
     capybara (2.18.0)
       addressable
@@ -307,6 +309,7 @@ DEPENDENCIES
   active_decorator
   active_link_to
   bootstrap
+  bulma-rails (~> 0.7.2)
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)

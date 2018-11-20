@@ -1,4 +1,4 @@
-<div class="container is-fluid">
+<div class="container-fluid">
   <% flash.each_with_index do |(key, message), index| %>
     <div class="notification is-<%= key %>" id="<%= key %>-<%= index %>">
       <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
@@ -6,12 +6,8 @@
     </div>
     <% end %>
 </div>
-<section class="hero">
-  <div class="hero-center">
-    <div class="hero-body">
-      <div class="container is-fluid">
-        <div class="columns is-mobile">
-          <div class="column is-half is-offset-one-quarter">
+<section class="section">
+      <div class="container">
             <% if @borrowers.empty? %>
               <div class="box hero has-text-centered">
                 <div class="hero-body">
@@ -21,19 +17,21 @@
                 </div>
               </div>
               <% else %>
-                <div class="panel">
-                  <div class="panel-heading">
+                <div class="row justify-content-md-center">
+                <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header">
                     Current Loans
                   </div>
-                  <% @borrowers.each do |person| -%>
-                    <%= link_to member_path(person), class: "panel-block" do %>
-                      <div class="is-pulled-right tag is-warning">
-                        <%= person.loans.active.size %>
-                      </div>
-                      &nbsp;
-                      <%= "#{person.full_name}" %>
-                        <% end %>
-                          <% end -%>
+                  <ul class="list-group list-group-flush">
+                  <% @borrowers.each do |person| %>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <%= link_to member_path(person) do %>
+                        <%= "#{person.full_name}" %>
+                      <% end %>
+                      <span class="badge badge-primary badge-pill"><%= person.loans.active.size %></span>
+                    </li>
+                  <% end %>
                 </div>
                 <% end %>
           </div>
