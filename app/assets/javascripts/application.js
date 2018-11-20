@@ -15,7 +15,6 @@
 
 //= require jquery
 
-//= require bulma-iconpicker.js
 //= require jquery.dataTables.js
 //= require dataTables.bulma.js
 //= require rails-timeago
