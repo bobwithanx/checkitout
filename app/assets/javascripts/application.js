@@ -21,5 +21,6 @@
 //= require rails-timeago
 //= require local-time
 //= require jquery.easy-autocomplete.js
+//= require list.js
 
 //= require_tree .
