@@ -6,37 +6,33 @@
     </div>
     <% end %>
 </div>
-<section class="section">
-      <div class="container">
-            <% if @borrowers.empty? %>
-              <div class="box hero has-text-centered">
-                <div class="hero-body">
-                  <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
-                    No items are borrowed.
-                  </p>
-                </div>
-              </div>
-              <% else %>
-                <div class="row justify-content-md-center">
-                <div class="col-md-4">
-                <div class="card">
-                  <div class="card-header">
-                    Current Loans
-                  </div>
-                  <ul class="list-group list-group-flush">
-                  <% @borrowers.each do |person| %>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      <%= link_to member_path(person) do %>
-                        <%= "#{person.full_name}" %>
-                      <% end %>
-                      <span class="badge badge-primary badge-pill"><%= person.loans.active.size %></span>
-                    </li>
-                  <% end %>
-                </div>
-                <% end %>
-          </div>
-
-        </div>
+<div class="relaxed ui grid centered">
+  <% if @borrowers.empty? %>
+    <div class="box hero has-text-centered">
+      <div class="hero-body">
+        <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
+          No items are borrowed.
+        </p>
       </div>
     </div>
-</section>
+  <% else %>
+    <table class="ui table large collapsing">
+      <thead>
+        <tr>
+          <th colspan=2>Current Loans</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @borrowers.each do |person| %>
+          <tr>
+            <td>
+            <%= link_to "#{person.full_name}", member_path(person) %>
+            </td>
+            <td><div class="ui red circular label"><%= person.loans.active.size %></div></td>
+          </tr>
+        <% end %>
+      </tbody>
+      </table>
+    </table>
+  <% end %>
+</div>

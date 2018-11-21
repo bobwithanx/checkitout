@@ -16,11 +16,14 @@
 //= require jquery
 
 //= require jquery.dataTables.js
-//= require dataTables.bulma.js
+// dataTables.bulma.js
 //= require rails-timeago
 //= require local-time
 //= require jquery.easy-autocomplete.js
 //= require list.js
-//= require bootstrap
+//= require semantic.min.js
+//= require dataTables.semanticui.min.js
+
+// bootstrap
 
 //= require_tree .

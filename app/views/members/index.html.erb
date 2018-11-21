@@ -11,7 +11,6 @@
     <h1 class="title ">
       Members
     </h1>
-
       <% if @members.blank? %>
         <section class="hero is-medium is-light has-text-centered">
           <div class="hero-body">
@@ -23,7 +22,7 @@
           </div>
         </section>
       <% else %>
-        <table id="member_list" class="table table-sm order-table is-hoverable is-fullwidth">
+        <table id="member_list" class="ui table compact order-table">
           <thead>
             <th class="no-sort">
               <i class="fa fa-tag"></i>
@@ -34,7 +33,6 @@
             <th>ID Number</th>
             <th>Group</th>
           </thead>
-
           <tbody>
             <% @members.each do |member| %>
               <tr>

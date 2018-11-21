@@ -30,6 +30,7 @@ document.addEventListener("turbolinks:load", function () {
         enabled: true
       }
     },
+    cssClasses: "ui action input",
     template: {
       type: "custom",
       method: function (value, item) {

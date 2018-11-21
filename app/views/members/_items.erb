@@ -1,57 +1,41 @@
-      <div class="modal-header">
-        <h5 class="modal-title" id="selectItemModal" >Select an Item</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="listjs-items">
-        <div class="input-group mb-3">
-          <input type="text" id="listjs-search" class="form-control search" placeholder="Filter" aria-describedby="basic-addon1">
-          <div class="input-group-append">
-              <% Category.all.each do |category| %>
-              <button type="button" class="input-group-btn btn btn-outline-secondary filter" data-filter="<%= category.name %>"><i class="<%= category.icon %>"></i></button>
-            <% end %>
-          </div>
-        </div>
-        <table id="item_list" class="table table-sm order-table table-hover is-fullwidth is-narrow">
-          <thead>
-            <th class="">Item</th>
-            <th class="d-none">Serial Number</th>
-            <th class="">Inventory&nbsp;Tag</th>
-            <th class="d-none">Description</th>
-            <th class="d-none">Category</th>
-            <th class=""></th>
-          </thead>
-          <tbody class="list">
-            <% @items.each do |item| %>
-              <tr class="table-row <%= 'is-selected' unless item.loans.active.size.zero? %>">
-                <td class="listjs-brand-name">
-                  <i class="<%= item.category.icon %>"></i>&nbsp;
-                  <%= item.brand %>
-                  <%= item.name %>
-                </td>
-                <td class="d-none listjs-sn">
-                    <%= item.serial_number %>
-                </td>
-                <td class="listjs-tag is-monospaced">
-                    <%= item.inventory_tag %>
-                </td>
-                <td class="d-none listjs-description">
-                  <%= item.description %>
-                </td>
-                <td class="d-none category"><% if item.category %><%= item.category.name %><% end %></td>
-                <td class="">
-                  <%= link_to "select", item_path(item) %>
-                </td>
-              </tr>
-
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+<div class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Select an Item
+  </div>
+  <div class="content" id="listjs-items">
+    <table id="item_list" class="table table-sm order-table table-hover is-fullwidth is-narrow">
+      <thead>
+        <th class="">Item</th>
+        <th class="d-none">Serial Number</th>
+        <th class="">Inventory&nbsp;Tag</th>
+        <th class="d-none">Description</th>
+        <th class="d-none">Category</th>
+        <th class=""></th>
+      </thead>
+      <tbody class="list">
+        <% @items.each do |item| %>
+          <tr class="table-row <%= 'is-selected' unless item.loans.active.size.zero? %>">
+            <td class="listjs-brand-name">
+              <i class="<%= item.category.icon %>"></i>&nbsp;
+              <%= item.brand %>
+              <%= item.name %>
+            </td>
+            <td class="listjs-sn"><%= item.serial_number %></td>
+            <td class="listjs-tag is-monospaced"><%= item.inventory_tag %></td>
+            <td class="listjs-description"><%= item.description %></td>
+            <td class="category"><% if item.category %><%= item.category.name %><% end %></td>
+            <td><%= link_to "select", item_path(item) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="actions">
+    <div class="ui button">Cancel</div>
+    <div class="ui button">OK</div>
+  </div>
+</div>
 
 <style>
   .tags {
@@ -90,25 +74,25 @@
     margin-left: .4rem;
   }
 </style>
-      <script>
-        var options = {
-          valueNames: [ 'listjs-brand-name', 'listjs-sn', 'listjs-tag', 'listjs-description', 'category' ]
-        };
+<script>
+  var options = {
+    valueNames: [ 'listjs-brand-name', 'listjs-sn', 'listjs-tag', 'listjs-description', 'category' ]
+  };
 
-        var itemsList = new List('listjs-items', options);
+  var itemsList = new List('listjs-items', options);
 
-        $('.filter').on("click", function() {
-          var $q = $(this).attr('data-filter');
-          if ($(this).hasClass('active')) {
-            itemsList.filter();
-            $('.filter').removeClass('active');
-          } else {
-            itemsList.filter(function(item) {
-              return (item.values().category == $q);
-              // return (item.values().category == $q);
-            });
-            $('.filter').removeClass('active');
-            $(this).addClass('active');
-          }
-        });
-      </script>
+  $('.filter').on("click", function() {
+    var $q = $(this).attr('data-filter');
+    if ($(this).hasClass('active')) {
+      itemsList.filter();
+      $('.filter').removeClass('active');
+    } else {
+      itemsList.filter(function(item) {
+        return (item.values().category == $q);
+        // return (item.values().category == $q);
+      });
+      $('.filter').removeClass('active');
+      $(this).addClass('active');
+    }
+  });
+</script>

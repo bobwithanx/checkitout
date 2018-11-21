@@ -21,7 +21,7 @@
                 </div>
               </section>
               <% else %>
-                <table id="item_list" class="table order-table is-hoverable is-fullwidth is-narrow">
+                <table id="item_list" class="ui table order-table compact">
                   <thead>
                     <th>Item</th>
                     <th>Serial Number</th>
@@ -39,9 +39,7 @@
                             <%= item.name %>
                           <% end %>
                           <% if !item.loans.active.size.zero? %>
-                          <span class="tag is-xs is-danger">
-                            on loan
-                          </span>
+                          <div class="ui left pointing red small label">on loan</div>
                           <% end %>
                         </td>
                         <td>

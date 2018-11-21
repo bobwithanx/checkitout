@@ -1,5 +1,27 @@
-<%= render 'header' %>
+  <div class="ui container">
+    <h1 class="ui header">
+      <%= @member.full_name %>
+      <div class="sub header">
+        <%= @member.id_number %>
+        &bull;
+        <%= @member.group.name %>
+        <% if !@member.group.is_active? %>(inactive)<% end %>
+      </div>
+    </h1>
+  </div>
 
+  <div class="ui tabular menu">
+    <%= link_to member_path(@member), class: "item", data: { turbolinks: false } do %>
+      <i class="fa fa-briefcase"></i>&nbsp;&nbsp;Current
+      <% if ! @member.loans.active.blank? %>
+        <div class="ui circular label"><%= @member.loans.active.size %></div>
+      <% end %>
+    <% end %>
+    <%= link_to history_member_path(@member), class: "active item", data: { turbolinks: false } do %>
+      <i class="fa fa-history"></i>&nbsp;&nbsp;History
+      <div class="ui orange circular label"><%= @member.loans.size %></div>
+    <% end %>
+  </div>
   <div class="container">
     <% flash.each_with_index do |(key, message), index| %>
       <div class="notification is-<%= key %>" id="<%= key %>-<%= index %>">
@@ -9,15 +31,10 @@
       <% end %>
   </div>
 
-  <section class="section">
-    <div class="container">
-      <table id="loan_history" class=" table is-hoverable is-fullwidth is-responsive">
+      <table id="loan_history" class=" ui large single line table">
         <thead>
           <th class="has-text-grey-dark has-text-weight-semibold item_name">
             Item
-          </th>
-          <th class="has-text-grey-dark has-text-weight-semibold ">
-            Serial Number
           </th>
           <th class="has-text-grey-dark has-text-weight-semibold ">
             Inventory Tag
@@ -44,9 +61,6 @@
                 </span>
               </td>
               <td class="is-monospaced">
-                <%= loan.item.serial_number %>
-              </td>
-              <td class="is-monospaced">
                 <%= loan.item.inventory_tag %>
               </td>
               <td class="is-monospaced">
@@ -58,7 +72,7 @@
               </td>
                 <% else %>
               <td class="is-monospaced">
-                  on loan
+                <div class="ui red small label">on loan</div>
               </td>
                 <% end %>
               <td class="is-hidden-touch is-monospaced">
@@ -68,5 +82,3 @@
             <% end -%>
         </tbody>
       </table>
-    </div>
-  </section>

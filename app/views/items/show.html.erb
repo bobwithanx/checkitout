@@ -1,106 +1,75 @@
-<section class="hero pagehead">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title is-spaced">
-        <i class="<%= @item.category.icon %>"></i>&nbsp;
-        <%= @item.full_name %>
-      </h1>
-      <h2 class="subtitle">
-      <div class="d-flex justify-content-start align-items-start mb-3">
-        <span class="d-flex justify-content-start align-items-start mr-3">
-          <div class="input-group-prepend  input-group-sm ">
-            <span class="input-group-text bg-light">tag #</span>
-          </div>
-          <div class="input-group-append">
-            <span class="input-group-text bg-primary text-white is-monospaced"><%= @item.inventory_tag %></span>
-          </div>
-        </span>
-        <% if !@item.serial_number.blank? %>
-            <span class="d-flex justify-content-start align-items-start mr-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text bg-light">serial #</span>
-            </div>
-            <div class="input-group-append">
-              <span class="input-group-text bg-dark text-white is-monospaced"><%= @item.serial_number %></span>
-            </div>
-          </span>
-        <% end %>
-          <span class="d-flex justify-content-start align-items-start mr-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text bg-light">status</span>
-          </div>
-          <div class="input-group-append">
-            <% if @loans.active.blank? %>
-              <span class="input-group-text bg-success text-white is-monospaced">
-                available
-              </span>
-            <% else %>
-              <span class="input-group-text bg-danger text-white is-monospaced">
-                on loan
-              </span>
-            <% end %>
-          </div>
-        </span>
-      </h2>
+<div class="ui container">
+  <h1 class="ui header">
+      <i class="<%= @item.category.icon %>"></i>&nbsp;
+      <%= @item.full_name %>
+  </h1>
+  <div class="sub header">
+    <div class="ui labels">
+      <div class="ui teal image label">
+        tag #
+        <div class="detail is-monospaced"><%= @item.inventory_tag %></div>
+      </div>
+      <% if !@item.serial_number.blank? %>
+        <div class="ui image label">
+          serial #
+          <div class="detail is-monospaced"><%= @item.serial_number %></div>
+        </div>
+      <% end %>
+      <% if @loans.active.blank? %>
+        <div class="ui green image label">
+          status
+          <div class="detail is-monospaced">available</div>
+        </div>
+      <% else %>
+        <div class="ui red image label">
+          status
+          <div class="detail is-monospaced">on loan</div>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </h1>
+</div>
+
+<% flash.each_with_index do |(key, message), index| %>
+  <div class="container">
+    <div class="notification is-<%= key %>" id="<%= key %>-<%= index %>">
+      <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
+      <%= raw(message) %>
     </div>
   </div>
-</section>
+<% end %>
 
-  <% flash.each_with_index do |(key, message), index| %>
-    <section class="section">
-      <div class="container">
-
-        <div class="notification is-<%= key %>" id="<%= key %>-<%= index %>">
-          <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
-          <%= raw(message) %>
-        </div>
-      </div>
-    </section>
-    <% end %>
-
-      <section class="section">
-        <div class="container">
-
-         <table id="current_loans" class="table is-hoverable is-fullwidth is-responsive">
-                <thead>
-                  <th class="has-text-grey-dark has-text-weight-semibold ">
-                    Member
-                  </th>
-                  <th class="has-text-grey-dark has-text-weight-semibold ">
-                    Borrowed
-                  </th>
-                  <th class="has-text-grey-dark has-text-weight-semibold">
-                    Returned
-                  </th>
-                  <th class="has-text-grey-dark has-text-weight-semibold ">
-                    Duration
-                  </th>
-                </thead>
-                <tbody>
-                <% @loans.each do |loan| %>
-            <tr>
-              <td>
-                <%= link_to loan.member.full_name, member_path(loan.member), class: "hidden-link" %>
-              </td>
-                      <td class="">
-                        <%= local_time_ago(loan.created_at) %>
-                      </td>
-                      <td>
-                                      <% if loan.returned_at %>
-                  <%= local_time_ago(loan.returned_at) %>
-                    <% else %>
-                                    <span class="tag is-danger">
-                on loan
-              </span>
-
-                      <% end %>
-              </td>
-              <td class="">
-                <%= loan.days_borrowed %>
-              </td>
-            </tr>
+<table id="current_loans" class="ui single line table">
+  <thead>
+    <th>Member</th>
+    <th>Borrowed</th>
+    <th>Returned</th>
+    <th>Duration</th>
+  </thead>
+  <tbody>
+    <% @loans.each do |loan| %>
+      <tr>
+        <td>
+          <%= link_to loan.member.full_name, member_path(loan.member), class: "hidden-link" %>
+          <% if loan.returned_at.blank? %>
+            <div class="ui left pointing red small label">on loan</div>
           <% end %>
-                </tbody>
-              </table>
-        </div>
-      </section>
+        </td>
+        <td>
+          <%= local_time_ago(loan.created_at) %>
+        </td>
+        <td>
+          <% if loan.returned_at %>
+            <%= local_time_ago(loan.returned_at) %>
+          <% else %>
+            <span class="tag is-danger">on loan</span>
+          <% end %>
+        </td>
+        <td>
+          <%= loan.days_borrowed %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
