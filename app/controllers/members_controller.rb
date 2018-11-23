@@ -25,7 +25,7 @@ class MembersController < ApplicationController
     set_tab :history
     @member = Member.find_by_id params[:id]
     if @member.blank?
-      flash[:danger] = "Member ID not found."
+      flash[:error] = "Member ID not found."
       redirect_to(welcome_index_path)
       return
     end
@@ -36,7 +36,7 @@ class MembersController < ApplicationController
     set_tab :current
     @member = Member.find_by_id params[:id]
     if @member.blank?
-      flash[:danger] = "Member ID not found."
+      flash[:error] = "Member ID not found."
       redirect_to(welcome_index_path)
       return
     end
@@ -61,7 +61,7 @@ class MembersController < ApplicationController
   def items
     @member = Member.find_by_id params[:id]
     if @member.blank?
-      flash[:danger] = "Member ID not found."
+      flash[:error] = "Member ID not found."
       redirect_to(welcome_index_path)
       return
     end
@@ -81,7 +81,7 @@ class MembersController < ApplicationController
     if @loan.save
       flash[:success] = "Item borrowed. #{undo_link}"
     else
-      flash[:danger] = "ERROR<p>Item was not borrowed.</p>"
+      flash[:error] = "Error: Item was not borrowed."
     end
     redirect_to @loan.member
     # @member = Member.find_by_id_number(params[:search])
@@ -94,7 +94,7 @@ class MembersController < ApplicationController
     if @loan.save
       flash[:success] = "Item returned. #{undo_link}"
     else
-      flash[:danger] = "ERROR<p>Item was not returned.</p>"
+      flash[:error] = "Error: Item was not returned."
     end
     redirect_to @loan.member
 

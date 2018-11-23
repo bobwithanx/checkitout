@@ -7,8 +7,6 @@ end
 
 gem 'active_decorator'
 gem 'active_link_to'
-gem 'bootstrap'
-gem 'bulma-rails', '~> 0.7.2'
 gem 'counter_culture', '~> 1.8'
 gem 'font-awesome-sass', '~> 5.5.0'
 gem "font-awesome5-rails"
@@ -17,12 +15,12 @@ gem 'local_time'
 gem 'nav_links'
 gem 'paper_trail'
 gem 'paperclip', '~> 5.2.1'
-gem 'popper'
 gem 'primer-rails', '~> 0.7.0'
 gem 'rails_admin', '~> 1.3'
 gem 'rails-jquery-autocomplete'
 gem 'rails-timeago', '~> 2.0';
 gem 'ransack', github: 'activerecord-hackery/ransack'
+gem 'semantic-ui-sass'
 gem 'tabs_on_rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

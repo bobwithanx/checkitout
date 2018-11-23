@@ -18,11 +18,9 @@
       <%= link_to 'CheckItOut', welcome_index_path, class: "header item" %>
       <div class="item">
         <%= form_with url:search_members_path, local: true, method: :get, html: { id: "search-form" } do |form| %>
-        <div class="field">
-          <div class="control">
-            <%= form.text_field :q, placeholder: "Find Student", class: "input", autocomplete: "off", autocorrect: "off", autocapitalize: "off", spellcheck: "false", id: 'member-autocomplete', data: { behavior: 'autocomplete'} %>
+          <div class="ui transparent input">
+            <%= form.text_field :q, placeholder: "Find Student", autocomplete: "off", autocorrect: "off", autocapitalize: "off", spellcheck: "false", id: 'member-autocomplete', data: { behavior: 'autocomplete'} %>
           </div>
-        </div>
         <% end %>
       </div>
       <%= link_to 'Members', members_path, class: "item" %>
@@ -32,6 +30,12 @@
   </div>
 
   <div class="ui main container">
+    <% flash.each_with_index do |(key, message), index| %>
+      <div class="ui <%= key %> message">
+        <p><%= message %></p>
+      </div>
+    <% end %>
+
     <%= yield %>
   </div>
 </body>
