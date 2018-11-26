@@ -17,9 +17,10 @@
     <div class="ui container">
       <%= link_to 'CheckItOut', welcome_index_path, class: "header item" %>
       <div class="item">
-        <%= form_with url:search_members_path, local: true, method: :get, html: { id: "search-form" } do |form| %>
-          <div class="ui transparent input">
-            <%= form.text_field :q, placeholder: "Find Student", autocomplete: "off", autocorrect: "off", autocapitalize: "off", spellcheck: "false", id: 'member-autocomplete', data: { behavior: 'autocomplete'} %>
+        <%= form_with url:search_members_path, method: :get, html: { id: "search-form" } do |form| %>
+          <div class="ui search transparent icon input inverted">
+            <%= form.text_field :prompt, placeholder: "Search students...", autocomplete: "off", class: 'prompt', autocorrect: "off", autocapitalize: "off", spellcheck: "false" %>
+            <i class="search icon"></i>
           </div>
         <% end %>
       </div>

@@ -19,9 +19,9 @@
 // dataTables.bulma.js
 //= require rails-timeago
 //= require local-time
-//= require jquery.easy-autocomplete.js
+// require jquery.easy-autocomplete.js
 //= require list.js
-//= require semantic.min.js
+//= require semantic-ui
 //= require dataTables.semanticui.min.js
 
 // bootstrap

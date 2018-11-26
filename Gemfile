@@ -13,9 +13,11 @@ gem "font-awesome5-rails"
 gem 'jquery-datatables-rails'
 gem 'local_time'
 gem 'nav_links'
+gem 'oj'
 gem 'paper_trail'
 gem 'paperclip', '~> 5.2.1'
 gem 'primer-rails', '~> 0.7.0'
+gem 'rabl'
 gem 'rails_admin', '~> 1.3'
 gem 'rails-jquery-autocomplete'
 gem 'rails-timeago', '~> 2.0';

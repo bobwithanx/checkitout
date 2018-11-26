@@ -21,15 +21,6 @@
   <% end %>
 </div>
 
-<% flash.each_with_index do |(key, message), index| %>
-  <div class="container">
-    <div class="notification is-<%= key %>" id="<%= key %>-<%= index %>">
-      <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
-      <%= raw(message) %>
-    </div>
-  </div>
-<% end %>
-
 <%= form_tag(borrow_member_path, id: "borrow-form" ) do %>
   <div class="ui action input">
     <input type="hidden" name="member_id" value="<%= @member.id %>">

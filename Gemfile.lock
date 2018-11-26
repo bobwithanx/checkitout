@@ -153,6 +153,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
+    oj (3.7.1)
     paper_trail (10.0.1)
       activerecord (>= 4.2, < 5.3)
       request_store (~> 1.1)
@@ -165,6 +166,8 @@ GEM
     primer-rails (0.7.0)
     public_suffix (3.0.3)
     puma (3.12.0)
+    rabl (0.14.0)
+      activesupport (>= 2.3.14)
     rack (2.0.6)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
@@ -293,10 +296,12 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   local_time
   nav_links
+  oj
   paper_trail
   paperclip (~> 5.2.1)
   primer-rails (~> 0.7.0)
   puma (~> 3.7)
+  rabl
   rails (~> 5.1.5)
   rails-jquery-autocomplete
   rails-timeago (~> 2.0)

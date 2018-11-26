@@ -1,44 +1,40 @@
 document.addEventListener("turbolinks:load", function () {
-  input = $("#member-autocomplete");
-  var options = {
-    // getValue: "id_number",
-    getValue: function (element) {
-      return element.name + " (" +
-             element.id_number + ")";
-    },
-    url: function (phrase) {
-      console.log("phrase = " + phrase);
-      return "/members/search.json?q=" + phrase;
-    },
-    listLocation: "members",
-    list: {
-
-
-
-
-
-
-      onChooseEvent: function () {
-        var url = input.getSelectedItemData().url;
-        var id_number = input.getSelectedItemData().id_number;
-
-        console.log("url = " + url);
-        input.val("");
-
-        Turbolinks.visit(url);
+  // $('#searchInput')
+  //   .api({
+  //     action: 'search',
+  //     url: '/members/search.json?q={query}',
+  //     onResponse: function(results) {
+  //         var response = {
+  //             results : []
+  //         };
+  //         $.each(results, function(index, item) {
+  //             response.results.push({
+  //               title: item.title, // $results['items'][]['name']
+  //               description: item.description, // $results['items'][]['currency']
+  //               url: item.url
+  //             });
+  //         });
+  //         console.log(results);
+  //         return {"results" : results};
+  //     },
+  //   })
+  // ;
+  //   $('#searchInput').search({
+  //       action: 'search',
+  //       minCharacters : 1
+  //     });
+  $('.ui.search')
+    .search({
+      minCharacters : 2,
+      apiSettings: {
+        url: '/members/search.json?q={query}'
       },
-      match: {
-        enabled: true
+      fields: {
+        results : 'results',
+        title   : 'title',
+        url     : 'html_url'
       }
-    },
-    template: {
-      type: "custom",
-      method: function (value, person) {
-        return person.name + " (" +
-              person.id_number + ")";
-      }
-    }
-  }
+    })
+  ;
 
-  input.easyAutocomplete(options)
 });

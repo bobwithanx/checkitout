@@ -8,9 +8,9 @@ class MembersController < ApplicationController
   def search
     @members = Member.ransack(name_or_id_number_cont: params[:q]).result(distinct: true)
 
-    if @members.length == 1
-      redirect_to @members[0]
-    end
+    # if @members.length == 1
+    #   redirect_to @members[0]
+    # end
 
     respond_to do |format|
       format.html {}
