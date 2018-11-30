@@ -2,6 +2,9 @@
   "name": "checkitout",
   "private": true,
   "dependencies": {
+    "autocomplete-js": "^2.7.1",
+    "bulma": "^0.7.2",
+    "easy-autocomplete": "^1.3.5",
     "jquery": "^3.3.1"
   }
 }

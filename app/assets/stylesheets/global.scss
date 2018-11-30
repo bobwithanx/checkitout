@@ -1,8 +1,8 @@
 // Place all the styles related to the Members controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-@import "bulma/initial-variables.sass";
-@import "bulma/functions"; // $tag-background-color: #ddd;
+@import "bulma/sass/utilities/initial-variables.sass";
+@import "bulma/sass/utilities/functions.sass"; // $tag-background-color: #ddd;
 @import url("https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Lato");
 // $table-background-color: unset;
 // $table-cell-border: 1px solid #e6e6e6;
@@ -16,12 +16,22 @@ $text: grey;
 $family-sans-serif: 'Lato','Helvetica Neue',Arial,Helvetica,sans-serif;
 
 // $link: $turquoise;
-@import "bulma";
+@import "bulma/css/bulma.css";
 @import "bulma/dataTables.bulma.min.css";
 @import "fontawesome-all";
 // @import "bootstrap";
 @import url("https://fonts.googleapis.com/css?family=Inconsolata");
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
+
+// .easy-autocomplete-container ul {
+//   max-width: 90%;
+//   white-space: nowrap;
+// }
+
+// .easy-autocomplete-container ul li div {
+//   display: inline-block;
+
+// }
 #loan_histry {
   font-size: 0.9rem;
   font-style: normal;

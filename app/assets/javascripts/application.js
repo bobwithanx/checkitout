@@ -19,7 +19,7 @@
 //= require dataTables.bulma.js
 //= require rails-timeago
 //= require local-time
-//= require jquery.easy-autocomplete.js
+// = require easy-autocomplete/dist/jquery.easy-autocomplete.js
 //= require list.js
 
 //= require_tree .

@@ -6,7 +6,7 @@ class MembersController < ApplicationController
   end
 
   def search
-    @members = Member.ransack(name_or_id_number_cont: params[:q]).result(distinct: true)
+    @members = Member.joins(:group).where(groups: {is_active: true}).ransack(full_name_or_id_number_cont: params[:q]).result(distinct: true)
 
     if @members.length == 1
       redirect_to @members[0]
@@ -15,7 +15,6 @@ class MembersController < ApplicationController
     respond_to do |format|
       format.html {}
       format.json {
-        @members = @members.limit(5)
       }
     end
   end

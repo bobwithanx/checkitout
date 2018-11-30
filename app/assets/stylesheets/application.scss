@@ -12,8 +12,8 @@
  *
  *= require_tree .
  *= require_self
- *= require easy-autocomplete
- *= require easy-autocomplete.themes
+*= require easy-autocomplete/dist/easy-autocomplete
+*= require easy-autocomplete/dist/easy-autocomplete.themes
 
  */
 
