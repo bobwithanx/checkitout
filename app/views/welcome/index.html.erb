@@ -6,39 +6,23 @@
     </div>
     <% end %>
 </div>
-<section class="hero">
-  <div class="hero-center">
-    <div class="hero-body">
-      <div class="container is-fluid">
-        <div class="columns is-mobile">
-          <div class="column is-half is-offset-one-quarter">
-            <% if @borrowers.empty? %>
-              <div class="box hero has-text-centered">
-                <div class="hero-body">
-                  <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
-                    No items are borrowed.
-                  </p>
-                </div>
-              </div>
-              <% else %>
-                <div class="panel">
-                  <div class="panel-heading">
-                    Current Loans
-                  </div>
-                  <% @borrowers.each do |person| -%>
-                    <%= link_to member_path(person), class: "panel-block" do %>
-                      <div class="is-pulled-right tag is-warning">
-                        <%= person.loans.active.size %>
-                      </div>
-                      &nbsp;
-                      <%= "#{person.full_name}" %>
-                        <% end %>
-                          <% end -%>
-                </div>
-                <% end %>
-          </div>
 
-        </div>
+<div class="text-center">
+  <div style="width: 100%; max-width: 430px; padding: 15px; margin: auto;" class="mt-5">
+    <% if @borrowers.empty? %>
+      <div class="jumbotron">
+        <p class="lead">No items are borrowed.</p>
       </div>
-    </div>
-</section>
+    <% else %>
+      <h3>Current Loans</h3>
+      <ul class="list-group">
+        <% @borrowers.each do |person| -%>
+          <%= link_to member_path(person), wrap_tag: 'li', class: "list-group-item d-flex justify-content-between align-items-center" do %>
+            <%= "#{person.full_name}" %>
+            <span class="badge badge-primary badge-pill"><%= person.loans.active.size %></span>
+          <% end %>
+        <% end -%>
+      </ul>
+    <% end %>
+  </div>
+</div>
