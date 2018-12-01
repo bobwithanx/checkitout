@@ -16,10 +16,10 @@ $text: grey;
 $family-sans-serif: 'Lato','Helvetica Neue',Arial,Helvetica,sans-serif;
 
 // $link: $turquoise;
-@import "bulma/css/bulma.css";
+// @import "bulma/css/bulma.css";
 @import "bulma/dataTables.bulma.min.css";
 @import "fontawesome-all";
-// @import "bootstrap";
+@import "bootstrap/dist/css/bootstrap.css";
 @import url("https://fonts.googleapis.com/css?family=Inconsolata");
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 

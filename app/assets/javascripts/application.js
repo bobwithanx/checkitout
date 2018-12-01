@@ -16,6 +16,7 @@
 //= require jquery
 
 //= require jquery.dataTables.js
+//= require bootstrap/dist/js/bootstrap
 //= require dataTables.bulma.js
 //= require rails-timeago
 //= require local-time
