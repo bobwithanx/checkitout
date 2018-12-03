@@ -9,64 +9,63 @@
       <% end %>
   </div>
 
-  <section class="section">
-    <div class="container">
-      <table id="loan_history" class=" table is-hoverable is-fullwidth is-responsive">
-        <thead>
-          <th class="has-text-grey-dark has-text-weight-semibold item_name">
-            Item
-          </th>
-          <th class="has-text-grey-dark has-text-weight-semibold ">
-            Serial Number
-          </th>
-          <th class="has-text-grey-dark has-text-weight-semibold ">
-            Inventory Tag
-          </th>
-          <th class="has-text-grey-dark has-text-weight-semibold">
-            Borrowed
-          </th>
-          <th class="has-text-grey-dark has-text-weight-semibold">
-            Returned
-          </th>
-          <th class="has-text-grey-dark has-text-weight-semibold is-hidden-touch">
-            Duration
-          </th>
-        </thead>
-        <tbody>
-          <% @member.loans.each do |loan| -%>
-            <tr class="<%= 'has-background-warning-light' if loan.active? %>">
-              <td>
-                <i class="<%= loan.item.category.icon %>"></i>&nbsp;
-                <span class="item_name">
-                  <%= link_to item_path(loan.item.id) do %>
-                    <%= loan.item.full_name %>
-                  <% end %>
-                </span>
-              </td>
-              <td class="is-monospaced">
-                <%= loan.item.serial_number %>
-              </td>
-              <td class="is-monospaced">
-                <%= loan.item.inventory_tag %>
-              </td>
-              <td class="is-monospaced">
-                <%= local_time_ago(loan.created_at) %>
-              </td>
-                <% if loan.returned_at %>
-              <td class="is-monospaced">
-                <%= local_time_ago(loan.returned_at) %>
-              </td>
-                <% else %>
-              <td class="is-monospaced">
-                  on loan
-              </td>
-                <% end %>
-              <td class="is-hidden-touch is-monospaced">
-                <%= loan.days_borrowed %>
-              </td>
-            </tr>
-            <% end -%>
-        </tbody>
-      </table>
-    </div>
-  </section>
+  <table id="loan_history" class="table table-hover">
+    <thead>
+      <th class="has-text-grey-dark has-text-weight-semibold border-top-0 item_name">
+        Item
+      </th>
+      <th class="has-text-grey-dark has-text-weight-semibold border-top-0">
+        Serial Number
+      </th>
+      <th class="has-text-grey-dark has-text-weight-semibold border-top-0">
+        Inventory Tag
+      </th>
+      <th class="has-text-grey-dark has-text-weight-semibold border-top-0">
+        Borrowed
+      </th>
+      <th class="has-text-grey-dark has-text-weight-semibold border-top-0">
+        Returned
+      </th>
+      <th class="has-text-grey-dark has-text-weight-semibold is-hidden-touch border-top-0">
+        Duration
+      </th>
+    </thead>
+    <tbody>
+      <% @member.loans.each do |loan| -%>
+        <tr class="<%= '' if loan.active? %>">
+          <td>
+            <i class="<%= loan.item.category.icon %>"></i>&nbsp;
+            <span class="item_name">
+              <%= link_to item_path(loan.item.id) do %>
+                <%= loan.item.full_name %>
+              <% end %>
+              <% if !loan.returned_at %>
+                <div class="badge badge-primary ml-3 py-1">on loan</div>
+              <% end %>
+            </span>
+          </td>
+          <td class="is-monospaced">
+            <%= loan.item.serial_number %>
+          </td>
+          <td class="is-monospaced">
+            <%= loan.item.inventory_tag %>
+          </td>
+          <td class="is-monospaced">
+            <%= local_time_ago(loan.created_at) %>
+          </td>
+            <% if loan.returned_at %>
+          <td class="is-monospaced">
+            <%= local_time_ago(loan.returned_at) %>
+          </td>
+            <% else %>
+          <td class="is-monospaced">
+              <span>on loan</span>
+          </td>
+            <% end %>
+          <td class="is-hidden-touch is-monospaced">
+            <%= loan.days_borrowed %>
+          </td>
+        </tr>
+        <% end -%>
+    </tbody>
+  </table>

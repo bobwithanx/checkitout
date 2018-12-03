@@ -7,22 +7,38 @@
     <% end %>
 </div>
 
-<div class="text-center">
-  <div style="width: 100%; max-width: 430px; padding: 15px; margin: auto;" class="mt-5">
+<div class="row justify-content-center align-items-start bg-primary">
+  <div class="col-4 mt-2">
+    <div class="alert alert-primary mt-3 mx-0 py-4 border border-primary">
+      <%= form_with url:search_members_path, local: true, method: :get, html: { id: "search-form", class: "form-inline my-0" } do |form| %>
+          <div class="input-group mx-auto">
+            <%= form.text_field :q, placeholder: "Student name or ID...", class: "form-control border border-primary", autocomplete: "off", autocorrect: "off", autocapitalize: "off", spellcheck: "false", id: 'member-autocomplete', data: { behavior: 'autocomplete'} %>
+            <div class="input-group-append">
+              <button class="btn btn-outline-primary my-sm-0" type="submit">Search</button>
+            </div>
+        </div>
+      <% end %>
+    </div>
+    </div>
+    <div class="row justify-content-center align-items-end">
+    <div class="card mt-5 border-secondary">
     <% if @borrowers.empty? %>
       <div class="jumbotron">
         <p class="lead">No items are borrowed.</p>
       </div>
     <% else %>
-      <h3>Current Loans</h3>
-      <ul class="list-group">
-        <% @borrowers.each do |person| -%>
-          <%= link_to member_path(person), wrap_tag: 'li', class: "list-group-item d-flex justify-content-between align-items-center" do %>
-            <%= "#{person.full_name}" %>
-            <span class="badge badge-primary badge-pill"><%= person.loans.active.size %></span>
+        <div class="card-header border-secondary">
+          Current Loans
+        </div>
+        <ul class="list-group list-group-flush">
+          <% @borrowers.each do |person| %>
+            <%= link_to member_path(person), wrap_tag: 'li', class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center" do %>
+              <%= "#{person.full_name}" %>
+              <span class="badge badge-primary"><%= person.loans.active.size %></span>
+            <% end %>
           <% end %>
-        <% end -%>
-      </ul>
+        </ul>
+      </div>
     <% end %>
   </div>
 </div>

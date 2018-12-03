@@ -1,50 +1,55 @@
-<section class="hero pagehead">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
+<div class="row my-4">
+  <div class="col-6">
+    <div class="">
+      <h1 class="display-4">
         <%= @member.full_name %>
       </h1>
-      <h2 class="subtitle">
-          <%= @member.id_number %>
+      <h5 class="subtitle text-muted">
+        <%= @member.id_number %>
         &bull;
         <%= @member.group.name %>
         <% if !@member.group.is_active? %>
-        <span class="tag is-xs is-danger">
-          inactive
-        </span>
+          <span class="badge alert-danger ml-2">
+            inactive
+          </span>
         <% end %>
-      </h2>
+      </h5>
     </div>
   </div>
-  <div class="hero-foot">
-    <div class="container">
-      <div class="tabs is-boxed">
-        <ul>
-          <% nav_links selected_class:'is-active', wrapper: 'li' do |nav| %>
-            <%= nav.link_to member_path(@member), class: "tab pagetab", data: { turbolinks: false } do %>
-              <span class="icon is-small">
-                <i class="fa fa-briefcase"></i>
-              </span>
-              <span>Current</span>&nbsp;&nbsp;&nbsp;
-              <% if ! @member.loans.active.blank? %>
-                <span class="tag is-warning is-rounded">
-                  <%= @member.loans.active.size %>
-                </span>
-              <% end %>
-            <% end %>
+<div class="col-3 text-center my-4 text-primary">
+  <h2 class="timer count-title count-number" data-to="100" data-speed="1500"><%= @member.loans.size %></h2>
+  <p class="count-text "># Current Loans</p>
+</div>
+<div class="col-3 text-center my-4 text-danger">
+  <h2 class="timer count-title count-number" data-to="100" data-speed="1500"><%= @member.loans.active.size %></h2>
+  <p class="count-text "># Total Loans</p>
+</div>
+</div>
 
-            <%= nav.link_to history_member_path(@member), class: "tab pagetab", data: { turbolinks: false } do %>
-              <span class="icon is-small">
-                <i class="fa fa-history"></i>
-              </span>
-              <span>History</span>&nbsp;&nbsp;&nbsp;
-                <span class="tag is-rounded">
-                  <%= @member.loans.size %>
-                </span>
-            <% end %>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+
+<ul class="nav nav-tabs my-5">
+  <li class="nav-item">
+    <%= active_link_to member_path(@member), class: 'nav-link', active: :exclusive do %>
+      <span class="icon is-small">
+        <i class="fa fa-briefcase"></i>
+      </span>
+      <span>Current</span>&nbsp;&nbsp;&nbsp;
+      <% if ! @member.loans.active.blank? %>
+        <span class="badge badge-light border">
+          <%= @member.loans.active.size %>
+        </span>
+      <% end %>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= active_link_to history_member_path(@member), class: 'nav-link', active: :exclusive do %>
+      <span class="icon is-small">
+        <i class="fa fa-history"></i>
+      </span>
+      <span>History</span>&nbsp;&nbsp;&nbsp;
+      <span class="badge badge-light border">
+        <%= @member.loans.size %>
+      </span>
+    <% end %>
+  </li>
+</ul>
