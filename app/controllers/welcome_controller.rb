@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
 
   def index
-    @borrowers = Member.where('active_loans_count>0').order(active_loans_count: :desc)
+    @borrowers = Member.with_loans
   end
 end

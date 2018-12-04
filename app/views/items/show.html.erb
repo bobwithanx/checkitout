@@ -109,5 +109,14 @@
           <% end %>
                 </tbody>
               </table>
+          <div class="columns">
+            <div class="column is-one-fourth">
+              <%== pagy_info(@pagy) %>
+            </div>
+
+            <div class="column is-narrow">
+              <%== pagy_bulma_nav(@pagy) %>
+            </div>
+          </div>
         </div>
       </section>

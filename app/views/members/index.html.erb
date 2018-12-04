@@ -46,7 +46,7 @@
                   <% end %>
                 </td>
                 <td>
-                  <%= link_to member_path(member) do %>
+                  <%= link_to member_path(member), data: { turbolinks: "false"} do %>
                     <%= member.full_name %>
                   <% end %>
                 </td>

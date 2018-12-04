@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
 
 //= require jquery
 
@@ -19,7 +18,6 @@
 //= require dataTables.bulma.js
 //= require rails-timeago
 //= require local-time
-// = require easy-autocomplete/dist/jquery.easy-autocomplete.js
 //= require list.js
 
 //= require_tree .

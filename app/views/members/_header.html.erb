@@ -1,4 +1,4 @@
-<section class="hero pagehead">
+<div class="hero ">
   <div class="hero-body">
     <div class="container">
       <h1 class="title">
@@ -15,36 +15,29 @@
         <% end %>
       </h2>
     </div>
-  </div>
-  <div class="hero-foot">
+    </div>
+    </div>
     <div class="container">
       <div class="tabs is-boxed">
         <ul>
-          <% nav_links selected_class:'is-active', wrapper: 'li' do |nav| %>
-            <%= nav.link_to member_path(@member), class: "tab pagetab", data: { turbolinks: false } do %>
-              <span class="icon is-small">
-                <i class="fa fa-briefcase"></i>
+          <%= active_link_to member_path(@member), wrap_tag: 'li', class_active: 'is-active', active: :exclusive do %>
+            <span class="icon is-small">
+              <i class="fa fa-briefcase"></i>
+            </span>
+            <span>On Loan</span>&nbsp;&nbsp;&nbsp;
+            <% if ! @active_loans.blank? %>
+              <span class="tag is-warning is-rounded">
+                <%= @active_loans.size %>
               </span>
-              <span>Current</span>&nbsp;&nbsp;&nbsp;
-              <% if ! @member.loans.active.blank? %>
-                <span class="tag is-warning is-rounded">
-                  <%= @member.loans.active.size %>
-                </span>
-              <% end %>
             <% end %>
+          <% end %>
 
-            <%= nav.link_to history_member_path(@member), class: "tab pagetab", data: { turbolinks: false } do %>
-              <span class="icon is-small">
-                <i class="fa fa-history"></i>
-              </span>
-              <span>History</span>&nbsp;&nbsp;&nbsp;
-                <span class="tag is-rounded">
-                  <%= @member.loans.size %>
-                </span>
-            <% end %>
+          <%= active_link_to history_member_path(@member), wrap_tag: 'li', class_active: 'is-active' do %>
+            <span class="icon is-small">
+              <i class="fa fa-history"></i>
+            </span>
+            <span>Returned</span>&nbsp;&nbsp;&nbsp;
           <% end %>
         </ul>
       </div>
-    </div>
-  </div>
-</section>
+</div>

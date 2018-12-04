@@ -8,10 +8,10 @@
 
 @inventoryFocus = () ->
     $("input[autofocus='autofocus']").focus();
-    # console.log("hi");
+    console.log("INVENTORY_FOCUS");
 
-jQuery ->
-  $(document).ready ->
-      # console.log("hi");
-      inventoryFocus();
-      setTimeout(inventoryFocus, 50);
+$(document).ready ->
+    # $("#dropdown-menu").click = () ->
+    #   console.log("hi");
+    #   $("#dropdown-menu").classList.toggle('is-active');
+    setTimeout(inventoryFocus, 50);

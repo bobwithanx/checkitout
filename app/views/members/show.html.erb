@@ -11,7 +11,6 @@
       </div>
     </section>
     <% end %>
-
       <section class="section">
         <div class="container">
           <div class="level is-mobile">
@@ -37,7 +36,7 @@
               </div>
             </div>
           </div>
-          <% if @member.loans.active.empty? %>
+          <% if @loans.empty? %>
             <div class="box hero has-text-centered is-light">
               <div class="hero-body">
                 <p class="subtitle  has-text-grey-dark has-text-weight-light">
@@ -66,7 +65,7 @@
                   </th>
                 </thead>
                 <tbody>
-                  <% @member.loans.active.each do |loan| -%>
+                  <% @loans.each do |loan| -%>
                     <tr class="loan-item">
                       <td>
                         <i class="<%= loan.item.category.icon %>"></i>&nbsp;
@@ -94,5 +93,15 @@
                 </tbody>
               </table>
               <% end %>
+          <div class="columns">
+            <div class="column is-one-fourth">
+              <%== pagy_info(@pagy) %>
+            </div>
+
+            <div class="column is-narrow">
+              <%== pagy_bulma_nav(@pagy) %>
+            </div>
+          </div>
+
         </div>
       </section>

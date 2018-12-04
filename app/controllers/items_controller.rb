@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :force_json, only: :search
   def index
-    @items = Item.all
+    @items = Item.all.includes(:loans, :category)
   end
 
   def search
@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @loans = @item.loans.order('returned_at, created_at DESC').all
+    @pagy, @loans = pagy(@item.loans.includes(:member, :category))
   end
 
   def new

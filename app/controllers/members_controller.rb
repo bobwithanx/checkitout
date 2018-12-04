@@ -1,14 +1,13 @@
 class MembersController < ApplicationController
   # before_action :force_json, only: :search
-
   def index
-    @members = Member.joins(:group).where(groups: {is_active: true})
+    @members = Member.active.includes('group', 'loans')
   end
 
   def search
-    @members = Member.joins(:group).where(groups: {is_active: true}).ransack(full_name_or_id_number_cont: params[:q]).result(distinct: true)
+    @members = Member.ransack(full_name_or_id_number_cont: params[:q]).result(distinct: true)
 
-    if @members.length == 1
+    if @members.size == 1
       redirect_to @members[0]
     end
 
@@ -20,25 +19,27 @@ class MembersController < ApplicationController
   end
 
   def history
-    set_tab :members
-    set_tab :history
     @member = Member.find_by_id params[:id]
     if @member.blank?
       flash[:danger] = "Member ID not found."
       redirect_to(welcome_index_path)
       return
     end
+
+    @pagy, @loans = pagy(@member.loans.returned.includes([:item, :category]))
   end
 
   def show
-    set_tab :members
-    set_tab :current
+    # @pagy, @records = pagy(Product.some_scope)
     @member = Member.find_by_id params[:id]
+
     if @member.blank?
       flash[:danger] = "Member ID not found."
       redirect_to(welcome_index_path)
       return
     end
+
+    @pagy, @loans = pagy(@member.active_loans.includes([:item, :category]))
   end
 
   # def search

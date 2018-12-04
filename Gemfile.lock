@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/activerecord-hackery/ransack.git
-  revision: 457a371dc23de078ae6fd8931d158ed6ce59397f
+  revision: 8daa87a0389d380f7c9fd7ea9cb5bda634d5dc7d
   specs:
     ransack (2.1.0)
       actionpack (>= 5.0)
@@ -66,6 +66,9 @@ GEM
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     builder (3.2.3)
+    bullet (5.9.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     bulma-rails (0.7.2)
       sass (~> 3.2)
     byebug (10.0.2)
@@ -101,8 +104,6 @@ GEM
     ffi (1.9.25)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
-    font-awesome-sass (5.0.13)
-      sassc (>= 1.11)
     fontawesome5-rails (5.2.0.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -114,11 +115,6 @@ GEM
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
-    jquery-datatables-rails (3.4.0)
-      actionpack (>= 3.1)
-      jquery-rails
-      railties (>= 3.1)
-      sass-rails
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -162,6 +158,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
+    pagy (1.2.0)
     paper_trail (10.0.1)
       activerecord (>= 4.2, < 5.3)
       request_store (~> 1.1)
@@ -197,8 +194,6 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
-    rails-jquery-autocomplete (1.0.5)
-      rails (>= 3.2)
     rails-timeago (2.16.0)
       actionpack (>= 3.1)
       activesupport (>= 3.1)
@@ -241,9 +236,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sassc (2.0.0)
-      ffi (~> 1.9.6)
-      rake
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
@@ -260,18 +252,15 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.13)
-    tabs_on_rails (3.0.0)
     temple (0.8.0)
     thor (0.20.3)
     thread_safe (0.3.6)
-    tilt (2.0.8)
-    turbolinks (5.2.0)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
+    tilt (2.0.9)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
+    uniform_notifier (1.12.1)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -291,24 +280,23 @@ DEPENDENCIES
   active_link_to
   better_errors
   binding_of_caller
+  bullet
   bulma-rails (~> 0.7.2)
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
   counter_culture (~> 1.8)
-  font-awesome-sass (~> 5.0.6)
   fontawesome5-rails
   jbuilder (~> 2.5)
-  jquery-datatables-rails
   listen (>= 3.0.5, < 3.2)
   local_time
   nav_links
+  pagy
   paper_trail
   paperclip (~> 5.2.1)
   primer-rails (~> 0.7.0)
   puma (~> 3.7)
   rails (~> 5.1.5)
-  rails-jquery-autocomplete
   rails-timeago (~> 2.0)
   rails_admin (~> 1.3)
   ransack!
@@ -317,8 +305,6 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
-  tabs_on_rails
-  turbolinks (~> 5)
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
 

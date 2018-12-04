@@ -1,6 +1,8 @@
 class Member < ApplicationRecord
-  belongs_to :group, optional: true
+  belongs_to :group
   has_many :loans
+  has_many :active_loans, ->{ active }, class_name: 'Loan'
+  has_many :completed_loans, ->{ !active }, class_name: 'Loan'
   has_many :items, through: :loans
   has_paper_trail
 
@@ -12,7 +14,14 @@ class Member < ApplicationRecord
     self.full_name
   end
 
-  ransack_alias :name_or_id_number, :first_name_or_last_name_or_id_number
+  scope :active, -> {
+    joins(:group)
+      .merge(Group.active)
+  }
+
+  scope :with_loans, -> {
+    where("active_loans_count > ?", 0)
+  }
 
   def self.search(search)
     where('id_number LIKE ? OR first_name LIKE ? OR last_name LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")

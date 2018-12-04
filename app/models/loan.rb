@@ -5,16 +5,21 @@ class Loan < ApplicationRecord
   has_paper_trail
 
   belongs_to :item
+  has_one :category, through: :item
 
   def title
     self.item.name + " (" + self.created_at.strftime("%Y-%m-%d") + ")"
   end
 
-  enum status: %i[active complete]
+  enum status: %i[on_loan returned]
+
+  scope :active, -> {
+    where(status: 0)
+  }
 
   after_save :update_status, if: :saved_change_to_returned_at?
 
-  default_scope { order(created_at: :desc) }
+  default_scope { order(returned_at: :desc, created_at: :desc) }
   validates_uniqueness_of :item, conditions: -> { where(status: 'active') }
 
   def today?

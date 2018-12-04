@@ -8,15 +8,15 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application', async: true %>
 </head>
 
 <body class="">
-  <nav class="navbar is-light has-shadow">
+  <nav class="navbar is-dark  has-shadow">
     <div class="container is-fluid">
       <div class="navbar-brand">
-        <%= link_to 'CheckItOut', welcome_index_path, class: "navbar-item is-tab" %>
+        <%= link_to 'CheckItOut', welcome_index_path, class: "navbar-item" %>
       </div>
       <div class="navbar-menu ">
         <div class="navbar-start">
@@ -31,8 +31,8 @@
           </div>
 
           <% nav_links selected_class:'is-active', url_segment: 1 do |nav| %>
-            <%= nav.link_to 'Members', members_path, class: "navbar-item is-tab" %>
-              <%= nav.link_to 'Items', items_path, class: "navbar-item is-tab" %>
+            <%= nav.link_to 'Members', members_path, class: "navbar-item" %>
+              <%= nav.link_to 'Items', items_path, class: "navbar-item" %>
                 <% end %>
         </div>
         <div class="navbar-end">
