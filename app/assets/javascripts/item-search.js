@@ -39,11 +39,5 @@ document.addEventListener("turbolinks:load", function () {
     }
   }
 
-  input.easyAutocomplete(options)
-});
-
-var trigger = document.querySelector(".dropdown-trigger");
-
-trigger.addEventListener("click", function(event) {
-  document.querySelector(".dropdown-menu").classList.toggle("is-open");
+  // input.easyAutocomplete(options)
 });

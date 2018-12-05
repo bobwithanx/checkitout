@@ -27,10 +27,12 @@ class MembersController < ApplicationController
     end
 
     @pagy, @loans = pagy(@member.loans.returned.includes([:item, :category]))
+    @active_loans = @member.loans.active.size
+    @completed_loans = @pagy.count
+
   end
 
   def show
-    # @pagy, @records = pagy(Product.some_scope)
     @member = Member.find_by_id params[:id]
 
     if @member.blank?
@@ -40,19 +42,9 @@ class MembersController < ApplicationController
     end
 
     @pagy, @loans = pagy(@member.active_loans.includes([:item, :category]))
+    @active_loans = @pagy.count
+    @completed_loans = @member.loans.returned.size
   end
-
-  # def search
-  #   @member =  Member.find_by_id_number(params[:search])
-  #   if @member.blank?
-  #     flash[:danger] = "Member ID not found."
-  #     redirect_to(welcome_index_path)
-  #     return
-  #   end
-
-  #   render 'show'
-  #   # @member = Member.find_by_id_number(params[:search])
-  # end
 
   def undo_link
     view_context.link_to('undo', revert_version_path(@loan.versions.last), :method=> :post)
@@ -65,7 +57,8 @@ class MembersController < ApplicationController
       redirect_to(welcome_index_path)
       return
     end
-    @items = Item.available
+    @categories = Category.all
+    @items = Item.available.includes(:category)
   end
 
   def borrow

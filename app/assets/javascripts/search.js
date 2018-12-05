@@ -38,5 +38,5 @@ document.addEventListener("turbolinks:load", function () {
     }
   }
 
-  input.easyAutocomplete(options)
+  // input.easyAutocomplete(options)
 });

@@ -10,98 +10,108 @@
         </div>
       </div>
     </section>
-    <% end %>
-      <section class="section">
-        <div class="container">
-          <div class="level is-mobile">
-            <div class="level-left">
-              <div class="level-item">
-                <%= form_tag(borrow_member_path, id: "borrow-form" ) do %>
-                  <input type="hidden" name="member_id" value="<%= @member.id %>">
-                  <div class="field is-grouped">
-                    <div class="field">
-                      <p class="control ">
-                        <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", class: "input is-rounded", autofocus: true, autocomplete: "off", required: true, id: 'item-autocomplete', data: { behavior: 'autocomplete'} %>
-                      </p>
-                    </div>
-                    <% end %>
-                  </div>
-              </div>
-              <div class="level-item">
-                or
-              </div>
-              <div class="level-item">
-
-                <%= link_to 'Browse Inventory', items_member_path, target: :_blank %>
-              </div>
-            </div>
-          </div>
-          <% if @loans.empty? %>
-            <div class="box hero has-text-centered is-light">
-              <div class="hero-body">
-                <p class="subtitle  has-text-grey-dark has-text-weight-light">
-                  No items are borrowed.
+  <% end %>
+<section class="section">
+  <div class="container">
+    <div class="level is-mobile">
+      <div class="level-left">
+        <div class="level-item">
+          <%= form_tag(borrow_member_path, id: "borrow-form" ) do %>
+            <input type="hidden" name="member_id" value="<%= @member.id %>">
+            <div class="field is-grouped">
+              <div class="field">
+                <p class="control ">
+                  <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", class: "input is-rounded", autofocus: true, autocomplete: "off", required: true, id: 'item-autocomplete', data: { behavior: 'autocomplete'} %>
                 </p>
               </div>
-            </div>
-            <% else %>
-
-              <table id="current_loans" class="table is-hoverable is-fullwidth is-responsive">
-                <thead>
-                  <th class="has-text-grey-dark has-text-weight-semibold ">
-                    Item
-                  </th>
-                  <th class="has-text-grey-dark has-text-weight-semibold ">
-                    Serial Number
-                  </th>
-                  <th class="has-text-grey-dark has-text-weight-semibold ">
-                    Inventory Tag
-                  </th>
-                  <th class="has-text-grey-dark has-text-weight-semibold">
-                    Borrowed
-                  </th>
-                  <th class="has-text-grey-dark has-text-weight-semibold ">
-                    Action
-                  </th>
-                </thead>
-                <tbody>
-                  <% @loans.each do |loan| -%>
-                    <tr class="loan-item">
-                      <td>
-                        <i class="<%= loan.item.category.icon %>"></i>&nbsp;
-                        <%= link_to item_path(loan.item.id) do %>
-                          <%= loan.item.full_name %>
-                        <% end %>
-                      </td>
-                      <td class="is-monospaced">
-                        <%= loan.item.serial_number %>
-                      </td>
-                      <td class="is-monospaced">
-                        <%= loan.item.inventory_tag %>
-                      </td>
-                      <td class="is-monospaced">
-                        <%= local_time_ago(loan.created_at) %>
-                      </td>
-                      <td class="">
-                        <%= link_to return_member_path(" #{loan.id}"), class: 'is-7', method: :post do %>
-                          <i class="fa fa-calendar-check-o"></i> check in
-                          <% end %>
-                      </td>
-
-                    </tr>
-                    <% end -%>
-                </tbody>
-              </table>
               <% end %>
-          <div class="columns">
-            <div class="column is-one-fourth">
-              <%== pagy_info(@pagy) %>
             </div>
-
-            <div class="column is-narrow">
-              <%== pagy_bulma_nav(@pagy) %>
-            </div>
-          </div>
-
         </div>
-      </section>
+        <div class="level-item">
+          or
+        </div>
+        <div class="level-item">
+          <%= link_to 'Browse Inventory', items_member_path, :remote=> 'true', id: "browseButton", class: "open-modal" %>
+        </div>
+      </div>
+    </div>
+    <% if @loans.empty? %>
+      <div class="box hero has-text-centered is-light">
+        <div class="hero-body">
+          <p class="subtitle  has-text-grey-dark has-text-weight-light">
+            No items are borrowed.
+          </p>
+        </div>
+      </div>
+    <% else %>
+      <table id="current_loans" class="table is-hoverable is-fullwidth is-responsive">
+        <thead>
+          <th class="has-text-grey-dark has-text-weight-semibold ">
+            Item
+          </th>
+          <th class="has-text-grey-dark has-text-weight-semibold ">
+            Serial Number
+          </th>
+          <th class="has-text-grey-dark has-text-weight-semibold ">
+            Inventory Tag
+          </th>
+          <th class="has-text-grey-dark has-text-weight-semibold">
+            Borrowed
+          </th>
+          <th class="has-text-grey-dark has-text-weight-semibold ">
+            Action
+          </th>
+        </thead>
+        <tbody>
+          <% @loans.each do |loan| %>
+            <tr class="loan-item">
+              <td>
+                <i class="<%= loan.item.category.icon %>"></i>&nbsp;
+                <%= link_to item_path(loan.item.id) do %>
+                  <%= loan.item.full_name %>
+                <% end %>
+              </td>
+              <td class="is-monospaced">
+                <%= loan.item.serial_number %>
+              </td>
+              <td class="is-monospaced">
+                <%= loan.item.inventory_tag %>
+              </td>
+              <td class="is-monospaced">
+                <%= local_time_ago(loan.created_at) %>
+              </td>
+              <td class="">
+                <%= link_to return_member_path(" #{loan.id}"), class: 'is-7', method: :post do %>
+                  <i class="fa fa-calendar-check-o"></i> check in
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+    <div class="columns">
+      <div class="column is-one-fourth">
+        <%== pagy_info(@pagy) %>
+      </div>
+      <div class="column is-narrow">
+        <%== pagy_bulma_nav(@pagy) %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Select an Item</p>
+      <button class="delete close-modal" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body" id="listjs-items">
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button close-modal">Close</button>
+    </footer>
+  </div>
+</div>

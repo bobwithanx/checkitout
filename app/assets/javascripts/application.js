@@ -12,12 +12,10 @@
 //
 //= require rails-ujs
 
-//= require jquery
+//= require jquery/dist/jquery
 
-//= require jquery.dataTables.js
-//= require dataTables.bulma.js
 //= require rails-timeago
 //= require local-time
-//= require list.js
+//= require list.js/dist/list.js
 
 //= require_tree .

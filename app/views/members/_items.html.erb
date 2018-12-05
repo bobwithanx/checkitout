@@ -1,0 +1,90 @@
+<!-- app/views/layouts/modal.html.erb -->
+<div class="level">
+  <div class="level-item">
+    <div class="control">
+      <input type="text" id="listjs-search" class="input" placeholder="Filter">
+    </div>
+  </div>
+  <div class="level-item">
+    or
+  </div>
+  <div class="level-item">
+    <div class="control">
+      <div class="buttons has-addons are-small">
+        <% @categories.each do |category| %>
+          <span class="button filter is-small" data-filter="<%= category.name %>"><i class="<%= category.icon %>"></i></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="mt-3" style="height:300px;overflow:auto">
+      <table id="item_list" class="table is-fullwidth">
+        <thead>
+          <th class="">Item</th>
+          <th class="is-hidden">Serial Number</th>
+          <th class="">Inventory&nbsp;Tag</th>
+          <th class="is-hidden">Description</th>
+          <th class="is-hidden">Category</th>
+          <th class=""></th>
+        </thead>
+        <tbody class="list">
+            <% Item.available.each do |item| %>
+            <tr class="table-row">
+              <td class="listjs-brand-name">
+                <i class="<%= item.category.icon %>"></i>&nbsp;
+                <%= item.brand %>
+                <%= item.name %>
+              </td>
+              <td class="is-hidden listjs-sn"><%= item.serial_number %></td>
+              <td class="listjs-tag is-monospaced"><%= item.inventory_tag %></td>
+              <td class="is-hidden listjs-description"><%= item.description %></td>
+              <td class="is-hidden category"><% if item.category %><%= item.category.name %><% end %></td>
+              <td><%= link_to "select", item_path(item) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  var options = {
+    valueNames: [ 'listjs-brand-name', 'listjs-sn', 'listjs-tag', 'listjs-description', 'category' ]
+  };
+  var itemsList = new List('listjs-items', options);
+  $('.filter').on("click", function() {
+    var $q = $(this).attr('data-filter');
+    if ($(this).hasClass('is-selected')) {
+      itemsList.filter();
+      $('.filter').removeClass('is-selected');
+      $('.filter').removeClass('is-info');
+    } else {
+      itemsList.filter(function(item) {
+        return (item.values().category == $q);
+        // return (item.values().category == $q);
+      });
+      $('.filter').removeClass('is-selected');
+      $('.filter').removeClass('is-primary');
+      $(this).addClass('is-selected');
+      $(this).addClass('is-primary');
+    }
+  });
+  </script>
+
+<script type="application/javascript">
+  function toggleModalClasses(event) {
+    var modalId = event.currentTarget.dataset.modalId;
+    var modal = $(modalId);
+    modal.toggleClass('is-active');
+    // console.log("here");
+    $(".modal").removeClass("is-active");
+  };
+  $('.open-modal').click(toggleModalClasses);
+  $('.modal-background').click(toggleModalClasses);
+  $('.close-modal').click(toggleModalClasses);
+
+</script>

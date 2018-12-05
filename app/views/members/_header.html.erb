@@ -8,7 +8,7 @@
           <%= @member.id_number %>
         &bull;
         <%= @member.group.name %>
-        <% if !@member.group.is_active? %>
+        <% if !@member.is_active? %>
         <span class="tag is-xs is-danger">
           inactive
         </span>
@@ -26,8 +26,8 @@
             </span>
             <span>On Loan</span>&nbsp;&nbsp;&nbsp;
             <% if ! @active_loans.blank? %>
-              <span class="tag is-warning is-rounded">
-                <%= @active_loans.size %>
+              <span class="tag is-tab-tag is-rounded">
+                <%= @active_loans %>
               </span>
             <% end %>
           <% end %>
@@ -37,6 +37,11 @@
               <i class="fa fa-history"></i>
             </span>
             <span>Returned</span>&nbsp;&nbsp;&nbsp;
+            <% if ! @completed_loans.blank? %>
+              <span class="tag is-tab-tag is-rounded">
+                <%= @completed_loans %>
+              </span>
+            <% end %>
           <% end %>
         </ul>
       </div>

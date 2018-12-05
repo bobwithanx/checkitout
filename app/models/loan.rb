@@ -17,6 +17,10 @@ class Loan < ApplicationRecord
     where(status: 0)
   }
 
+  scope :completed, -> {
+    where(status: 1)
+  }
+
   after_save :update_status, if: :saved_change_to_returned_at?
 
   default_scope { order(returned_at: :desc, created_at: :desc) }

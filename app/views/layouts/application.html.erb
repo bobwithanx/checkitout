@@ -30,10 +30,9 @@
               <% end %>
           </div>
 
-          <% nav_links selected_class:'is-active', url_segment: 1 do |nav| %>
-            <%= nav.link_to 'Members', members_path, class: "navbar-item" %>
-              <%= nav.link_to 'Items', items_path, class: "navbar-item" %>
-                <% end %>
+          <%= active_link_to 'Members', members_path, class: 'navbar-item is-tab', class_active: 'is-active' %>
+          <%= active_link_to 'Items', items_path, class: 'navbar-item is-tab', class_active: 'is-active' %>
+
         </div>
         <div class="navbar-end">
           <a class="navbar-item is-tab" href="/admin">
@@ -44,11 +43,7 @@
 
     </div>
   </nav>
-
   <%= yield %>
-
-    <div id="modal-holder"></div>
-
 </body>
 
 </html>
