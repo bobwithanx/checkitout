@@ -13,8 +13,8 @@
 </head>
 
 <body class="">
-  <nav class="navbar is-dark  has-shadow">
-    <div class="container is-fluid">
+  <nav class="navbar has-shadow is-white">
+    <div class="container">
       <div class="navbar-brand">
         <%= link_to 'CheckItOut', welcome_index_path, class: "navbar-item" %>
       </div>
@@ -29,10 +29,8 @@
               </div>
               <% end %>
           </div>
-
-          <%= active_link_to 'Members', members_path, class: 'navbar-item is-tab', class_active: 'is-active' %>
-          <%= active_link_to 'Items', items_path, class: 'navbar-item is-tab', class_active: 'is-active' %>
-
+          <%= link_to 'Members', members_path, class: 'navbar-item' %>
+          <%= link_to 'Items', items_path, class: 'navbar-item' %>
         </div>
         <div class="navbar-end">
           <a class="navbar-item is-tab" href="/admin">
