@@ -7,6 +7,11 @@ autocomplete-js@^2.7.1:
   resolved "https://registry.yarnpkg.com/autocomplete-js/-/autocomplete-js-2.7.1.tgz#a954e909e55d8062ad08064ae1a5c82a99caec8e"
   integrity sha512-F+1Sj13zbfpbkprKjtyYiaHgBo6YODzNzWgJjgo/p312AeiZVEn3W+NaRRzVZYqMI0Bm7/W36uanp995eNDy+A==
 
+bulma-helpers@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/bulma-helpers/-/bulma-helpers-0.2.3.tgz#9b71e39fc5254a8a671aac55226fcc1f55c033c3"
+  integrity sha512-HzD07fLIKLOAmV6yNDh8ajgjzrRwdO/sIDo6ejxMlRmbu2tyn5dr7cCl0WyEHMI2h8/bdoKv5tqOvEeoQAVFgQ==
+
 bulma@^0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.2.tgz#8e944377b74c7926558830d38d8e19eaf49f5fb6"

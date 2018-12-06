@@ -8,7 +8,7 @@ end
 gem 'active_decorator'
 gem 'active_link_to'
 gem 'bulma-rails', '~> 0.7.2'
-gem 'counter_culture', '~> 1.8'
+gem 'counter_culture'
 gem 'font-awesome-sass', '~> 5.0.6'
 gem 'fontawesome5-rails'
 gem 'local_time'
