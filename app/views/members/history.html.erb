@@ -13,6 +13,7 @@
     <div class="container">
       <table id="loan_history" class=" table is-hoverable is-fullwidth is-responsive">
         <thead>
+          <th class="is-narrow">&nbsp;</th>
           <th class="has-text-grey-dark has-text-weight-semibold item_name">
             Item
           </th>
@@ -35,8 +36,8 @@
         <tbody>
           <% @loans.each do |loan| -%>
             <tr>
-              <td>
-                <i class="<%= loan.item.category.icon %>"></i>&nbsp;
+              <td class="has-text-centered is-narrow" style="padding-left: 0px; padding-right: 0px"><i class="<%= loan.item.category.icon %>"></i></td>
+              <td style="padding-left: .5em;">
                 <span class="item_name">
                   <%= link_to item_path(loan.item.id) do %>
                     <%= loan.item.full_name %>

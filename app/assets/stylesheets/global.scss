@@ -17,15 +17,26 @@ $family-sans-serif: 'Lato','Helvetica Neue',Arial,Helvetica,sans-serif;
 
 // $link: $turquoise;
 @import "bulma/css/bulma.css";
+@import "bulma-helpers/css/bulma-helpers.min.css";
+
 @import "fontawesome-all";
 // @import "bootstrap";
 @import url("https://fonts.googleapis.com/css?family=Inconsolata");
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 
-.is-active .is-tab-tag {
-  background-color: #ffdd57;
-    color: rgba(0,0,0,.7);
+.hero .tabs ul {
+  border-bottom-color: #dbdbdb;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
 }
+
+.hero.is-link .tabs ul {
+  border-bottom-color: #3273dc;
+}
+// .is-active .is-tab-tag {
+//   background-color: #ffdd57;
+//     color: rgba(0,0,0,.7);
+// }
 // .easy-autocomplete-container ul {
 //   max-width: 90%;
 //   white-space: nowrap;
@@ -61,14 +72,10 @@ tr.has-background-warning-light td:first-of-type {
   margin-left: -10px !important;
 }
 
-
-.has-background-warning-light:hover {
-  // background-color: hsl(48, 100, 80) !important;
-}
-
 .has-background-warning-light .item_name {
   font-weight: 500;
 }
+
 table .is-monospaced,
 .tag.is-monospaced {
   font-size: 1.0rem !important;
@@ -93,24 +100,19 @@ tr:hover .on-hover {
   padding: 2rem 1.5rem;
 }
 
-.hero.is-light .tabs.is-boxed li.is-active a {
-  background: white !important;
-  color: darkslategray !important;
-}
+// .hero.is-light .tabs.is-boxed li.is-active a {
+//   background: white !important;
+//   color: darkslategray !important;
+// }
 
-.pagehead {
-  background-color: #fafbfc;
-  border-bottom: 1px solid #e1e4e8;
+.hero-foot .tabs .is-active a {
+  background-color: #fff;
+  color: #24292e;
+
 }
 
 a.pagetab:hover {
   background-color: inherit !important;
-}
-
-li.is-active a.pagetab {
-  color: #24292e !important;
-  background-color: #fff !important;
-  border-color: #e36209 #e1e4e8 white !important;
 }
 
 a.pagetab.is-active {
