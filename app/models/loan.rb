@@ -1,30 +1,24 @@
 class Loan < ApplicationRecord
   belongs_to :member
-  counter_culture :member, column_name: proc { |model| model.active? ? 'active_loans_count' : nil }
-  counter_culture :member
-  has_paper_trail
-
   belongs_to :item
   has_one :category, through: :item
-
-  def title
-    self.item.name + " (" + self.created_at.strftime("%Y-%m-%d") + ")"
-  end
+  counter_culture :member, column_name: 'active_loans_count'
+  has_paper_trail
 
   enum status: %i[on_loan returned]
+  after_save :update_status, if: :saved_change_to_returned_at?
 
   scope :active, -> {
     where(status: 0)
   }
-
   scope :completed, -> {
     where(status: 1)
   }
-
-  after_save :update_status, if: :saved_change_to_returned_at?
-
   default_scope { order(returned_at: :desc, created_at: :desc) }
-  validates_uniqueness_of :item, conditions: -> { where(status: 'active') }
+
+  def title
+    self.item.name + " (" + self.created_at.strftime("%Y-%m-%d") + ")"
+  end
 
   def today?
     created_at.to_date == Time.zone.now.beginning_of_day.to_date

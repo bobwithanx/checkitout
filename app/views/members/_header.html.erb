@@ -25,7 +25,7 @@
           <i class="fa fa-briefcase"></i>
         </span>
         <span>On Loan</span>&nbsp;&nbsp;&nbsp;
-        <% if ! @active_loans.blank? %>
+        <% if @active_loans.present? %>
           <span class="tag is-tab-tag is-rounded">
             <%= @active_loans %>
           </span>
@@ -37,7 +37,7 @@
           <i class="fa fa-history"></i>
         </span>
         <span>Returned</span>&nbsp;&nbsp;&nbsp;
-        <% if ! @completed_loans.blank? %>
+        <% if @completed_loans.present? %>
           <span class="tag is-tab-tag is-rounded">
             <%= @completed_loans %>
           </span>

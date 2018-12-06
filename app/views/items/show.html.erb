@@ -17,7 +17,7 @@
               </span>
             </span>
           </div>
-          <% if !@item.serial_number.blank? %>
+          <% if @item.serial_number.present? %>
             <div class="control">
               <span class="tags has-addons">
                 <span class="tag is-medium is-light is-outlined-dark">

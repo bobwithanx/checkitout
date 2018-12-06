@@ -41,7 +41,9 @@
               <td class="listjs-tag is-monospaced"><%= item.inventory_tag %></td>
               <td class="is-hidden listjs-description"><%= item.description %></td>
               <td class="is-hidden category"><% if item.category %><%= item.category.name %><% end %></td>
-              <td><%= link_to "select", item_path(item) %></td>
+              <td>
+                <%= button_to "borrow", borrow_member_path, class: 'button is-primary is-outlined is-small', params: { :inventory_tag => item.inventory_tag, :member_id => @member.id } %>
+              </td>
             </tr>
           <% end %>
         </tbody>

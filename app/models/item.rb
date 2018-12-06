@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
-  belongs_to :category, optional: true
+  belongs_to :category
   has_many :loans
-  has_one :active_loan, ->{ active }, class_name: 'Loan'
+  has_one :active_loan, class_name: 'Loan'
   has_many :members, through: :loans
 
   has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
@@ -11,6 +11,10 @@ class Item < ApplicationRecord
   scope :available, -> { where.not(id: unavailable) }
 
   ransack_alias :name_or_tag, :brand_or_name_or_description_or_inventory_tag
+
+  def on_loan?
+    loans.active.present?
+  end
 
   def full_name
     "#{brand} #{name}"

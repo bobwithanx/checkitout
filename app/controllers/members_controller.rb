@@ -62,17 +62,28 @@ class MembersController < ApplicationController
   end
 
   def borrow
-    @loan = Loan.new
-    @loan.member = Member.find(params[:member_id])
-    @loan.item = Item.find_by_inventory_tag(params[:inventory_tag].upcase)
-
-    if @loan.save
-      flash[:success] = "Item borrowed. #{undo_link}"
-    else
-      flash[:danger] = "ERROR<p>Item was not borrowed.</p>"
+    @member = Member.find(params[:member_id])
+    if !@member
+      flash[:danger] = "Could not find MemberID."
+      return
     end
-    redirect_to @loan.member
-    # @member = Member.find_by_id_number(params[:search])
+    @item = Item.find_by_inventory_tag(params[:inventory_tag].upcase)
+    if !@item
+      flash[:danger] = "Could not find Item."
+    elsif @item.on_loan?
+      flash[:danger] = "ERROR<p>Item is already borrowed.</p>"
+    end
+    if flash[:danger].blank?
+      @loan = Loan.new
+      @loan.member = @member
+      @loan.item = @item
+      if @loan.save
+        flash[:success] = "Item borrowed. #{undo_link}"
+      else
+        flash[:danger] = "Error - item was not assigned."
+      end
+    end
+    redirect_to @member
   end
 
   def return
