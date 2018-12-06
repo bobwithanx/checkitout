@@ -1,13 +1,11 @@
 <nav class="navbar has-shadow">
   <div class="container is-fluid">
     <div class="navbar navbar-tabs tabs">
-      <% nav_links selected_class:'is-active', url_segment: 2 do |nav| %>
-        <%= nav.link_to 'Members', members_path, class: "navbar-item is-tab" %>
-        <%= nav.link_to 'Groups', groups_path, class: "navbar-item is-tab" %>
-        <%= nav.link_to 'Loans', loans_path, class: "navbar-item is-tab" %>
-        <%= nav.link_to 'Items', items_path, class: "navbar-item is-tab" %>
-        <%= nav.link_to 'Categories', categories_path, class: "navbar-item is-tab" %>
-      <% end %>
+        <%= link_to 'Members', members_path, class: "navbar-item is-tab" %>
+        <%= link_to 'Groups', groups_path, class: "navbar-item is-tab" %>
+        <%= link_to 'Loans', loans_path, class: "navbar-item is-tab" %>
+        <%= link_to 'Items', items_path, class: "navbar-item is-tab" %>
+        <%= link_to 'Categories', categories_path, class: "navbar-item is-tab" %>
     </div>
   </div>
 </nav>
