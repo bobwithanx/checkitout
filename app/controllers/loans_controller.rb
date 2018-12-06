@@ -15,16 +15,20 @@ class LoansController < ApplicationController
     render layout: 'modal'
   end
 
-
   def undo_link
     view_context.link_to('undo', revert_version_path(@loan.versions.last), :method=> :post)
   end
 
-  def borrow
+  def create
     @loan = Loan.new
     @loan.member = Member.find(params[:member_id])
+    if !@loan.member
+      flash[:danger] = "Could not find MemberID."
+    end
     @loan.item = Item.find_by_inventory_tag(params[:inventory_tag])
-
+    if !@loan.item
+      flash[:danger] = "Could not find Item."
+    end
     if @loan.save
       flash[:success] = "Item borrowed. #{undo_link}"
     else
@@ -44,7 +48,11 @@ class LoansController < ApplicationController
       flash[:notice] = "Did not save."
     end
     redirect_to @loan.member
-
     # @member = Member.find_by_id_number(params[:search])
+  end
+
+  private
+  def loan_params
+    params.permit(:member_id, :item_id, :returned_at, :status)
   end
 end
