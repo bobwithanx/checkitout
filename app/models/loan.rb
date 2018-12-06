@@ -37,6 +37,6 @@ class Loan < ApplicationRecord
   end
 
   def update_status
-    complete!
+    returned!
   end
 end
