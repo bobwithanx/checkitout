@@ -2,7 +2,8 @@ class Loan < ApplicationRecord
   belongs_to :member
   belongs_to :item
   has_one :category, through: :item
-  counter_culture :member, column_name: 'active_loans_count'
+  counter_culture :member, column_name: proc { |model| model.on_loan? ? 'active_loans_count' : nil }
+
   has_paper_trail
 
   enum status: %i[on_loan returned]
