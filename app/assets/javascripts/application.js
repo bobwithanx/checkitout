@@ -10,12 +10,9 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery3
 //= require rails-ujs
-
-//= require jquery/dist/jquery
-
-//= require rails-timeago
 //= require local-time
 //= require list.js/dist/list.js
-
+//= require easy-autocomplete/dist/jquery.easy-autocomplete.js
 //= require_tree .
