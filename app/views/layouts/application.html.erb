@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <!-- <html class="has-navbar-fixed-top"> -->
-<html class="">
+<html>
 
 <head>
   <title>CheckItOut</title>
   <%= csrf_meta_tags %>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_include_tag 'application', async: true %>
+    <%= javascript_include_tag 'application' %>
 </head>
 
-<body class="">
+<body>
   <nav class="navbar has-shadow is-white">
     <div class="container">
       <div class="navbar-brand">
@@ -21,10 +19,10 @@
       <div class="navbar-menu ">
         <div class="navbar-start">
           <div class="navbar-item">
-            <%= form_with url:search_members_path, local: true, method: :get, html: { id: "search-form" } do |form| %>
+            <%= form_with url:search_members_path, local: true, method: :get, html: { id: "member_search" } do |form| %>
               <div class="field">
                 <div class="control">
-                  <%= form.text_field :q, placeholder: "Find Student", class: "input", autocomplete: "off", autocorrect: "off", autocapitalize: "off", spellcheck: "false", id: 'member-autocomplete', data: { behavior: 'autocomplete'} %>
+                  <%= form.text_field :q, placeholder: "Find Student", class: "input", autocomplete: "off", autocorrect: "off", autocapitalize: "off", spellcheck: "false", id: 'member_search_field', data: { behavior: 'autocomplete' } %>
                 </div>
               </div>
               <% end %>
