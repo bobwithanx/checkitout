@@ -1,34 +1,22 @@
-document.addEventListener("turbolinks:load", function () {
-  input = $("#item-autocomplete");
+document.addEventListener("DOMContentLoaded", function () {
+  var input = $("#borrow_item_field");
   var options = {
-    getValue: "inventory_tag",
-    // getValue: function (element) {
-    //   return element.brand + " " +
-    //     element.name + " (" + element.inventory_tag + ")";
-    // },
-    url: function (phrase) {
-      console.log("phrase = " + phrase);
-      return "/items/search?q=" + phrase;
+    getValue: function (element) {
+      return element.brand + " " +
+        element.name + " (" + element.inventory_tag + ")";
     },
+    url: function (phrase) {
+      return "/items/search.json?q=" + phrase;
+    },
+    adjustWidth: true,
     listLocation: "items",
     list: {
-      // onSelectItemEvent: function () {
-      //   var value = $("#function-data").getSelectedItemData().realName;
-
-      //   $("#data-holder").val(value).trigger("change");
-      // }
-
       onChooseEvent: function () {
-        var value = $input.getSelectedItemData().inventory_tag;
-
-        console.log("inventory_tag = " + value);
-        $input.val(value);
-        // $("#borrow-form").submit();
-        // $input.focus();
+        var value = input.getSelectedItemData().inventory_tag;
+        input.val(value);
+        $("#borrow_item").submit();
       },
-      match: {
-        enabled: true
-      }
+      maxNumberOfElements: 8,
     },
     template: {
       type: "custom",
@@ -39,5 +27,5 @@ document.addEventListener("turbolinks:load", function () {
     }
   }
 
-  // input.easyAutocomplete(options)
+  input.easyAutocomplete(options);
 });
