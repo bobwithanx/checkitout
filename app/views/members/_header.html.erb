@@ -1,50 +1,41 @@
 <div class="hero <%= @active_loans.zero? ? '' : 'is-link' %>">
   <div class="hero-body ">
     <div class="container">
-      <h1 class="title">
-        <%= @member.full_name %>
-      </h1>
+      <h1 class="title"><%= @member.full_name %></h1>
       <h2 class="subtitle">
-          <%= @member.id_number %>
+        <%= @member.id_number %>
         &bull;
         <%= @member.group.name %>
         <% if !@member.is_active? %>
-        <span class="tag is-xs is-danger">
-          inactive
-        </span>
+          <span class="tag is-xs is-danger">inactive</span>
         <% end %>
       </h2>
     </div>
   </div>
-<div class="hero-foot">
-<div class="container">
-  <div class="tabs is-boxed">
-    <ul>
-      <%= active_link_to member_path(@member), wrap_tag: 'li', class: '', class_active: 'is-active', active: :exclusive do %>
-        <span class="icon is-small">
-          <i class="fa fa-briefcase"></i>
-        </span>
-        <span>On Loan</span>&nbsp;&nbsp;&nbsp;
-        <% if @active_loans.present? %>
-          <span class="tag is-tab-tag is-rounded">
-            <%= @active_loans %>
-          </span>
-        <% end %>
-      <% end %>
-
-      <%= active_link_to history_member_path(@member), wrap_tag: 'li', class: '', class_active: 'is-active' do %>
-        <span class="icon is-small">
-          <i class="fa fa-history"></i>
-        </span>
-        <span>Returned</span>&nbsp;&nbsp;&nbsp;
-        <% if @completed_loans.present? %>
-          <span class="tag is-tab-tag is-rounded">
-            <%= @completed_loans %>
-          </span>
-        <% end %>
-      <% end %>
-    </ul>
-</div>
-</div>
-</div>
+  <div class="hero-foot">
+    <div class="container">
+      <div class="tabs is-boxed">
+        <ul>
+          <%= active_link_to member_path(@member), wrap_tag: 'li', class: '', class_active: 'is-active', active: :exclusive do %>
+            <span class="icon is-small">
+              <i class="fa fa-briefcase"></i>
+            </span>
+            <span>On Loan</span>&nbsp;&nbsp;&nbsp;
+            <% if @active_loans.nonzero? %>
+              <span class="tag is-tab-tag is-rounded">
+                <%= @active_loans %>
+              </span>
+            <% end %>
+          <% end %>
+          <%= active_link_to history_member_path(@member), wrap_tag: 'li', class: '', class_active: 'is-active' do %>
+            <span class="icon is-small"><i class="fa fa-history"></i></span>
+            <span>Returned</span>&nbsp;&nbsp;&nbsp;
+            <% if @completed_loans.nonzero? %>
+              <span class="tag is-tab-tag is-rounded"><%= @completed_loans %></span>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

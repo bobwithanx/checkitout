@@ -1,19 +1,24 @@
 class MembersController < ApplicationController
   # before_action :force_json, only: :search
   def index
-    @members = Member.active.includes('group', 'loans')
+    @results = Member.active.includes('group', 'loans')
+    @pagy, @members = pagy(@results)
   end
 
   def search
-    @members = Member.ransack(full_name_or_id_number_cont: params[:q]).result(distinct: true)
-
-    if @members.size == 1
-      redirect_to @members[0]
-    end
+    @search_term = params[:q]
+    @results = Member.ransack(first_name_or_last_name_or_id_number_cont: @search_term).result(distinct: true)
 
     respond_to do |format|
-      format.html {}
+      format.html {
+        if @results.size == 1
+          redirect_to @results[0]
+        else
+          @pagy, @members = pagy(@results)
+        end
+      }
       format.json {
+        @members = @results
       }
     end
   end
@@ -27,9 +32,8 @@ class MembersController < ApplicationController
     end
 
     @pagy, @loans = pagy(@member.loans.returned.includes([:item, :category]))
-    @active_loans = @member.loans.active.size
+    @active_loans = @member.active_loans_count
     @completed_loans = @pagy.count
-
   end
 
   def show
@@ -42,7 +46,7 @@ class MembersController < ApplicationController
     end
 
     @pagy, @loans = pagy(@member.active_loans.includes([:item, :category]))
-    @active_loans = @pagy.count
+    @active_loans = @member.active_loans_count
     @completed_loans = @member.loans.returned.size
   end
 
@@ -96,9 +100,6 @@ class MembersController < ApplicationController
       flash[:danger] = "ERROR<p>Item was not returned.</p>"
     end
     redirect_to @loan.member
-
-    # render members_index
-    # @member = Member.find_by_id_number(params[:search])
   end
 
   def new

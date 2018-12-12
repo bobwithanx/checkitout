@@ -1,122 +1,86 @@
-<section class="hero pagehead">
+<div class="hero">
   <div class="hero-body">
     <div class="container">
       <h1 class="title is-spaced">
         <i class="<%= @item.category.icon %>"></i>&nbsp;
         <%= @item.full_name %>
       </h1>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <div class="container">
       <h2 class="subtitle">
         <div class="field is-grouped is-grouped-multiline">
           <div class="control">
             <span class="tags has-addons">
-              <span class="tag is-medium is-light is-outlined-dark">
-                tag #
-              </span>
-              <span class="tag is-medium is-info is-monospaced">
-                <%= @item.inventory_tag %>
-              </span>
+              <span class="tag is-medium is-light is-outlined-dark">tag #</span>
+              <span class="tag is-medium is-info is-monospaced"><%= @item.inventory_tag %></span>
             </span>
           </div>
           <% if @item.serial_number.present? %>
             <div class="control">
               <span class="tags has-addons">
-                <span class="tag is-medium is-light is-outlined-dark">
-                  serial #
-                </span>
-                <span class="tag is-medium is-dark is-monospaced">
-                  <%= @item.serial_number %>
-                </span>
+                <span class="tag is-medium is-light is-outlined-dark">serial #</span>
+                <span class="tag is-medium is-dark is-monospaced"><%= @item.serial_number %></span>
               </span>
             </div>
           <% end %>
           <div class="control">
             <span class="tags has-addons">
-              <span class="tag is-medium is-light is-outlined-dark">
-                status
-              </span>
+              <span class="tag is-medium is-light is-outlined-dark">status</span>
               <% if @loans.active.blank? %>
-                <span class="tag is-medium is-success is-monospaced">
-                  available
-                </span>
+                <span class="tag is-medium is-success is-monospaced">available</span>
               <% else %>
-                <span class="tag is-medium is-danger is-monospaced">
-                  on loan
-                </span>
+                <span class="tag is-medium is-danger is-monospaced">on loan</span>
               <% end %>
-              </span>
+            </span>
           </div>
         </div>
-
-      </div>
       </h2>
     </div>
   </div>
-</section>
+</div>
 
-  <% flash.each_with_index do |(key, message), index| %>
-    <section class="section">
-      <div class="container">
-
-        <div class="notification is-<%= key %>" id="<%= key %>-<%= index %>">
-          <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
-          <%= raw(message) %>
-        </div>
+<% flash.each_with_index do |(key, message), index| %>
+  <section class="section">
+    <div class="container">
+      <div class="notification is-<%= key %>" id="<%= key %>-<%= index %>">
+        <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
+        <%= raw(message) %>
       </div>
-    </section>
-    <% end %>
+    </div>
+  </section>
+<% end %>
 
-      <section class="section">
-        <div class="container">
-
-         <table id="current_loans" class="table is-hoverable is-fullwidth is-responsive">
-                <thead>
-                  <th class="has-text-grey-dark has-text-weight-semibold ">
-                    Member
-                  </th>
-                  <th class="has-text-grey-dark has-text-weight-semibold ">
-                    Borrowed
-                  </th>
-                  <th class="has-text-grey-dark has-text-weight-semibold">
-                    Returned
-                  </th>
-                  <th class="has-text-grey-dark has-text-weight-semibold ">
-                    Duration
-                  </th>
-                </thead>
-                <tbody>
-                <% @loans.each do |loan| %>
-            <tr>
-              <td>
-                <%= link_to loan.member.full_name, member_path(loan.member), class: "hidden-link" %>
-              </td>
-                      <td class="">
-                        <%= local_time_ago(loan.created_at) %>
-                      </td>
-                      <td>
-                                      <% if loan.returned_at %>
-                  <%= local_time_ago(loan.returned_at) %>
-                    <% else %>
-                                    <span class="tag is-danger">
-                on loan
-              </span>
-
-                      <% end %>
-              </td>
-              <td class="">
-                <%= loan.days_borrowed %>
-              </td>
-            </tr>
-          <% end %>
-                </tbody>
-              </table>
-          <div class="columns">
-            <div class="column is-one-fourth">
-              <%== pagy_info(@pagy) %>
-            </div>
-
-            <div class="column is-narrow">
-              <%== pagy_bulma_nav(@pagy) %>
-            </div>
-          </div>
-        </div>
-      </section>
+<section class="section">
+  <div class="container">
+    <table id="current_loans" class="table is-hoverable is-fullwidth is-responsive">
+      <thead>
+        <th class="has-text-grey-dark has-text-weight-semibold">Member</th>
+        <th class="has-text-grey-dark has-text-weight-semibold">Borrowed</th>
+        <th class="has-text-grey-dark has-text-weight-semibold">Returned</th>
+        <th class="has-text-grey-dark has-text-weight-semibold">Duration</th>
+      </thead>
+      <tbody>
+        <% @loans.each do |loan| %>
+          <tr>
+            <td><%= link_to loan.member.full_name, member_path(loan.member), class: "hidden-link" %></td>
+            <td><%= local_time_ago(loan.created_at) %></td>
+            <td>
+              <% if loan.returned_at %>
+                <%= local_time_ago(loan.returned_at) %>
+              <% else %>
+                <span class="tag is-danger">on loan</span>
+              <% end %>
+            </td>
+            <td><%= loan.days_borrowed %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="columns">
+      <div class="column is-one-fourth"><%== pagy_info(@pagy) %></div>
+      <div class="column is-narrow"><%== pagy_bulma_nav(@pagy) %></div>
+    </div>
+  </div>
+</section>

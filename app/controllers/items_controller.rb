@@ -1,11 +1,13 @@
 class ItemsController < ApplicationController
   before_action :force_json, only: :search
   def index
-    @items = Item.all.includes(:loans, :category)
+    @results = Item.all.includes(:loans, :category)
+    @pagy, @items = pagy(@results)
   end
 
   def search
-    @items = Item.available.ransack(brand_or_name_or_description_or_inventory_tag: params[:q]).result(distinct: true)
+    @search_term = params[:q]
+    @items = Item.available.ransack(brand_or_name_or_description_or_inventory_tag_cont: @search_term).result(distinct: true)
 
     # respond_to do |format|
     #   format.html {}

@@ -61,29 +61,16 @@
                       <% end %>
                   </tbody>
                 </table>
+                <div class="columns">
+                  <div class="column is-one-fourth">
+                    <%== pagy_info(@pagy) %>
+                  </div>
+                  <div class="column is-narrow">
+                    <%== pagy_bulma_nav(@pagy) %>
+                  </div>
+                </div>
+
                 <% end %>
           </div>
         </div>
 </section>
-
-<script>
-  $('#item_list').DataTable({
-    paging: true,
-    order: [
-      [
-        0, "asc"
-      ],
-      [
-        2, "asc"
-      ]
-    ],
-
-    columnDefs: [{
-      targets: 'no-sort',
-      responsive: true,
-      orderable: false
-    }]
-  });
-
-  $('div.dataTables_filter input', $('#item_list').DataTable().table().container()).focus();
-</script>

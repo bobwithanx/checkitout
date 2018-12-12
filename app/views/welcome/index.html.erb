@@ -28,7 +28,7 @@
                   <% @borrowers.each do |person| -%>
                     <%= link_to member_path(person), class: "panel-block" do %>
                       <div class="is-pulled-right tag is-warning">
-                        <%= person.loans.active.size %>
+                        <%= person.active_loans_count %>
                       </div>
                       &nbsp;
                       <%= "#{person.full_name}" %>
@@ -37,7 +37,6 @@
                 </div>
                 <% end %>
           </div>
-
         </div>
       </div>
     </div>
