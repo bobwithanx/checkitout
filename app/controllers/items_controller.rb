@@ -7,14 +7,7 @@ class ItemsController < ApplicationController
 
   def search
     @search_term = params[:q]
-    @items = Item.available.ransack(brand_or_name_or_description_or_inventory_tag_cont: @search_term).result(distinct: true)
-
-    # respond_to do |format|
-    #   format.html {}
-    #   format.json {
-    #     @items = @items.limit(10)
-    #   }
-    # end
+    @items = Item.available.ransack(brand_or_name_or_inventory_tag_cont: @search_term).result(distinct: true)
   end
 
   def show
@@ -66,6 +59,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:brand, :name, :serial_number, :inventory_tag, :description, :category, :category_id, :image)
+    params.require(:item).permit(:brand, :name, :serial_number, :inventory_tag, :category, :category_id, :image)
   end
 end
