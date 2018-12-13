@@ -1,29 +1,29 @@
 <%= render 'header' %>
-  <% flash.each_with_index do |(key, message), index| %>
-    <section class="section">
-      <div class="container">
-        <div class="notification is-<%= key %>" id="<%= key %>-<%= index %>">
-          <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
-          <%= raw(message) %>
-        </div>
-      </div>
-    </section>
-  <% end %>
+<% flash.each_with_index do |(key, message), index| %>
+<section class="section">
+  <div class="container">
+    <div class="notification is-<%= key %>" id="<%= key %>-<%= index %>">
+      <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
+      <%= raw(message) %>
+    </div>
+  </div>
+</section>
+<% end %>
 <section class="section">
   <div class="container">
     <div class="level is-mobile">
       <div class="level-left">
         <div class="level-item">
           <%= form_tag(borrow_member_path, id: "borrow_item" ) do %>
-            <input type="hidden" name="member_id" value="<%= @member.id %>">
-            <div class="field is-grouped">
-              <div class="field">
-                <p class="control">
-                  <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", class: "input", autofocus: true, autocorrect: "off", autocapitalize: "off", spellcheck: "false", id: 'borrow_item_field', data: { behavior: 'autocomplete'} %>
-                </p>
-              </div>
-              <% end %>
+          <input type="hidden" name="member_id" value="<%= @member.id %>">
+          <div class="field is-grouped">
+            <div class="field">
+              <p class="control">
+                <%= text_field_tag :inventory_tag, params[:inventory_tag], placeholder: "Scan Item", class: "input", autofocus: true, autocorrect: "off", autocapitalize: "off", spellcheck: "false", id: 'borrow_item_field', data: { behavior: 'autocomplete'} %>
+              </p>
             </div>
+            <% end %>
+          </div>
         </div>
         <div class="level-item">
           or
@@ -34,39 +34,50 @@
       </div>
     </div>
     <% if @loans.empty? %>
-      <div class="box hero has-text-centered is-light">
-        <div class="hero-body">
-          <p class="subtitle  has-text-grey-dark has-text-weight-light">No items are borrowed.</p>
-        </div>
+    <div class="box hero has-text-centered is-light">
+      <div class="hero-body">
+        <p class="subtitle  has-text-grey-dark has-text-weight-light">No items are borrowed.</p>
       </div>
+    </div>
     <% else %>
-      <table id="current_loans" class="table is-hoverable is-fullwidth is-responsive">
-        <thead>
-          <th class="has-text-grey-dark has-text-weight-semibold">Item</th>
-          <th class="has-text-grey-dark has-text-weight-semibold">Serial Number</th>
-          <th class="has-text-grey-dark has-text-weight-semibold">Inventory Tag</th>
-          <th class="has-text-grey-dark has-text-weight-semibold">Borrowed</th>
-          <th class="has-text-grey-dark has-text-weight-semibold">Action</th>
-        </thead>
-        <tbody>
-          <% @loans.each do |loan| %>
-            <tr class="loan-item">
-              <td>
-                <i class="<%= loan.item.category.icon %>"></i>&nbsp;
-                <%= link_to item_path(loan.item.id) do %><%= loan.item.full_name %><% end %>
-              </td>
-              <td class="is-monospaced"><%= loan.item.serial_number %></td>
-              <td class="is-monospaced"><%= loan.item.inventory_tag %></td>
-              <td class="is-monospaced"><%= local_time_ago(loan.created_at) %></td>
-              <td class="">
-                <%= link_to return_member_path(" #{loan.id}"), class: 'is-7', method: :post do %>
-                  <i class="fa fa-calendar-check-o"></i> check in
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <table id="current_loans" class="table is-hoverable is-fullwidth is-responsive">
+      <thead>
+        <th class="is-narrow">&nbsp;</th>
+        <th class="has-text-grey-dark has-text-weight-semibold">Item</th>
+        <th class="has-text-grey-dark has-text-weight-semibold">Serial Number</th>
+        <th class="has-text-grey-dark has-text-weight-semibold">Inventory Tag</th>
+        <th class="has-text-grey-dark has-text-weight-semibold">Borrowed</th>
+        <th class="has-text-grey-dark has-text-weight-semibold">Action</th>
+      </thead>
+      <tbody>
+        <% @loans.each do |loan| %>
+        <tr class="loan-item">
+          <td class="has-text-centered is-narrow" style="padding-left: 0px; padding-right: 0px"><i class="<%= loan.item.category.icon %>"></i></td>
+          <td style="padding-left: .5em;">
+            <span class="item_name">
+              <%= link_to item_path(loan.item.id) do %>
+              <%= loan.item.full_name %>
+              <% end %>
+            </span>
+          </td>
+          <td class="is-monospaced">
+            <%= loan.item.serial_number %>
+          </td>
+          <td class="is-monospaced">
+            <%= loan.item.inventory_tag %>
+          </td>
+          <td class="is-monospaced">
+            <%= local_time_ago(loan.created_at) %>
+          </td>
+          <td class="">
+            <%= link_to return_member_path(" #{loan.id}"), class: 'is-7', method: :post do %>
+            <i class="fa fa-calendar-check-o"></i> check in
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
     <% end %>
     <div class="columns">
       <div class="column is-one-fourth">
