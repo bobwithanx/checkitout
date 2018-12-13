@@ -35,7 +35,6 @@ class LoansController < ApplicationController
       flash[:danger] = "Error - item was not assigned."
     end
     redirect_to @loan.member
-    # @member = Member.find_by_id_number(params[:search])
   end
 
   def complete
@@ -48,7 +47,6 @@ class LoansController < ApplicationController
       flash[:notice] = "Did not save."
     end
     redirect_to @loan.member
-    # @member = Member.find_by_id_number(params[:search])
   end
 
   private

@@ -1,5 +1,4 @@
 class MembersController < ApplicationController
-  # before_action :force_json, only: :search
   def index
     @results = Member.active.includes('group', 'loans')
     @pagy, @members = pagy(@results)
