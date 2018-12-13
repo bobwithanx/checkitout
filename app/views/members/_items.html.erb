@@ -2,8 +2,8 @@
 <div class="level">
   <div class="level-item">
     <div class="control">
-      <input type="text" id="search_field" class="input" autocomplete="off" autocapitalize="off" spellcheck="false"
-        placeholder="Filter" data-qjs="#item_list .table-row">
+    <input type="text" id="search_term" class="input" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Filter">
+    <input type="hidden" id="filter_term">
     </div>
   </div>
   <div class="level-item">
@@ -55,53 +55,51 @@
     </tbody>
   </table>
 </div>
-</div>
-</div>
 
 <script>
-  $(function () {
-    $("#search_field").qjsearch();
-  });
+  function filter() {
+    search_term = $("#search_term").val().toLowerCase();
+    filter_term = $("#filter_term").val().toLowerCase();
 
-  $('#search_field').on("keypress", function (source) {
-    $('.filter').removeClass('is-selected');
-    $('.filter').removeClass('is-link');
+    $.each($("#item_list .table-row"), function () {
+      var row_text = $(this).text().toLowerCase();
+      if (search_term.length === 0) {
+        if ((filter_term.length > 0) && row_text.indexOf(filter_term) === -1) {
+          $(this).hide();
+        }
+        else {
+          $(this).show();
+        }
+      } else {
+        if (row_text.indexOf(search_term) === -1) {
+          $(this).hide();
+        } else if ((filter_term.length > 0) && row_text.indexOf(filter_term) === -1) {
+            $(this).hide();
+        } else {
+          $(this).show();
+        }
+      }
+    });
+  }
+
+  $("#search_term").keyup(function () {
+    filter();
   });
 
   $('.filter').on("click", function (source) {
-    var $q = $(this).attr('data-filter');
-    $("#search_field").val('');
-    $("#search_field").disabled = true;
+    $("#filter_term").val("");
+
     if ($(this).hasClass('is-selected')) {
       $('.filter').removeClass('is-selected');
       $('.filter').removeClass('is-link');
-      var t = $(this),
-        e = "#item_list .table-row",
-        o = '';
-      $(e).hide(), $.expr[":"].Contains = $.expr.createPseudo(function (e) {
-        return function (t) {
-          return 0 <= $(t).text().toUpperCase().indexOf(e.toUpperCase())
-        }
-      });
-      var s = $(e + ':Contains("' + o + '")').show();
-      s;
     } else {
-      var t = $(this),
-        e = "#item_list .table-row",
-        o = $q;
-      $(e).hide(), $.expr[":"].Contains = $.expr.createPseudo(function (e) {
-        return function (t) {
-          return 0 <= $(t).text().toUpperCase().indexOf(e.toUpperCase())
-        }
-      });
-      var s = $(e + ':Contains("' + o + '")').show();
-      s;
-
+      $("#filter_term").val($(this).attr('data-filter'));
       $('.filter').removeClass('is-selected');
       $('.filter').removeClass('is-link');
       $(this).addClass('is-selected');
       $(this).addClass('is-link');
     }
+    filter();
   });
 
   function toggleModalClasses(event) {
