@@ -27,6 +27,8 @@ class Member < ApplicationRecord
     where("active_loans_count > ?", 0)
   }
 
+  default_scope { order(last_name: :desc, first_name: :desc) }
+
   def self.search(search)
     where('id_number LIKE ? OR first_name LIKE ? OR last_name LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
   end
