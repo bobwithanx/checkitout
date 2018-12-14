@@ -13,6 +13,5 @@
 //= require jquery3
 //= require rails-ujs
 //= require local-time
-//= require list.js/dist/list.js
 //= require easy-autocomplete/dist/jquery.easy-autocomplete.js
 //= require_tree .

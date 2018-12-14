@@ -22,27 +22,27 @@
 <div class="mt-3" style="height:300px;overflow:auto">
   <table id="item_list" class="table is-fullwidth is-hoverable">
     <thead>
-      <th class="">Item</th>
+      <th>Item</th>
       <th class="is-hidden">Serial Number</th>
-      <th class="">Inventory&nbsp;Tag</th>
+      <th>Inventory&nbsp;Tag</th>
       <th class="is-hidden">Category</th>
-      <th class=""></th>
+      <th></th>
     </thead>
     <tbody class="list">
       <% @items.each do |item| %>
       <tr class="table-row">
-        <td class="listjs_brand_name">
+        <td>
           <i class="<%= item.category.icon %>"></i>&nbsp;
           <%= item.brand %>
           <%= item.name %>
         </td>
-        <td class="listjs_sn is-hidden">
+        <td class="is-hidden">
           <%= item.serial_number %>
         </td>
-        <td class="listjs_tag is-monospaced">
+        <td class="is-monospaced">
           <%= item.inventory_tag %>
         </td>
-        <td class="listjs_category is-hidden">
+        <td class="is-hidden">
           <% if item.category %>
           <%= item.category.name %>
           <% end %>
