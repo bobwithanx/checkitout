@@ -29,7 +29,7 @@
       <th class=""></th>
     </thead>
     <tbody class="list">
-      <% Item.available.each do |item| %>
+      <% @items.each do |item| %>
       <tr class="table-row">
         <td class="listjs_brand_name">
           <i class="<%= item.category.icon %>"></i>&nbsp;
