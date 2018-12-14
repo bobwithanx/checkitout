@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   post 'versions/:id/revert' => 'versions#revert', :as=>'revert_version'
 
-  resources :groups, :categories, :loans
+  # resources :groups, :categories, :loans
   resources :members do
     member { post 'borrow' }
     member { post 'return' }
