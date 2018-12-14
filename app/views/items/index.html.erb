@@ -1,4 +1,3 @@
-<!-- <%= render 'admin/menu' %> -->
 <section class="section">
   <div class="container">
     <% flash.each_with_index do |(key, message), index| %>
@@ -30,7 +29,7 @@
                   </thead>
                   <tbody>
                     <% @items.each do |item| %>
-                      <tr class="<%= 'is-selected' unless item.loans.active.size.zero? %>">
+                      <tr class="<%= 'is-selected' if item.on_loan? %>">
                         <td>
                           <i class="<%= item.category.icon %>"></i>&nbsp;
                           <%= link_to item_path(item) do %>
