@@ -28,8 +28,4 @@ class Member < ApplicationRecord
   }
 
   default_scope { order(last_name: :asc, first_name: :asc) }
-
-  def self.search(search)
-    where('id_number LIKE ? OR first_name LIKE ? OR last_name LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
-  end
 end
