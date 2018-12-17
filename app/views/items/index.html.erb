@@ -5,67 +5,61 @@
         <button class="delete" onclick="document.getElementById('<%= key %>-<%= index %>').style.display = 'none'"></button>
         <%= message %>
       </div>
-      <% end %>
-            <h1 class="title ">
-              Items
-            </h1>
-            <% if @items.blank? %>
-              <section class="hero is-medium is-light has-text-centered">
-                <div class="hero-body">
-                  <div class="container">
-                    <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
-                      Add a New Item
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <% else %>
-                <table id="item_list" class="table order-table is-hoverable is-fullwidth is-narrow">
-                  <thead>
-                    <th>Item</th>
-                    <th>Serial Number</th>
-                    <th>Inventory Tag</th>
-                    <th>Category</th>
-                  </thead>
-                  <tbody>
-                    <% @items.each do |item| %>
-                      <tr class="<%= 'is-selected' if item.on_loan? %>">
-                        <td>
-                          <i class="<%= item.category.icon %>"></i>&nbsp;
-                          <%= link_to item_path(item) do %>
-                            <%= item.brand %>
-                            <%= item.name %>
-                          <% end %>
-                        </td>
-                        <td>
-                          <span class="is-monospaced">
-                            <%= item.serial_number %>
-                          </span>
-                        </td>
-                        <td>
-                          <span class="is-monospaced">
-                            <%= item.inventory_tag %>
-                          </span>
-                        </td>
-                        <td>
-                          <% if item.category %>
-                            <%= item.category.name %>
-                              <% end %>
-                        </td>
-                      </tr>
-                      <% end %>
-                  </tbody>
-                </table>
-                <div class="columns">
-                  <div class="column is-one-fourth">
-                    <%== pagy_info(@pagy) %>
-                  </div>
-                  <div class="column is-narrow">
-                    <%== pagy_bulma_nav(@pagy) %>
-                  </div>
-                </div>
-
-                <% end %>
+    <% end %>
+    <h1 class="title ">
+      Items
+    </h1>
+    <% if @items.blank? %>
+      <section class="hero is-medium is-light has-text-centered">
+        <div class="hero-body">
+          <div class="container">
+            <p class="subtitle is-4 has-text-grey-dark has-text-weight-light">
+              Add a New Item
+            </p>
           </div>
         </div>
+      </section>
+    <% else %>
+      <table id="item_list" class="table order-table is-hoverable is-fullwidth is-narrow">
+        <thead>
+          <th>Item</th>
+          <th>Serial Number</th>
+          <th>Inventory Tag</th>
+          <th>Category</th>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+            <tr class="<%= 'is-selected' if item.on_loan? %>">
+              <td>
+                <i class="<%= item.category.icon %>"></i>&nbsp;
+                <%= link_to item_path(item) do %>
+                  <%= item.brand %>
+                  <%= item.name %>
+                <% end %>
+              </td>
+              <td>
+                <span class="is-monospaced"><%= item.serial_number %></span>
+              </td>
+              <td>
+                <span class="is-monospaced"><%= item.inventory_tag %></span>
+              </td>
+              <td>
+                <% if item.category %>
+                  <%= item.category.name %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="columns">
+        <div class="column is-one-fourth">
+          <%== pagy_info(@pagy) %>
+        </div>
+        <div class="column is-narrow">
+          <%== pagy_bulma_nav(@pagy) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </section>
